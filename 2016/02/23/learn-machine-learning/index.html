@@ -1,0 +1,706 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/hexo-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/hexo-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/hexo-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ml," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/hexo-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="From:&amp;nbsp; https://www.quora.com/Machine-Learning/How-do-I-learn-machine-learning-1
+I didn’t  do a PhD on machine learning (was mostly focused on Signal Processing  and Software Engineering) so I get">
+<meta property="og:type" content="article">
+<meta property="og:title" content="learn machine learning">
+<meta property="og:url" content="https://jackklpan.github.io/hexo-blog/2016/02/23/learn-machine-learning/index.html">
+<meta property="og:site_name" content="Notes">
+<meta property="og:description" content="From:&amp;nbsp; https://www.quora.com/Machine-Learning/How-do-I-learn-machine-learning-1
+I didn’t  do a PhD on machine learning (was mostly focused on Signal Processing  and Software Engineering) so I get">
+<meta property="og:updated_time" content="2017-02-28T15:31:32.706Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="learn machine learning">
+<meta name="twitter:description" content="From:&amp;nbsp; https://www.quora.com/Machine-Learning/How-do-I-learn-machine-learning-1
+I didn’t  do a PhD on machine learning (was mostly focused on Signal Processing  and Software Engineering) so I get">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/hexo-blog/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jackklpan.github.io/hexo-blog/2016/02/23/learn-machine-learning/"/>
+
+
+
+
+
+  <title> learn machine learning | Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/hexo-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A place to record somethings related to programming.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/hexo-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/hexo-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/hexo-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2016/02/23/learn-machine-learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Pan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                learn machine learning
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2016-02-23T12:22:00+00:00">
+                2016-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/hexo-blog/2016/02/23/learn-machine-learning/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/02/23/learn-machine-learning/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><span class="inline_editor_value"><span class="rendered_qtext">From:&nbsp; <a href="https://www.quora.com/Machine-Learning/How-do-I-learn-machine-learning-1" target="_blank" rel="external">https://www.quora.com/Machine-Learning/How-do-I-learn-machine-learning-1</a></span></span></p>
+<p><span class="inline_editor_value"><span class="rendered_qtext">I didn’t  do a PhD on machine learning (was mostly focused on Signal Processing  and Software Engineering) so I get this question a lot. The typical  person that asks me this question is a software engineer with a computer  science background, so I will address it from that perspective. If you  are a Math major, for example, my answer might be less useful.</span></span></p>
+<p>The first thing I tell someone who wants to get into machine learning is to take Andrew Ng’s <span class="qlink_container"><a href="https://www.coursera.org/course/ml" target="_blank" rel="external">online course</a></span>.  I think Ng’s course is very much to-the-point and very well organized,  so it is a great introduction for someone wanting to get into ML. I am  surprised when people tell me the course is “too basic” or “too  superficial”. If they tell me that I ask them to explain the difference  between Logistic Regression and Linear Kernel SVMs, PCA vs. Matrix  Factorization, regularization, or gradient descent. I have interviewed  candidates who claimed years of ML experience that did not know the  answer to these questions. They are all clearly explained in Ng’s  course. There are other online courses you can take after this one such  as <span class="qlink_container"><a href="https://www.coursera.org/course/mmds" target="_blank" rel="external"></a></span></p>
+<p><div class="tooltip" style="display: block; left: -16px; top: -31px;"><div class="tooltip_contents nub_bottom"><a href="https://www.coursera.org/course/mmds" target="_blank" rel="external"><span>coursera.org</span></a></div></div><a href="https://www.coursera.org/course/mmds" target="_blank" rel="external">Mining Massive Datasets</a> or <span class="qlink_container"><a href="https://www.coursera.org/learn/recommender-systems" target="_blank" rel="external">Recommender Systems</a></span>, but at this point you are mostly ready to go to the next step.</p>
+<p><span class="inline_editor_value"><span class="rendered_qtext">My  recommended next step is the following. Get a good ML book (my list  below), read the first intro chapters, and then jump to whatever chapter  includes an algorithm you are interested. Once you have found that  algo, dive into it, understand all the details, and, especially,  implement it. In the previous online course you would already have  implemented some algorithms in Octave. But, here I am talking about  implementing an algorithm from scratch in a “real” programming language.  You can still start with an easy one such as L2-regularized Logistic  Regression, or k-means, but you should also push yourself to implement  more interesting ones such as LDA (Latent Dirichlet Allocation) or SVMs.  You can use a reference implementation in one of the many existing  libraries to make sure you are getting comparable results, but ideally  you don’t want to look at the code but actually force yourself to  implement it directly from the mathematical formulation in the book.</span></span></p>
+<p>So, what are some good books to do this? Many have been mentioned before. Some of my favorite:</p>
+<ul>
+<li>Hastie, Tibshirani, and Friedman’s <span class="qlink_container"><a href="http://statweb.stanford.edu/%7Etibs/ElemStatLearn/" target="_blank" rel="external">The Elements of Statistical Learning</a></span></li>
+<li>Bishop’s <span class="qlink_container"><a href="http://research.microsoft.com/en-us/um/people/cmbishop/prml/" target="_blank" rel="external">Pattern Recognition and Machine Learning</a></span>*   David Barber’s <span class="qlink_container"><a href="http://web4.cs.ucl.ac.uk/staff/D.Barber/pmwiki/pmwiki.php?n=Brml.HomePage" target="_blank" rel="external">Bayesian Reasoning and Machine Learning</a></span></li>
+<li>Kevin Murphy’s <span class="qlink_container"><a href="http://www.cs.ubc.ca/%7Emurphyk/MLbook/" target="_blank" rel="external">Machine learning: a Probabilistic Perspective</a></span>You can also go directly to a research paper that introduces an algorithm or approach you are interested on and dive into it.</li>
+</ul>
+<p>My  main point is that machine learning is both about breadth as depth. You  are expected to know the basics of the most important algorithms (see  my answer to <span class="qlink_container"><a href="https://www.quora.com/What-are-the-top-10-data-mining-or-machine-learning-algorithms/answer/Xavier-Amatriain" target="_blank" rel="external"> What are the top 10 data mining or machine learning algorithms?</a></span>).  On the other hand, you are also expected to understand low-level  complicated details of algorithms and their implementation details. I  think the approach I am describing addresses both these dimensions and I  have seen it work.</p>
+<p><strong>Edit 08/26/2015</strong></p>
+<p>In response to  some comments and questions, I feel that I should add another book  recommendation. If you feel like you lack some background in Statistics,  I would totally recommend:</p>
+<ul>
+<li>Larry Wasserman’s <span class="qlink_container"><a href="http://www.amazon.com/All-Statistics-Statistical-Inference-Springer/dp/0387402721" target="_blank" rel="external">All of Statistics: A Concise Course in Statistical Inference</a></span>This  books cover all the topics in statistics that you need for  understanding ML concepts. As a matter of fact, the book itself has a  pretty good introduction to many of the typical ML approaches such as  regression and classification.</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/hexo-blog/tags/ml/" rel="tag"># ml</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/hexo-blog/2016/02/21/iOS-Missing-IOS-Distrubution-signing-identity/" rel="next" title="iOS Missing IOS Distrubution signing identity">
+                <i class="fa fa-chevron-left"></i> iOS Missing IOS Distrubution signing identity
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/hexo-blog/2016/02/24/QGIS/" rel="prev" title="QGIS">
+                QGIS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/hexo-blog/images/avatar.gif"
+               alt="Jack Pan" />
+          <p class="site-author-name" itemprop="name">Jack Pan</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/hexo-blog/archives">
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/hexo-blog/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack Pan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/hexo-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/hexo-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/hexo-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/hexo-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/hexo-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'jack-pan-blog';
+      var disqus_identifier = '2016/02/23/learn-machine-learning/';
+
+      var disqus_title = "learn machine learning";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,690 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/hexo-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/hexo-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/hexo-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ios," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/hexo-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="From:https://dotblogs.com.tw/aken1215/2016/02/15/234033
+                                            憑證顯示”無效的簽發者“                        搞了三小時才找到問題，問題的病徵其實很詭異，就當今天一如往常的想要將開發好的 APP發佈新版本，一切都很順利，一直到要輸出成ip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS Missing IOS Distrubution signing identity">
+<meta property="og:url" content="https://jackklpan.github.io/hexo-blog/2016/02/21/iOS-Missing-IOS-Distrubution-signing-identity/index.html">
+<meta property="og:site_name" content="Notes">
+<meta property="og:description" content="From:https://dotblogs.com.tw/aken1215/2016/02/15/234033
+                                            憑證顯示”無效的簽發者“                        搞了三小時才找到問題，問題的病徵其實很詭異，就當今天一如往常的想要將開發好的 APP發佈新版本，一切都很順利，一直到要輸出成ip">
+<meta property="og:updated_time" content="2017-02-28T15:31:32.706Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS Missing IOS Distrubution signing identity">
+<meta name="twitter:description" content="From:https://dotblogs.com.tw/aken1215/2016/02/15/234033
+                                            憑證顯示”無效的簽發者“                        搞了三小時才找到問題，問題的病徵其實很詭異，就當今天一如往常的想要將開發好的 APP發佈新版本，一切都很順利，一直到要輸出成ip">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/hexo-blog/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jackklpan.github.io/hexo-blog/2016/02/21/iOS-Missing-IOS-Distrubution-signing-identity/"/>
+
+
+
+
+
+  <title> iOS Missing IOS Distrubution signing identity | Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/hexo-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A place to record somethings related to programming.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/hexo-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/hexo-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/hexo-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2016/02/21/iOS-Missing-IOS-Distrubution-signing-identity/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Pan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS Missing IOS Distrubution signing identity
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2016-02-21T12:26:00+00:00">
+                2016-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/hexo-blog/2016/02/21/iOS-Missing-IOS-Distrubution-signing-identity/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/02/21/iOS-Missing-IOS-Distrubution-signing-identity/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>From:<br><a href="https://dotblogs.com.tw/aken1215/2016/02/15/234033" target="_blank" rel="external">https://dotblogs.com.tw/aken1215/2016/02/15/234033</a></p>
+<div class="article__content">                    <div class="article__desc">                        憑證顯示”<span style="color: red;">無效的簽發者</span>“<br>                        </div>搞了三小時才找到問題，問題的病徵其實很詭異，就當今天一如往常的想要將開發好的 APP發佈新版本，一切都很順利，一直到要輸出成ipa檔的時候，系統提示”<span style="color: red;">Missing IOS Distrubution &nbsp;signing&nbsp;identity &nbsp;for…</span>“的錯誤．身為一個在IOS世界裡打滾一小陣子的開發人員，很直覺得就會猜<br><br>1.  該不會又是該死的certificate過期了吧？可是回想一下，年初才全部更新過呀，全部都沒過期<br>2.  該不會又是certificate的私鑰找不到？於是就打開Key Chan，看到憑證和私鑰都存在．<br>3.  不合邏輯啊！該不會是provision profile選錯certificate？於是又重新從apple developer網頁下載provision profile 安裝完還是不行<br>4.  還是不行OOXX，心想，檢查一下Xcode的Target=&gt;General=&gt;Bundle identifier吧，還是沒錯….<br>5.  快沒招了，最後檢查XCode的Target =&gt; BuildSetting =&gt;Code&nbsp;Signing ，還是沒錯….我暈….以上講了五個步驟，其實都跟本篇的解決方案無關，但這次真的是例外，上面五個步驟，在遇到類似這種錯誤訊息通常都是可以順利解決的．而這次，這些步 驟我至少重複玩了一小時，甚至還從頭到尾 建立CSR=&gt;申請certificate=&gt;建立provision  profile=&gt;下載安裝certificate=&gt;下載安裝provision profile  =&gt;設定xocde全部跑過一次，還是無法解決．直到點開Key Chan裡的憑證，看到左下角有一個紅色叉叉寫著”<span style="color: red;">無效的簽發者</span>“才大致找到問題源頭，不看還好，一看心臟快停止，全部至少10多張憑證在同一時間全部都顯示這個訊息．不得已只好膜拜google大神…<br>  <a href="https://developer.apple.com/support/certificates/expiration/" target="_blank" rel="external">https://developer.apple.com/support/certificates/expiration/</a>&nbsp;=&gt;  apple 的解釋，大致上是說有一個叫做”The Apple Worldwide Developer Relations  Certification Intermediate  Certificate”的簽發人憑證即將在2016/2/14到期(謎之聲：不知道是apple裡的那位工程師不爽看大家在情人節放閃，故意在情人節要 捅大家)，不過文章也有說，你不需要重新產生所有已存在的憑證，原本可以運作的APP也都會正常運作．大致重點就這樣．不過他是說你在運行的APP不會掛 掉，但可沒說你要是想發布新版本APP卻沒更新該憑證就會中招．<br>  那要怎麼做呢？<br><br>1.  <a href="https://developer.apple.com/certificationauthority/AppleWWDRCA.cer" target="_blank" rel="external">https://developer.apple.com/certificationauthority/AppleWWDRCA.cer</a>=&gt;下載新版憑證&nbsp;<br>2.  將下載的憑證連續點兩下即可安裝<br>3.  打開Key Chan=&gt;顯示方式=&gt;顯示已過期憑證 =&gt;在登入和系統的分類裡各有一張過期的憑證請把它刪除(謎之聲：沒刪除它不會套用你剛安裝的新憑證，這裏我又卡了半小時有吧，無言….）<br>4.  請檢查所有IOS憑證是否顯示綠色圈圈搭配”此憑證是有效的”訊息，如果有的話，恭喜，大功告成..&nbsp;</div>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/hexo-blog/tags/ios/" rel="tag"># ios</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/hexo-blog/2016/02/14/DIY-NAS/" rel="next" title="DIY NAS">
+                <i class="fa fa-chevron-left"></i> DIY NAS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/hexo-blog/2016/02/23/learn-machine-learning/" rel="prev" title="learn machine learning">
+                learn machine learning <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/hexo-blog/images/avatar.gif"
+               alt="Jack Pan" />
+          <p class="site-author-name" itemprop="name">Jack Pan</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/hexo-blog/archives">
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/hexo-blog/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack Pan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/hexo-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/hexo-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/hexo-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/hexo-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/hexo-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'jack-pan-blog';
+      var disqus_identifier = '2016/02/21/iOS-Missing-IOS-Distrubution-signing-identity/';
+
+      var disqus_title = "iOS Missing IOS Distrubution signing identity";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

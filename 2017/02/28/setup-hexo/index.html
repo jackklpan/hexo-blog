@@ -1,0 +1,731 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/hexo-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/hexo-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/hexo-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="hexo," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/hexo-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="初始設定Hexo的官方網站，根據官方網站可以有基本的設定，但官方的介面不太好看，所以接下來要使用別人寫好的Theme。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="建置Hexo">
+<meta property="og:url" content="https://jackklpan.github.io/hexo-blog/2017/02/28/setup-hexo/index.html">
+<meta property="og:site_name" content="Notes">
+<meta property="og:description" content="初始設定Hexo的官方網站，根據官方網站可以有基本的設定，但官方的介面不太好看，所以接下來要使用別人寫好的Theme。">
+<meta property="og:updated_time" content="2017-02-28T15:31:32.706Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="建置Hexo">
+<meta name="twitter:description" content="初始設定Hexo的官方網站，根據官方網站可以有基本的設定，但官方的介面不太好看，所以接下來要使用別人寫好的Theme。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/hexo-blog/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jackklpan.github.io/hexo-blog/2017/02/28/setup-hexo/"/>
+
+
+
+
+
+  <title> 建置Hexo | Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/hexo-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A place to record somethings related to programming.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/hexo-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/hexo-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/hexo-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2017/02/28/setup-hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Pan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                建置Hexo
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-02-28T15:31:32+00:00">
+                2017-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/hexo-blog/2017/02/28/setup-hexo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/02/28/setup-hexo/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="初始設定"><a href="#初始設定" class="headerlink" title="初始設定"></a>初始設定</h2><p>Hexo的<a href="https://hexo.io/zh-tw/" target="_blank" rel="external">官方網站</a>，根據官方網站可以有基本的設定，但官方的介面不太好看，所以接下來要使用別人寫好的Theme。<br><a id="more"></a></p>
+<p>使用的是<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">NexT</a>，該主題很貼心的提供了很多相關的設定說明，比如：<a href="http://theme-next.iissnan.com/theme-settings.html#tags-page" target="_blank" rel="external">增加Tag</a>、<a href="http://theme-next.iissnan.com/third-party-services.html#disqus" target="_blank" rel="external">增加DISQUS</a>、<a href="http://theme-next.iissnan.com/third-party-services.html#mathjax" target="_blank" rel="external">增加MathJax</a>。</p>
+<h3 id="NexT"><a href="#NexT" class="headerlink" title="NexT"></a>NexT</h3><p>這邊需要注意的是，因為之後要用到travis自動化deploy。NexT為獨立的git repo，若無特殊設定，並不會將其檔案下載下來，導致travis的自動化部署失敗（找不到theme檔案）。有兩種方法：</p>
+<p>1.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rm themes/next/.gitignore</div><div class="line">rm -r themes/next/.git</div></pre></td></tr></table></figure></p>
+<p>將NexT的git刪除，使其全部使用同一個git repo</p>
+<p>2.<br>先fork NexT，並在此repo客製化後，將此repo視為submodule（請使用https的連結，避免權限問題）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git submodule add https://your/custom/repo</div></pre></td></tr></table></figure></p>
+<p>之後於travis指令執行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git submodule init</div><div class="line">git submodule update</div></pre></td></tr></table></figure></p>
+<p>即可以載入主題檔案。</p>
+<h3 id="MathJax使用方法"><a href="#MathJax使用方法" class="headerlink" title="MathJax使用方法"></a>MathJax使用方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$$ Block $$</div><div class="line"></div><div class="line">\\(inline\\)</div></pre></td></tr></table></figure>
+<h3 id="DISQUS"><a href="#DISQUS" class="headerlink" title="DISQUS"></a>DISQUS</h3><p>增加DISQUS時若要在local預覽，到_config.yml將url更改成localhost:4000（<a href="http://www.codeblocq.com/2015/12/Add-Disqus-comments-in-Hexo/" target="_blank" rel="external">參考</a>）。</p>
+<h3 id="NexT文字大小"><a href="#NexT文字大小" class="headerlink" title="NexT文字大小"></a>NexT文字大小</h3><p>大致上設定完成之後，另外更改NexT的文字大小。在：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">themes/next/source/css/_variable/custom.styl</div></pre></td></tr></table></figure></p>
+<p>可以修改相關的設定：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">// 正文字體大小</div><div class="line">$font-size-base = 18px</div><div class="line"></div><div class="line">$font-size-headings-base = 28px</div><div class="line"></div><div class="line">$table-font-size = 18px</div><div class="line"></div><div class="line">// 代碼字體大小</div><div class="line">$code-font-size = 17px</div><div class="line"></div><div class="line">$btn-default-font-size = 18px</div><div class="line"></div><div class="line">$logo-font-size = 24px</div><div class="line"></div><div class="line">$subtitle-font-size = 17px</div><div class="line"></div><div class="line">$read-more-font-size = 18px</div><div class="line"></div><div class="line">$site-description-font-size = 18px</div></pre></td></tr></table></figure></p>
+<h2 id="匯入Blogger的文章"><a href="#匯入Blogger的文章" class="headerlink" title="匯入Blogger的文章"></a>匯入Blogger的文章</h2><p>只能用RSS<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-migrator-rss --save</div></pre></td></tr></table></figure></p>
+<p>匯入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo migrate rss <span class="string">"http://annotationandnote.blogspot.com/feeds/posts/default?alt=rss&amp;max-results=1000000"</span></div></pre></td></tr></table></figure></p>
+<p>遇到個問題<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unknown block tag: load</div></pre></td></tr></table></figure></p>
+<p>是文章中有個<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;% load %&#125;</div></pre></td></tr></table></figure></p>
+<p>這種東西，將其包在code block即可。</p>
+<h2 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h2><p>我使用的方式是用repo的gh-pages。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<p>_config.yml：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: git@github.com:xxx/xxx.git</div><div class="line">  branch: gh-pages</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">url: https://xxx.github.io/xxx/</div><div class="line">root: /xxx/</div></pre></td></tr></table></figure>
+<p>command：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo g</div><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
+<h2 id="使用Travis自動部署"><a href="#使用Travis自動部署" class="headerlink" title="使用Travis自動部署"></a>使用Travis自動部署</h2><p>參考Hexo作者的<a href="https://zespia.tw/blog/2015/01/21/continuous-deployment-to-github-with-travis/" target="_blank" rel="external">文章</a></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="attr">language:</span> node_js</div><div class="line"><span class="attr">node_js:</span></div><div class="line"><span class="bullet">  -</span> node</div><div class="line"><span class="attr">before_install:</span></div><div class="line">  <span class="comment"># Decrypt the private key</span></div><div class="line"><span class="bullet">  -</span> openssl aes<span class="bullet">-256</span>-cbc -K $xxx_key -iv $xxx_iv</div><div class="line"><span class="bullet">    -</span>in .travis/xxx.enc -out ~/.ssh/id_rsa</div><div class="line"><span class="bullet">    -</span>d</div><div class="line">  <span class="comment"># Set the permission of the key</span></div><div class="line"><span class="bullet">  -</span> chmod <span class="number">600</span> ~/.ssh/id_rsa</div><div class="line">  <span class="comment"># Start SSH agent</span></div><div class="line"><span class="bullet">  -</span> eval $(ssh-agent)</div><div class="line">  <span class="comment"># Add the private key to the system</span></div><div class="line"><span class="bullet">  -</span> ssh-add ~/.ssh/id_rsa</div><div class="line">  <span class="comment"># Copy SSH config</span></div><div class="line"><span class="bullet">  -</span> cp .travis/ssh_config ~/.ssh/config</div><div class="line">  <span class="comment"># Set Git config</span></div><div class="line"><span class="bullet">  -</span> git config --global user.name <span class="string">"jackklpan"</span></div><div class="line"><span class="bullet">  -</span> git config --global user.email jackklpan@gmail.com</div><div class="line">  <span class="comment"># Install Hexo</span></div><div class="line"><span class="bullet">  -</span> npm install hexo -g</div><div class="line">  <span class="comment"># Clone the repository, 產生的檔案會放置於public，將其clone下來使commit一致，避免git force update</span></div><div class="line"><span class="bullet">  -</span> git clone --branch gh-pages https://github.com/jackklpan/hexo-blog.git public</div><div class="line"><span class="attr">script:</span></div><div class="line"><span class="bullet">  -</span> git submodule init <span class="comment"># 用于更新主题，需要指定到自己的repo，否则会clone最新NexT主题，客製化的部分會消失</span></div><div class="line"><span class="bullet">  -</span> git submodule update</div><div class="line"><span class="bullet">  -</span> hexo generate</div><div class="line"><span class="bullet">  -</span> hexo deploy</div><div class="line"><span class="attr">branches:</span></div><div class="line"><span class="attr">  only:</span></div><div class="line"><span class="bullet">    -</span> master</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/hexo-blog/tags/hexo/" rel="tag"># hexo</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/hexo-blog/2017/01/13/iOS-upload-to-iTunes-but-not-show-after-process/" rel="next" title="iOS upload to iTunes but not show after process">
+                <i class="fa fa-chevron-left"></i> iOS upload to iTunes but not show after process
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/hexo-blog/images/avatar.gif"
+               alt="Jack Pan" />
+          <p class="site-author-name" itemprop="name">Jack Pan</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/hexo-blog/archives">
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/hexo-blog/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始設定"><span class="nav-number">1.</span> <span class="nav-text">初始設定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NexT"><span class="nav-number">1.1.</span> <span class="nav-text">NexT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MathJax使用方法"><span class="nav-number">1.2.</span> <span class="nav-text">MathJax使用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DISQUS"><span class="nav-number">1.3.</span> <span class="nav-text">DISQUS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NexT文字大小"><span class="nav-number">1.4.</span> <span class="nav-text">NexT文字大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匯入Blogger的文章"><span class="nav-number">2.</span> <span class="nav-text">匯入Blogger的文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署到Github"><span class="nav-number">3.</span> <span class="nav-text">部署到Github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Travis自動部署"><span class="nav-number">4.</span> <span class="nav-text">使用Travis自動部署</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack Pan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/hexo-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/hexo-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/hexo-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/hexo-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/hexo-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'jack-pan-blog';
+      var disqus_identifier = '2017/02/28/setup-hexo/';
+
+      var disqus_title = "建置Hexo";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

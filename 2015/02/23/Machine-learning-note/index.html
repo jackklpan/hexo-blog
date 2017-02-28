@@ -1,0 +1,716 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/hexo-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/hexo-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/hexo-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ml," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/hexo-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="https://class.coursera.org/ml-008/
+Supervised Learning:
+Right answers are given.Regression problem:Predict continuous value output.
+Classification problem:Discrete value output.
+Unsupervised Learning:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Machine learning note">
+<meta property="og:url" content="https://jackklpan.github.io/hexo-blog/2015/02/23/Machine-learning-note/index.html">
+<meta property="og:site_name" content="Notes">
+<meta property="og:description" content="https://class.coursera.org/ml-008/
+Supervised Learning:
+Right answers are given.Regression problem:Predict continuous value output.
+Classification problem:Discrete value output.
+Unsupervised Learning:">
+<meta property="og:image" content="https://3.bp.blogspot.com/-4Br754yMeTg/VOtP0nC8RgI/AAAAAAAAAMc/JhP-bqGfLZc/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png">
+<meta property="og:image" content="https://2.bp.blogspot.com/-5X-Fp0Bq6Ok/VOtRZXqoUrI/AAAAAAAAAMo/1kjpXOWDgpI/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png">
+<meta property="og:image" content="https://4.bp.blogspot.com/-Y2_7r7yTg-w/VOtTUWAu0kI/AAAAAAAAAM0/iBXxITeGd-o/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png">
+<meta property="og:image" content="https://2.bp.blogspot.com/-yJK-7Q9ocg4/VOtU-y-Aq3I/AAAAAAAAANA/oGz9vZIa7ZE/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png">
+<meta property="og:image" content="https://1.bp.blogspot.com/-TouprIuusyo/VPCNkY_q98I/AAAAAAAAANw/isLW7Be-2u0/s320/FireShot%2BCapture%2B-%2BStanford%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0---%E7%AC%AC%E4%B8%89%E8%AE%B2.%2B%E9%80%BB_%2B-%2Bhttp___blog.csdn.net_abcjennifer_article_details_7716281.png">
+<meta property="og:image" content="https://3.bp.blogspot.com/--RFTczq9WsY/VPCWRX48b7I/AAAAAAAAAOA/W1hDtkoJQN4/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png">
+<meta property="og:updated_time" content="2017-02-28T15:31:32.702Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Machine learning note">
+<meta name="twitter:description" content="https://class.coursera.org/ml-008/
+Supervised Learning:
+Right answers are given.Regression problem:Predict continuous value output.
+Classification problem:Discrete value output.
+Unsupervised Learning:">
+<meta name="twitter:image" content="https://3.bp.blogspot.com/-4Br754yMeTg/VOtP0nC8RgI/AAAAAAAAAMc/JhP-bqGfLZc/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/hexo-blog/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jackklpan.github.io/hexo-blog/2015/02/23/Machine-learning-note/"/>
+
+
+
+
+
+  <title> Machine learning note | Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/hexo-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A place to record somethings related to programming.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/hexo-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/hexo-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/hexo-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2015/02/23/Machine-learning-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Pan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Machine learning note
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2015-02-23T16:48:00+00:00">
+                2015-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/hexo-blog/2015/02/23/Machine-learning-note/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/02/23/Machine-learning-note/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://class.coursera.org/ml-008/" target="_blank" rel="external">https://class.coursera.org/ml-008/</a></p>
+<p>Supervised Learning:</p>
+<p><div>Right answers are given.</div><div><br>Regression problem:<br>Predict continuous value output.</div></p>
+<p>Classification problem:<br>Discrete value output.</p>
+<p>Unsupervised Learning:<br>Correct answers are not given to computer. Find the structure in the data.</p>
+<p>Linear Regression with One Variable:<br>ax+b = y minimize the squared error with training data.</p>
+<p>Gradient Descent:<br>Using the different value initialization will lead to different optimal result.( \theta_j := \theta_j - \alpha \frac{\partial }{\partial \theta_j}J(\theta_0, \theta_1) )<br>(\alpha) is called learning rate. It controls how big a step we take downhill to gradient descent.<br>If the alpha is too small, gradient descent can be slow.<br>If the alpha is too large, it may fail to converge, or even diverge.<br>Simultaneous update ( \theta_0, \theta_1 ).<br>In linear regression, the cost function is a convex function (bowl-shape function). So the gradient descent can find the only global optimum.<br>If the cost function is not convex, then gradient descent may find any local optima.</p>
+<p><strong>Linear Regression with Multiple Variable:</strong><br>( h_{\theta}(x) = \theta_0+\theta_1 x_1+\theta_2 x_2+…+\theta_n x_n )<br>For convenience, ( x<em>0 = 1 )<br>( J(\theta) = \frac{1}{2m} \sum</em>{i=1}^m{(h_{\theta}(x^{(i)}) - y^{(i)})^2} )<br>Use gradient descent: ( \theta_j = \theta<em>j - \alpha \frac{1}{m} \sum</em>{i=1}^m{(h_{\theta}(x^{(i)}) - y^{(i)}) x_j^{(i)}} )<br><strong>Feature scaling</strong><br>For gradient descent, we need to do feature scaling to make features in the range -3&lt;value&lt;3. All features in the similar range can make gradient descent more quickly.<br>In general, feature scaling is: ( x = \frac{x-mean}{standard \, deviations} )<br>And in practice, in training stage, we should save every feature’s mean and standard deviation. Because in predict stage, we still need to do the feature scaling first.<br><strong>Learning rate</strong><br>The learning rate ( \alpha ):<br>If ( \alpha ) is too small: slow convergence.<br>If ( \alpha ) is too large: ( J(\theta) ) may not decrease on every iteration and may not converge.<br>In practice, we can try learning rate in log scale which is about 3 times the previous value (ie., 0.3, 0.1, 0.03, 0.01 and so on).<br><strong>Feature selecting and polynomial regression</strong><br>Besides, we can do some features selecting and polynomial regression in linear regression.<br>For example, we can multiply two features to create new feature or omit some features.<br>Polynomial regression example: ( \theta_0 + \theta_1 x + \theta_2 x^2 + \theta_3 x^3 )<br>If the x is the feature: “size”. ( x_1 = (size) \quad x_2 = (size)^2 \quad x_3 = (size)^3 )<br><strong>Normal equation</strong><br>In addition to gradient descent, we can use normal equation to solve linear regression ( \theta ) analytically.<br>So in general, We do differentiation in cost function ( J(\theta) ) for every ( \theta ) and set it to zero. In order to find the minimum value of the cost function.<br>And actually we can directly do it in matrix in linear regression. We want ( X \theta = y ), therefore ( \theta = (X^\top X)^{-1} X^\top y ).<br>In summary, normal equation’s advantages are:<br>1. No need to choose ( \alpha )<br>2. Don’t need to iterate<br>The disadvantages are:<br>1. Need to compute ( (X^\top X)^{-1} )<br>2. Slow if the number of feature(n) is very large(&gt;10000).</p>
+<p><strong>Logistic Regression</strong><br>In classification problem, the linear regression is not a good method to solve it. We can use the logistic regression to solve classification problem. (Define a new Hypothesis and cost function.)<br>The hypothesis in linear regression is: ( h_{\theta}(x) = \theta_0+\theta_1 x_1+\theta_2 x_2+…+\theta_n x<em>n = \theta^\top x )<br>The new hypothesis in logistic regression is: ( h</em>\theta(x) = g(\theta^\top x) = \frac{1}{1+e^{-\theta^\top x}} ) which g is a sigmoid function.<br>And it actually represent the <strong>possibility</strong> that y=1 on input x.<br><a href="http://3.bp.blogspot.com/-4Br754yMeTg/VOtP0nC8RgI/AAAAAAAAAMc/JhP-bqGfLZc/s1600/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" target="_blank" rel="external"><img src="https://3.bp.blogspot.com/-4Br754yMeTg/VOtP0nC8RgI/AAAAAAAAAMc/JhP-bqGfLZc/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" alt=""></a><br>So based on the hypothesis, we will predict y=1 if ( J(\theta) ) &gt;= 0.5. In other word, when ( \theta^\top x ) &gt;= 0.<br>And that is called decision boundary.<br><a href="http://2.bp.blogspot.com/-5X-Fp0Bq6Ok/VOtRZXqoUrI/AAAAAAAAAMo/1kjpXOWDgpI/s1600/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" target="_blank" rel="external"><img src="https://2.bp.blogspot.com/-5X-Fp0Bq6Ok/VOtRZXqoUrI/AAAAAAAAAMo/1kjpXOWDgpI/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" alt=""></a><br>The decision boundary can be non-linear when we use other function in ( \theta^\top x ) just like in linear regression.<br><a href="http://4.bp.blogspot.com/-Y2_7r7yTg-w/VOtTUWAu0kI/AAAAAAAAAM0/iBXxITeGd-o/s1600/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" target="_blank" rel="external"><img src="https://4.bp.blogspot.com/-Y2_7r7yTg-w/VOtTUWAu0kI/AAAAAAAAAM0/iBXxITeGd-o/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" alt=""></a><br>Then in cost function.<br>The cost function in linear regression is: ( J(\theta) = \frac{1}{2m} \sum<em>{i=1}^m{(h</em>{\theta}(x^{(i)}) - y^{(i)})^2} )<br>We cannot use it in logistic regression because the (h_\theta(x)) is change. And it contain a sigmoid function that it produces a non-convex function when we use this cost function.<br>Therefore, we change the function inside the summation to:<br><a href="http://2.bp.blogspot.com/-yJK-7Q9ocg4/VOtU-y-Aq3I/AAAAAAAAANA/oGz9vZIa7ZE/s1600/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" target="_blank" rel="external"><img src="https://2.bp.blogspot.com/-yJK-7Q9ocg4/VOtU-y-Aq3I/AAAAAAAAANA/oGz9vZIa7ZE/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" alt=""></a><br>Because we use it in binary classification, and y=0 or 1, so can simplified it to: ( -ylog(h<em>\theta(x))-(1-y)log(1-h</em>\theta(x)) )<br>Finally the cost function is: ( J(\theta) = -\frac{1}{m}[\sum<em>{i=1}^m{ y^{(i)} log(h</em>\theta(x^{(i)})) + (1-y^{(i)}) log(1-h_\theta(x^{(i)})) }] )<br>And it is derived from statistics using the principle of maximum likelihood estimation. It also has a nice property that it is convex.<br>Now we have cost function, we can use it to do gradient descent to find the minimum cost. Same as in linear regression, the gradient descent is:<br>( \theta_j = \theta_j - \alpha \frac{\partial}{\partial\theta_j} J(\theta) )<br>After differential the cost function, we can get:<br>( \theta_j = \theta<em>j - \alpha \frac{1}{m} \sum</em>{i=1}^m{(h_{\theta}(x^{(i)}) - y^{(i)}) x<em>j^{(i)}} )<br>In surprise, it’s totally same as the gradient descent in linear regression.<br>The way to differential the cost function is show in below by picture.<br><a href="http://math.stackexchange.com/questions/477207/derivative-of-cost-function-for-logistic-regression" target="_blank" rel="external">http://math.stackexchange.com/questions/477207/derivative-of-cost-function-for-logistic-regression</a><br>[![](<a href="https://3.bp.blogspot.com/-kXLqV5SwoL4/VOtaMF-UGdI/AAAAAAAAANc/M8SEcFVYgo4/s400/FireShot%2BCapture%2B-%2Bstatistics%2B-%2Bderivative%2Bof%2Bcost%2Bfunctio" target="_blank" rel="external">https://3.bp.blogspot.com/-kXLqV5SwoL4/VOtaMF-UGdI/AAAAAAAAANc/M8SEcFVYgo4/s400/FireShot%2BCapture%2B-%2Bstatistics%2B-%2Bderivative%2Bof%2Bcost%2Bfunctio</a></em>%2B-%2Bhttp<strong>_math.stackexchange.com<em>questi.png)](<a href="http://3.bp.blogspot.com/-kXLqV5SwoL4/VOtaMF-UGdI/AAAAAAAAANc/M8SEcFVYgo4/s1600/FireShot%2BCapture%2B-%2Bstatistics%2B-%2Bderivative%2Bof%2Bcost%2Bfunctio" target="_blank" rel="external">http://3.bp.blogspot.com/-kXLqV5SwoL4/VOtaMF-UGdI/AAAAAAAAANc/M8SEcFVYgo4/s1600/FireShot%2BCapture%2B-%2Bstatistics%2B-%2Bderivative%2Bof%2Bcost%2Bfunctio</a></em>%2B-%2Bhttp_</strong>math.stackexchange.com_questi.png)<br>We can do gradient descent by vectorization in matlab:<br><a href="http://1.bp.blogspot.com/-TouprIuusyo/VPCNkY_q98I/AAAAAAAAANw/isLW7Be-2u0/s1600/FireShot%2BCapture%2B-%2BStanford%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0---%E7%AC%AC%E4%B8%89%E8%AE%B2.%2B%E9%80%BB_%2B-%2Bhttp___blog.csdn.net_abcjennifer_article_details_7716281.png" target="_blank" rel="external"><img src="https://1.bp.blogspot.com/-TouprIuusyo/VPCNkY_q98I/AAAAAAAAANw/isLW7Be-2u0/s320/FireShot%2BCapture%2B-%2BStanford%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0---%E7%AC%AC%E4%B8%89%E8%AE%B2.%2B%E9%80%BB_%2B-%2Bhttp___blog.csdn.net_abcjennifer_article_details_7716281.png" alt=""></a><br>In addition to gradient descent, there are other way to optimize the cost function. Like Conjugate gradient, BFGS, L-BFGS. The advantages are no need to select ( \alpha ) rate and more fast. But disadvantage is more complex.<br>However, we can use them easily by matlab without knowing any about their actually algorithm.<br>What we need to do in matlab is writing the function return cost and the partial derivatives value when given theta. And matlab will chose the appropriate method for us.<br>For example, the function we should write in the format like:  </p>
+<p><pre class="brush: text">function [jVal, gradient] = costFunction(theta)<br>  jVal = (theta(1)-5)^2 + (theta(2)-5)^2;<br>  gradient = zeros(2,1);<br>  gradient(1) = 2<em>(theta(1)-5);<br>  gradient(2) = 2</em>(theta(2)-5);<br></pre>And use it by:</p>
+<p><pre class="brush: text">options = optimset(‘GradObj’, ‘on’, ‘MaxIter’, ‘100’);<br>initialTheta = zeros(2,1);<br>[optTheta, functionVal, exitFlag] = fminunc(@costFunction, initialTheta, options);<br></pre>The optTheta will be the optimization theta.<br>Besides, we can also use logistic regression in multi-calss classification.<br>The way is just train a logistic regression classifier for each class. And pick the class that probability is maximum as the result.<br><a href="http://3.bp.blogspot.com/--RFTczq9WsY/VPCWRX48b7I/AAAAAAAAAOA/W1hDtkoJQN4/s1600/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" target="_blank" rel="external"><img src="https://3.bp.blogspot.com/--RFTczq9WsY/VPCWRX48b7I/AAAAAAAAAOA/W1hDtkoJQN4/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" alt=""></a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/hexo-blog/tags/ml/" rel="tag"># ml</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/hexo-blog/2015/02/23/Alternative-to-TestFlight/" rel="next" title="Alternative to TestFlight?">
+                <i class="fa fa-chevron-left"></i> Alternative to TestFlight?
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/hexo-blog/2015/02/28/Pass-JavaScript-variables-from-a-server-to-AngularJS/" rel="prev" title="Pass JavaScript variables from a server to AngularJS">
+                Pass JavaScript variables from a server to AngularJS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/hexo-blog/images/avatar.gif"
+               alt="Jack Pan" />
+          <p class="site-author-name" itemprop="name">Jack Pan</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/hexo-blog/archives">
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/hexo-blog/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack Pan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/hexo-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/hexo-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/hexo-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/hexo-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/hexo-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'jack-pan-blog';
+      var disqus_identifier = '2015/02/23/Machine-learning-note/';
+
+      var disqus_title = "Machine learning note";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

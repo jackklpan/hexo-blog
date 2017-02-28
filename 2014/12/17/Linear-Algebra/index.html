@@ -1,0 +1,716 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/hexo-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/hexo-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/hexo-blog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/hexo-blog/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="( 2x-y = 0 )( -x+2y = 3 )Row picture: intersection of planes( \begin{bmatrix}  2 &amp;amp; -1 \ -1 &amp;amp; 2 \end{bmatrix} \begin{bmatrix} x \ y \end{bmatrix} =  \begin{bmatrix} 0 \ 3 \end{bmatrix} )Column">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linear Algebra">
+<meta property="og:url" content="https://jackklpan.github.io/hexo-blog/2014/12/17/Linear-Algebra/index.html">
+<meta property="og:site_name" content="Notes">
+<meta property="og:description" content="( 2x-y = 0 )( -x+2y = 3 )Row picture: intersection of planes( \begin{bmatrix}  2 &amp;amp; -1 \ -1 &amp;amp; 2 \end{bmatrix} \begin{bmatrix} x \ y \end{bmatrix} =  \begin{bmatrix} 0 \ 3 \end{bmatrix} )Column">
+<meta property="og:updated_time" content="2017-02-28T15:31:32.702Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linear Algebra">
+<meta name="twitter:description" content="( 2x-y = 0 )( -x+2y = 3 )Row picture: intersection of planes( \begin{bmatrix}  2 &amp;amp; -1 \ -1 &amp;amp; 2 \end{bmatrix} \begin{bmatrix} x \ y \end{bmatrix} =  \begin{bmatrix} 0 \ 3 \end{bmatrix} )Column">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/hexo-blog/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jackklpan.github.io/hexo-blog/2014/12/17/Linear-Algebra/"/>
+
+
+
+
+
+  <title> Linear Algebra | Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/hexo-blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A place to record somethings related to programming.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/hexo-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/hexo-blog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/hexo-blog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2014/12/17/Linear-Algebra/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Pan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linear Algebra
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2014-12-17T16:23:00+00:00">
+                2014-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/hexo-blog/2014/12/17/Linear-Algebra/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/12/17/Linear-Algebra/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>( 2x-y = 0 )<br>( -x+2y = 3 )<br>Row picture: intersection of planes<br>( \begin{bmatrix}  2 &amp; -1 \ -1 &amp; 2 \end{bmatrix} \begin{bmatrix} x \ y \end{bmatrix} =  \begin{bmatrix} 0 \ 3 \end{bmatrix} )<br>Column picture: combine vectors to produce right hand. Or called it as a linear combination of columns.<br>(  x \begin{bmatrix} 2 \ -1      \end{bmatrix} +  y \begin{bmatrix} -1 \ 2 \end{bmatrix}  = \begin{bmatrix} 0 \ 3 \end{bmatrix} )<br>Ax = b have solution when A is invertible(non-singular case).<br>And we can say Ax is a combination of columns of A. </p>
+<h1 id="Elimination"><a href="#Elimination" class="headerlink" title="Elimination"></a>Elimination</h1><p>Select the first row first column as pivot, and elimination all row below it, to make these row’s first columns become zero.<br>Then select the second row second column as pivot. elimination all row below it to make these row’s second columns become zero.<br>Do it recursive until reach the last row. </p>
+<p><strong>One thing to note is “pivots cannot be zero”</strong> </p>
+<p>So the elimination fail when A matrix is singular matrix.<br>We can exchange the row’s positions to make pivots not zero when A matrix is not singular matrix.<br>( \begin{bmatrix} 0 &amp; 1 \ 1 &amp; 0 \end{bmatrix} \begin{bmatrix} 0 &amp; 2 \ 3 &amp; 1 \end{bmatrix} = \begin{bmatrix} 3 &amp; 1 \ 0 &amp; 2 \end{bmatrix} )<br>And we can express these operations in matrix form.<br>(When we put a matrix in the left of A, it is a combination of <strong>rows</strong> of A. Just like the above example to exchange row 1 and row 2.<br> When we put a matrix in the right of A, it is a combination of <strong>columns</strong> of A. Like the below example to exchange col 1 and col 2.)<br>( \begin{bmatrix} 0 &amp; 2 &amp; 1\ 3 &amp; 1 &amp; 2\ 1 &amp; 2 &amp; 3 \end{bmatrix} \begin{bmatrix} 0 &amp; 1 &amp; 0 \ 1 &amp; 0 &amp; 0 \ 0 &amp; 0 &amp; 1 \end{bmatrix}  = \begin{bmatrix} 2 &amp; 0 &amp; 1 \ 1 &amp; 3 &amp; 2 \ 2 &amp; 1 &amp; 3 \end{bmatrix} ) </p>
+<p>Example for elimination:<br>( x+2y+z = 2 )<br>( 3x+8y+z = 12 )<br>(  4y+z = 2 )<br>( \begin{bmatrix} 1 &amp; 0 &amp; 0 \ 0 &amp; 1 &amp; 0 \ 0 &amp; -2 &amp; 1 \end{bmatrix} \begin{bmatrix} 1 &amp; 0 &amp; 0 \ -3 &amp; 1 &amp; 0 \ 0 &amp; 0 &amp; 1 \end{bmatrix} \begin{bmatrix} 1 &amp; 2 &amp; 1 \ 3 &amp; 8 &amp; 1 \ 0 &amp; 4 &amp; 1 \end{bmatrix} =  \begin{bmatrix} 1 &amp; 2 &amp; 1 \ 0 &amp; 2 &amp; -2 \ 0 &amp; 0 &amp; 5 \end{bmatrix} )<br>It can be expressed as:<br>( E<em>{32} E</em>{21} A = U ) or just ( E A = U )<br>So do the same multiplication on b, we can get z value first. And back-substitution to get x and y. </p>
+<h1 id="Multiplication"><a href="#Multiplication" class="headerlink" title="Multiplication"></a>Multiplication</h1><p>Not commutative, but associative.<br>( AB = C )<br>( A=m<em>n \qquad B=n</em>p \qquad C=m*p ) </p>
+<ol>
+<li>Row times column( C<em>{34} = (row\,3\,of\,A) \cdot (column\,4\,of\,B) = a</em>{31}b<em>{14} + a</em>{32}b<em>{24} + … = \sum\limits</em>{k=1}^n a<em>{3k}b</em>{k4} )2.  Column wayColumns of C are combinations of columns of A( \begin{bmatrix} \; &amp; \; \end{bmatrix} \begin{bmatrix} | &amp; | \end{bmatrix} = \begin{bmatrix} | &amp; | \end{bmatrix} )3.  Row wayRows of C are combinations of rows of B( \begin{bmatrix} - \end{bmatrix} \begin{bmatrix} \; \end{bmatrix} = \begin{bmatrix} - \end{bmatrix} )4.  Column times rowSum of (cols of A) * (rows of B)( \begin{bmatrix} 2 &amp; 7 \ 3 &amp; 8 \ 4 &amp; 9 \end{bmatrix} \begin{bmatrix} 1 &amp; 6 \ 0 &amp; 0 \end{bmatrix} = \begin{bmatrix} 2 \ 3 \ 4 \end{bmatrix} \begin{bmatrix} 1 &amp; 6 \end{bmatrix} + \begin{bmatrix} 7 \ 8 \ 9 \end{bmatrix} \begin{bmatrix} 0 &amp; 0 \end{bmatrix} )5.  Block way( \begin{bmatrix} A_1 &amp; A_2 \ A_3 &amp; A_4 \end{bmatrix} \begin{bmatrix} B_1 &amp; B_2 \ B_3 &amp; B_4 \end{bmatrix} = \begin{bmatrix} A_1B_1+A_2B<em>3 &amp; \</em> \ _ &amp; _ \end{bmatrix} )</li>
+</ol>
+<h1 id="Inverses-of-square-matrices"><a href="#Inverses-of-square-matrices" class="headerlink" title="Inverses of square matrices"></a>Inverses of square matrices</h1><p>( A^{-1}A = I = AA^{-1} )<br>Only when matrix is square, we can put inverse of A after A to get I. (A must to be square to be invertible?)<br>But <strong>not all matrices have inverses. An inverse is <span style="color:red">impossible</span> when Ax is zero and x is non zero.</strong><br>Because ( A^{-1}Ax = A^{-1}0 ) means ( Ix = A^{-1}0 ) means ( x = 0 ). So it is impossible to find inverse of A when x is nonzero and there exist Ax is zero.<br><strong>The inverse exists if and only if elimination produces n pivots</strong> </p>
+<p><strong>Gauss-Jordan method to compute inverse of A</strong><br>Put the matrix in the form ( \begin{bmatrix} A &amp; I \end{bmatrix} ) and start the elimination to make A become triangular U. And then do it backward to make U become I.<br>The matrix become ( \begin{bmatrix} I &amp; ? \end{bmatrix} ).<br>Actually ? is ( A^{-1} ).<br>If we let E matrix is the steps we do in A to let A become I, we know that ( E \begin{bmatrix} A &amp; I \end{bmatrix} =  \begin{bmatrix} I &amp; ? \end{bmatrix} ).<br>So ( EA = I ) =&gt; ( E = A^{-1} ), means ( EI = A^{-1} ). Therefore the ? in the right is what we want ( A^{-1} ).</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/hexo-blog/2014/11/20/iOS-Prefix-pch/" rel="next" title="iOS Prefix.pch">
+                <i class="fa fa-chevron-left"></i> iOS Prefix.pch
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/hexo-blog/2015/01/19/Using-openCV-SIFT-in-C/" rel="prev" title="Using openCV SIFT in C++">
+                Using openCV SIFT in C++ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/hexo-blog/images/avatar.gif"
+               alt="Jack Pan" />
+          <p class="site-author-name" itemprop="name">Jack Pan</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/hexo-blog/archives">
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/hexo-blog/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Elimination"><span class="nav-number">1.</span> <span class="nav-text">Elimination</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Multiplication"><span class="nav-number">2.</span> <span class="nav-text">Multiplication</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Inverses-of-square-matrices"><span class="nav-number">3.</span> <span class="nav-text">Inverses of square matrices</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack Pan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/hexo-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/hexo-blog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/hexo-blog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/hexo-blog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/hexo-blog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/hexo-blog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'jack-pan-blog';
+      var disqus_identifier = '2014/12/17/Linear-Algebra/';
+
+      var disqus_title = "Linear Algebra";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
