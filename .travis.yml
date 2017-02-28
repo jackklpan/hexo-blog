@@ -20,9 +20,8 @@ before_install:
   # Install Hexo
   - npm install hexo -g
   # Clone the repository
-  - git clone https://github.com/jackklpan/hexo-blog.git blog
-after_success:
-  - cd blog
+  - git clone --branch gh-pages https://github.com/jackklpan/hexo-blog.git public
+script:
   - hexo generate
   - hexo deploy
 branches:
