@@ -2,13 +2,23 @@
 title: 建置Hexo
 tags: hexo
 ---
-介紹參考了哪些網頁來建置Hexo，首先第一個當然是Hexo的[官方網站](https://hexo.io/zh-tw/)，根據官方網站可以有基本的設定，但官方的介面不太好看，所以第二步就是使用別人寫好的Theme。
+## 初始設定
+Hexo的[官方網站](https://hexo.io/zh-tw/)，根據官方網站可以有基本的設定，但官方的介面不太好看，所以接下來要使用別人寫好的Theme。
 <!-- more -->
 
-我使用的是[NexT](http://theme-next.iissnan.com/getting-started.html)，該主題很貼心的提供了很多相關的設定說明，比如：[增加Tag](http://theme-next.iissnan.com/theme-settings.html#tags-page)、[增加DISQUS](http://theme-next.iissnan.com/third-party-services.html#disqus)、[增加MathJax](http://theme-next.iissnan.com/third-party-services.html#mathjax)。
+使用的是[NexT](http://theme-next.iissnan.com/getting-started.html)，該主題很貼心的提供了很多相關的設定說明，比如：[增加Tag](http://theme-next.iissnan.com/theme-settings.html#tags-page)、[增加DISQUS](http://theme-next.iissnan.com/third-party-services.html#disqus)、[增加MathJax](http://theme-next.iissnan.com/third-party-services.html#mathjax)。
 
+### MathJax使用方法
+```
+$$ Block $$
+
+\\(inline\\)
+```
+
+### DISQUS
 增加DISQUS時若要在local預覽，到_config.yml將url更改成localhost:4000（[參考](http://www.codeblocq.com/2015/12/Add-Disqus-comments-in-Hexo/)）。
 
+### NexT文字大小
 大致上設定完成之後，另外更改NexT的文字大小。在：
 ```
 themes/next/source/css/_variable/custom.styl
@@ -37,7 +47,28 @@ $site-description-font-size = 18px
 
 ```
 
-## Quick Start
+## 匯入Blogger的文章
+
+只能用RSS
+``` bash
+npm install hexo-migrator-rss --save
+```
+
+匯入
+``` bash
+hexo migrate rss "http://annotationandnote.blogspot.com/feeds/posts/default?alt=rss&max-results=1000000"
+```
+
+遇到個問題
+``` bash
+unknown block tag: load
+```
+
+是文章中有個
+```
+{% load %}
+```
+這種東西，將其包在code block即可。
 
 ### Create a new post
 
