@@ -145,8 +145,8 @@ before_install:
   - git config --global user.email jackklpan@gmail.com
   # Install Hexo
   - npm install hexo -g
-  # Clone the repository, 產生的檔案會放置於deploy_git，將其clone下來使commit一致，避免git force update
-  - git clone https://github.com/jackklpan/hexo-blog.git .deploy_git
+  # Clone the repository, 產生的檔案會放置於public，將其clone下來使commit一致，避免git force update
+  - git clone --branch gh-pages https://github.com/jackklpan/hexo-blog.git public
 script:
   - git submodule init # 用于更新主题，需要指定到自己的repo，否则会clone最新NexT主题，客製化的部分會消失
   - git submodule update
