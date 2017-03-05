@@ -247,6 +247,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2015/02/09/Python-pyenv-and-virtualenv-usage-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Pan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/hexo-blog/2015/02/09/Python-pyenv-and-virtualenv-usage-note/" itemprop="url">
+                  Python pyenv and virtualenv usage note
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2015-02-09T19:58:00+08:00">
+                2015-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/hexo-blog/2015/02/09/Python-pyenv-and-virtualenv-usage-note/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/02/09/Python-pyenv-and-virtualenv-usage-note/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation:"></a>Installation:</h2><div><br></div>
+
+<h3 id="pyenv"><a href="#pyenv" class="headerlink" title="pyenv"></a>pyenv</h3><div><br></div>
+
+<h4 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h4><div><br></div>brew update<br>brew install pyenv<br><br>To upgrade pyenv in the future, just use upgrade instead of install.<br><br>After installation, you’ll still need to add eval “$(pyenv init -)” to your profile (add it to ~/.bash_profile). You’ll only ever have to do this once.<br><br>#### Others<br><div><br></div># Get Code<br>git clone <a href="https://github.com/yyuu/pyenv.git" target="_blank" rel="external">https://github.com/yyuu/pyenv.git</a> ~/.pyenv<br><br># Set the Paths<br>echo ‘export PYENV_ROOT=”$HOME/.pyenv”‘ &gt;&gt; ~/.bash_profile<br>echo ‘export PATH=”$PYENV_ROOT/bin:$PATH”‘ &gt;&gt; ~/.bash_profile<br><strong>Zsh note: Modify your ~/.zshenv file instead of ~/.bash_profile.</strong><br><strong>Ubuntu note: Modify your ~/.bashrc file instead of ~/.bash_profile.</strong><br><br># Initialize pyenv on load of terminal<br>echo ‘eval “$(pyenv init -)”‘ &gt;&gt; ~/.bash_profile<br>exec $SHELL<br><br>### pyenv-virtualenv<br><div><br></div>
+
+<h4 id="Mac-1"><a href="#Mac-1" class="headerlink" title="Mac"></a>Mac</h4><div><br></div><div>brew install pyenv-virtualenv</div><div><br></div><div>Add</div><div>eval “$(pyenv virtualenv-init -)”</div><div>to your profile (add it to ~/.bash_profile)<br><br></div>
+
+<h4 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h4><div><br></div><div><div># Install pyenv virtualenv</div><div>git clone <a href="https://github.com/yyuu/pyenv-virtualenv.git" target="_blank" rel="external">https://github.com/yyuu/pyenv-virtualenv.git</a> ~/.pyenv/plugins/pyenv-virtualenv</div><div><br></div><div># auto ativate virtualenv for pyenv</div><div>echo ‘eval “$(pyenv virtualenv-init -)”‘ &gt;&gt; ~/.bash_profile</div><div><strong>Zsh note: Modify your ~/.zshenv file instead of ~/.bash_profile.</strong><br><strong>Ubuntu note: Modify your ~/.bashrc file instead of ~/.bash_profile.</strong><br><strong>
+</strong></div><div># restart shell</div></div><div>exec $SHELL<br><br></div>
+
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><div><br></div>
+
+<h3 id="pyenv-1"><a href="#pyenv-1" class="headerlink" title="pyenv"></a>pyenv</h3><p><div><br></div># install python<br>pyenv install 2.7.9<br>pyenv install 3.4.3</p>
+<h1 id="if-there-are-problems-when-install-the-python-you-can-refer-to"><a href="#if-there-are-problems-when-install-the-python-you-can-refer-to" class="headerlink" title="if there are problems when install the python, you can refer to"></a>if there are problems when install the python, you can refer to</h1><p>#&nbsp;<a href="https://github.com/yyuu/pyenv/wiki/Common-build-problems" target="_blank" rel="external">https://github.com/yyuu/pyenv/wiki/Common-build-problems</a></p>
+<h1 id="rehash-when-install-the-new-versions-every-time"><a href="#rehash-when-install-the-new-versions-every-time" class="headerlink" title="rehash when install the new versions every time"></a>rehash when install the new versions every time</h1><p>pyenv rehash</p>
+<h1 id="set-version-of-python-to-use-for-this-session"><a href="#set-version-of-python-to-use-for-this-session" class="headerlink" title="set version of python to use for this session"></a>set version of python to use for this session</h1><p>pyenv shell 3.4.3</p>
+<h1 id="set-global-python-for-everytime-we-start-pyenv"><a href="#set-global-python-for-everytime-we-start-pyenv" class="headerlink" title="set global python for everytime we start pyenv"></a>set global python for everytime we start pyenv</h1><p>pyenv global 3.4.3</p>
+<h1 id="set-python-version-for-current-and-all-sub-directories"><a href="#set-python-version-for-current-and-all-sub-directories" class="headerlink" title="set python version for current and all sub directories"></a>set python version for current and all sub directories</h1><p>pyenv local 3.4.3</p>
+<h3 id="pyenv-virtualenv"><a href="#pyenv-virtualenv" class="headerlink" title="pyenv-virtualenv"></a>pyenv-virtualenv</h3><p><div><br></div>Restart the shell and let’s create an virtualenv with Python 2.7.8.<br>pyenv virtualenv 2.7.8 project-a-2.7.8</p>
+<p>Activate the newly created virtualenv.<br>pyenv activate project-a-2.7.8</p>
+<p>You can deactivate the current virtualenv.<br>pyenv deactivate</p>
+<p>And list the available virtualenvs.<br>pyenv virtualenvs</p>
+<p>Those virtualenvs are located in ~/.pyenv/versions just like those installed Pythons. If you want to remove a virtualenv, simply delete that corresponding folder.<br>Or<br>pyenv uninstall my-virtual-env</p>
+<p>Reference:<br><a href="http://eureka.ykyuen.info/2014/07/11/pyenv-python-version-manager/" target="_blank" rel="external">http://eureka.ykyuen.info/2014/07/11/pyenv-python-version-manager/</a><br><a href="http://eureka.ykyuen.info/2014/07/14/manage-your-python-projects-with-virtualenv/" target="_blank" rel="external">http://eureka.ykyuen.info/2014/07/14/manage-your-python-projects-with-virtualenv/</a><br><a href="http://blog.froehlichundfrei.de/2014/11/30/my-transition-to-python3-and-pyenv-goodby-virtualenvwrapper.html" target="_blank" rel="external">http://blog.froehlichundfrei.de/2014/11/30/my-transition-to-python3-and-pyenv-goodby-virtualenvwrapper.html</a><br><a href="https://godjango.com/96-django-and-python-3-how-to-setup-pyenv-for-multiple-pythons/" target="_blank" rel="external">https://godjango.com/96-django-and-python-3-how-to-setup-pyenv-for-multiple-pythons/</a><br><a href="https://github.com/yyuu/pyenv" target="_blank" rel="external">https://github.com/yyuu/pyenv</a><br><a href="https://github.com/yyuu/pyenv-virtualenv" target="_blank" rel="external">https://github.com/yyuu/pyenv-virtualenv</a><br><a href="http://www.openfoundry.org/tw/tech-column/8516-pythons-virtual-environment-and-multi-version-programming-tools-virtualenv-and-pythonbrew" target="_blank" rel="external">http://www.openfoundry.org/tw/tech-column/8516-pythons-virtual-environment-and-multi-version-programming-tools-virtualenv-and-pythonbrew</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2015/02/07/Imgae-alignment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1527,144 +1679,6 @@ function leaveLayer(){
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2014/10/25/Using-MathJax-in-Blogger/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Pan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Notes">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/hexo-blog/2014/10/25/Using-MathJax-in-Blogger/" itemprop="url">
-                  Using MathJax in Blogger
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2014-10-25T23:33:00+08:00">
-                2014-10-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/hexo-blog/2014/10/25/Using-MathJax-in-Blogger/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/10/25/Using-MathJax-in-Blogger/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>It’s really easy. Just add the following code above &lt;head&gt; in blogger’s template: </p>
-<pre class="brush: html">&lt;script type="text/javascript"
-  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;
-&lt;/script&gt;
-</pre>
-And you can test it now! 
-\(          J_\alpha(x) = \sum\limits_{m=0}^\infty \frac{(-1)^m}{m! \, \Gamma(m + \alpha + 1)}{\bigl({\frac{x}{2}}\bigr)}^{2 m + \alpha} \) 
-<pre>\(
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;J_\alpha(x) = \sum\limits_{m=0}^\infty \frac{(-1)^m}{m! \, \Gamma(m + \alpha + 1)}{\bigl({\frac{x}{2}}\bigr)}^{2 m + \alpha}
-
-\)
-</pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1714,7 +1728,7 @@ And you can test it now!
           
             <div class="site-state-item site-state-posts">
               <a href="/hexo-blog/archives">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -1725,7 +1739,7 @@ And you can test it now!
           
             <div class="site-state-item site-state-tags">
               <a href="/hexo-blog/tags">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>

@@ -247,6 +247,178 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2015/05/13/node-js-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Pan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/hexo-blog/2015/05/13/node-js-note/" itemprop="url">
+                  node.js note
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2015-05-13T19:43:00+08:00">
+                2015-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/hexo-blog/2015/05/13/node-js-note/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/13/node-js-note/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Production:<br>forever<br>pm2</p>
+<p>From Tonyq(<a href="https://www.facebook.com/tonylovejava/posts/10206912577918652?fref=nf" target="_blank" rel="external">https://www.facebook.com/tonylovejava/posts/10206912577918652?fref=nf</a>)</p>
+<ul>
+<li>package.json 是專案設定檔，可以用來設定 dependency (會用到哪些 npm ，分成專案用跟開發用兩種 dependency / dev-dependency）。</li>
+</ul>
+<p>有設定的話剛 clone 別人專案回來時，可以用 “npm install” 直接安裝專案相依性到 local 。好處是不用把 node_modules commit 進版本控制，降低大小跟環境依賴。</p>
+<ul>
+<li><p>npm init 是如果沒有 package.json 可以用這個快速產生一個。</p>
+</li>
+<li><p>npm install &lt;package&gt; //正常的安裝套件流程</p>
+</li>
+</ul>
+<p>如果沒有指定 package 的話，會自動安裝 package.json 裡面的相依性.</p>
+<p>但如果你是裝專案需要的 npm package 的話，可以加上 “–save” ，如 npm install &lt;package&gt; –save ，會順便更新 package.json 檔加入這個 dependency。</p>
+<p>如果你是給 gulp 或其他開發工具用的，可以用 –save-dev ，會寫入 dev-dependency 區。</p>
+<p>另外跟這個沒有直接關係，但值得知道的事情是 “-g” 屬性，有支援 npm install -g &lt;package&gt; 的 npm ，會把該 package 直接變成 global 的 command。像是 express /browserify 等等等。(windows 底下這個功能有點 buggy …)</p>
+<p>==<br>發現我漏講了 npm run<br>在 package.json 裡面有 scripts properties 。可以在裡面直接寫入你要執行的 “command line”(!!) 指令</p>
+<p>像是我手上這專案是這樣<br>“scripts”: {<br>“test”: “echo \”Error: no test specified\” &amp;&amp; exit 1”,<br>“dev”: “supervisor –extensions ‘node,js,jsx’ app.js”<br>},</p>
+<p>就可以透過 npm run dev 來執行「supervisor –extensions ‘node,js,jsx’ app.js」</p>
+<p>npm install &lt;package&gt; 如果不帶上 –save 或 –save-dev 的話，所安裝的 package 將不會自動記進 package.json。</p>
+<p>但是，這些模塊仍會安裝在你的 node_modules。這時候你可以透過 npm prune 命令，清除這些不在 package.json 裡的模塊。</p>
+<p>這有時候在調試時，這還滿好用的。</p>
+<p>PS: bower prune 也有同樣功能。</p>
+<hr>
+<p>From 陳樂子 in (<a href="https://www.facebook.com/groups/javascript.tw/permalink/628502737251068/" target="_blank" rel="external">https://www.facebook.com/groups/javascript.tw/permalink/628502737251068/</a>)<br>npm install &lt;package&gt; -g 即是 –global，會把你的模塊裝到全局裡去，只要是在這個 node 環境下，所有項目都會共用著這些模塊，例如 npm gulp bower mocha 通常都是這樣使用。</p>
+<p>你 npm install mocha -g，安裝完成後，你便可以直接在任何地方執行 mocha –check-leaks –reporter spec 之類的命令。</p>
+<p>若你不想每次都要污染全局，你依然可以僅安裝在本地項目目錄上，只是若你要調試的話，便變成在要給模塊指定一個路徑，例如 node_modules/mocha/bin/mocha –check-leaks –reporter spec。</p>
+<p>你也可以透過 package.json 的 scripts 預先來編好一些腳本，再透過 npm run &lt;command&gt; 來執行。透過 npm run 執行的腳本，所有安裝在本地的模塊，皆不再須要幫它編寫路徑。</p>
+<p>因此你可以直接這樣作</p>
+<p>$ npm install npm-dep-info</p>
+<p>// package.json<br>“scripts”: {<br>“info”: “npm-dep-info”<br>}</p>
+<p>$ npm run info</p>
+<hr>
+<p>附帶一提，我命令都是用縮寫比較快。</p>
+<p>例如</p>
+<ul>
+<li><p>npm i 取代 npm install</p>
+</li>
+<li><p>npm un 取代 npm uninstall</p>
+</li>
+<li><p>npm i -S 取代 npm install –save</p>
+</li>
+<li><p>npm i -D 取代 npm install –save-dev</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2015/05/08/use-BFMatcher-instead-of-FlannBasedMatcher-when-want-result-to-be-same-openCV/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1417,158 +1589,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2015/02/09/Python-pyenv-and-virtualenv-usage-note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Pan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Notes">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/hexo-blog/2015/02/09/Python-pyenv-and-virtualenv-usage-note/" itemprop="url">
-                  Python pyenv and virtualenv usage note
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2015-02-09T19:58:00+08:00">
-                2015-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/hexo-blog/2015/02/09/Python-pyenv-and-virtualenv-usage-note/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/02/09/Python-pyenv-and-virtualenv-usage-note/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation:"></a>Installation:</h2><div><br></div>
-
-<h3 id="pyenv"><a href="#pyenv" class="headerlink" title="pyenv"></a>pyenv</h3><div><br></div>
-
-<h4 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h4><div><br></div>brew update<br>brew install pyenv<br><br>To upgrade pyenv in the future, just use upgrade instead of install.<br><br>After installation, you’ll still need to add eval “$(pyenv init -)” to your profile (add it to ~/.bash_profile). You’ll only ever have to do this once.<br><br>#### Others<br><div><br></div># Get Code<br>git clone <a href="https://github.com/yyuu/pyenv.git" target="_blank" rel="external">https://github.com/yyuu/pyenv.git</a> ~/.pyenv<br><br># Set the Paths<br>echo ‘export PYENV_ROOT=”$HOME/.pyenv”‘ &gt;&gt; ~/.bash_profile<br>echo ‘export PATH=”$PYENV_ROOT/bin:$PATH”‘ &gt;&gt; ~/.bash_profile<br><strong>Zsh note: Modify your ~/.zshenv file instead of ~/.bash_profile.</strong><br><strong>Ubuntu note: Modify your ~/.bashrc file instead of ~/.bash_profile.</strong><br><br># Initialize pyenv on load of terminal<br>echo ‘eval “$(pyenv init -)”‘ &gt;&gt; ~/.bash_profile<br>exec $SHELL<br><br>### pyenv-virtualenv<br><div><br></div>
-
-<h4 id="Mac-1"><a href="#Mac-1" class="headerlink" title="Mac"></a>Mac</h4><div><br></div><div>brew install pyenv-virtualenv</div><div><br></div><div>Add</div><div>eval “$(pyenv virtualenv-init -)”</div><div>to your profile (add it to ~/.bash_profile)<br><br></div>
-
-<h4 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h4><div><br></div><div><div># Install pyenv virtualenv</div><div>git clone <a href="https://github.com/yyuu/pyenv-virtualenv.git" target="_blank" rel="external">https://github.com/yyuu/pyenv-virtualenv.git</a> ~/.pyenv/plugins/pyenv-virtualenv</div><div><br></div><div># auto ativate virtualenv for pyenv</div><div>echo ‘eval “$(pyenv virtualenv-init -)”‘ &gt;&gt; ~/.bash_profile</div><div><strong>Zsh note: Modify your ~/.zshenv file instead of ~/.bash_profile.</strong><br><strong>Ubuntu note: Modify your ~/.bashrc file instead of ~/.bash_profile.</strong><br><strong>
-</strong></div><div># restart shell</div></div><div>exec $SHELL<br><br></div>
-
-<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><div><br></div>
-
-<h3 id="pyenv-1"><a href="#pyenv-1" class="headerlink" title="pyenv"></a>pyenv</h3><p><div><br></div># install python<br>pyenv install 2.7.9<br>pyenv install 3.4.3</p>
-<h1 id="if-there-are-problems-when-install-the-python-you-can-refer-to"><a href="#if-there-are-problems-when-install-the-python-you-can-refer-to" class="headerlink" title="if there are problems when install the python, you can refer to"></a>if there are problems when install the python, you can refer to</h1><p>#&nbsp;<a href="https://github.com/yyuu/pyenv/wiki/Common-build-problems" target="_blank" rel="external">https://github.com/yyuu/pyenv/wiki/Common-build-problems</a></p>
-<h1 id="rehash-when-install-the-new-versions-every-time"><a href="#rehash-when-install-the-new-versions-every-time" class="headerlink" title="rehash when install the new versions every time"></a>rehash when install the new versions every time</h1><p>pyenv rehash</p>
-<h1 id="set-version-of-python-to-use-for-this-session"><a href="#set-version-of-python-to-use-for-this-session" class="headerlink" title="set version of python to use for this session"></a>set version of python to use for this session</h1><p>pyenv shell 3.4.3</p>
-<h1 id="set-global-python-for-everytime-we-start-pyenv"><a href="#set-global-python-for-everytime-we-start-pyenv" class="headerlink" title="set global python for everytime we start pyenv"></a>set global python for everytime we start pyenv</h1><p>pyenv global 3.4.3</p>
-<h1 id="set-python-version-for-current-and-all-sub-directories"><a href="#set-python-version-for-current-and-all-sub-directories" class="headerlink" title="set python version for current and all sub directories"></a>set python version for current and all sub directories</h1><p>pyenv local 3.4.3</p>
-<h3 id="pyenv-virtualenv"><a href="#pyenv-virtualenv" class="headerlink" title="pyenv-virtualenv"></a>pyenv-virtualenv</h3><p><div><br></div>Restart the shell and let’s create an virtualenv with Python 2.7.8.<br>pyenv virtualenv 2.7.8 project-a-2.7.8</p>
-<p>Activate the newly created virtualenv.<br>pyenv activate project-a-2.7.8</p>
-<p>You can deactivate the current virtualenv.<br>pyenv deactivate</p>
-<p>And list the available virtualenvs.<br>pyenv virtualenvs</p>
-<p>Those virtualenvs are located in ~/.pyenv/versions just like those installed Pythons. If you want to remove a virtualenv, simply delete that corresponding folder.<br>Or<br>pyenv uninstall my-virtual-env</p>
-<p>Reference:<br><a href="http://eureka.ykyuen.info/2014/07/11/pyenv-python-version-manager/" target="_blank" rel="external">http://eureka.ykyuen.info/2014/07/11/pyenv-python-version-manager/</a><br><a href="http://eureka.ykyuen.info/2014/07/14/manage-your-python-projects-with-virtualenv/" target="_blank" rel="external">http://eureka.ykyuen.info/2014/07/14/manage-your-python-projects-with-virtualenv/</a><br><a href="http://blog.froehlichundfrei.de/2014/11/30/my-transition-to-python3-and-pyenv-goodby-virtualenvwrapper.html" target="_blank" rel="external">http://blog.froehlichundfrei.de/2014/11/30/my-transition-to-python3-and-pyenv-goodby-virtualenvwrapper.html</a><br><a href="https://godjango.com/96-django-and-python-3-how-to-setup-pyenv-for-multiple-pythons/" target="_blank" rel="external">https://godjango.com/96-django-and-python-3-how-to-setup-pyenv-for-multiple-pythons/</a><br><a href="https://github.com/yyuu/pyenv" target="_blank" rel="external">https://github.com/yyuu/pyenv</a><br><a href="https://github.com/yyuu/pyenv-virtualenv" target="_blank" rel="external">https://github.com/yyuu/pyenv-virtualenv</a><br><a href="http://www.openfoundry.org/tw/tech-column/8516-pythons-virtual-environment-and-multi-version-programming-tools-virtualenv-and-pythonbrew" target="_blank" rel="external">http://www.openfoundry.org/tw/tech-column/8516-pythons-virtual-environment-and-multi-version-programming-tools-virtualenv-and-pythonbrew</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1618,7 +1638,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/hexo-blog/archives">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -1629,7 +1649,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/hexo-blog/tags">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>
