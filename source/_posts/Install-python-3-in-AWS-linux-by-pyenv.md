@@ -1,7 +1,7 @@
 ---
 title: Install python 3 in AWS linux by pyenv
 tags: [python, aws]
-date: 2016-03-19 22:51:00
+date: 2017-03-19 22:51:00
 ---
 
 curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
