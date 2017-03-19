@@ -247,6 +247,139 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2015/12/15/ruby-csv-excel-gibberish/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Pan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/hexo-blog/2015/12/15/ruby-csv-excel-gibberish/" itemprop="url">
+                  ruby csv excel gibberish
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2015-12-15T09:05:00+08:00">
+                2015-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/hexo-blog/2015/12/15/ruby-csv-excel-gibberish/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/ruby-csv-excel-gibberish/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>From:<br><a href="http://blog.poyi.tw/blog/2014/05/06/ruby-csv-file/" target="_blank" rel="external">http://blog.poyi.tw/blog/2014/05/06/ruby-csv-file/</a></p>
+<p>export_to_csv_string 匯出csv的string格式再利用send_data下載<br>&nbsp; head = ‘EF BB BF’.split(‘ ‘).map{|a|a.hex.chr}.join() # 加入BOM，解決excel中文亂碼</p>
+<p>&nbsp; csv_string = CSV.generate(csv = head) do |csv|<br>&nbsp; &nbsp; csv &lt;&lt; header<br>&nbsp; &nbsp; csv &lt;&lt; body<br>&nbsp; end</p>
+<p>&nbsp; # &gt; csv_string.encoding 執行這句會發現預設編碼為ACSII<br>&nbsp; csv_string.force_encoding(‘big5’)<br>&nbsp; # BOM也可以這樣加 csv_string = “\xEF\xBB\xBF#{csv_string}”<br>&nbsp; # 若不需要調整格式就直接下載<br>&nbsp; send_data csv_string</p>
+<p>convert_to_wide_word 大小寫英文數字轉全形字元<br>def self.convert_to_wide_word(text)<br>&nbsp; text.gsub(/[a-v]/){|a|(a.ord + 41608).chr(‘big5’).encode(‘utf-8’)}<br>&nbsp; &nbsp; .gsub(/[w-z]/){|a|(a.ord + 41673).chr(‘big5’).encode(‘utf-8’)}<br>&nbsp; &nbsp; .gsub(/[A-Z]/){|a|(a.ord + 41614).chr(‘big5’).encode(‘utf-8’)}<br>&nbsp; &nbsp; .gsub(/[0-9]/){|a|(a.ord + 41599).chr(‘big5’).encode(‘utf-8’)}<br>end</p>
+<p>convert_to_wide_word(“0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ”)<br>&nbsp;=&gt; “０１２３４５６７８９ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬ<br>&nbsp;ＭＮＯＰＱＲＳＴＵＶＷＸＹＺ”</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2015/12/06/cocoapods-undefined-symbols-and-duplicate-symbols/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1406,134 +1539,6 @@ And actually it can be fixed when installed
           
             <p>Call C/C++ from Java and call Java from C/C++</p>
 <p><a href="http://87showmin.blogspot.tw/2009/06/java-java-native-interfacejni.html" target="_blank" rel="external">http://87showmin.blogspot.tw/2009/06/java-java-native-interfacejni.html</a><br><a href="http://www.codeproject.com/Articles/993067/Calling-Java-from-Cplusplus-with-JNI" target="_blank" rel="external">http://www.codeproject.com/Articles/993067/Calling-Java-from-Cplusplus-with-JNI</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2015/05/18/Using-OpenCV-in-Visual-Studio-2013/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Pan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Notes">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/hexo-blog/2015/05/18/Using-OpenCV-in-Visual-Studio-2013/" itemprop="url">
-                  Using OpenCV in Visual Studio 2013
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2015-05-18T16:15:00+08:00">
-                2015-05-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/hexo-blog/2015/05/18/Using-OpenCV-in-Visual-Studio-2013/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/18/Using-OpenCV-in-Visual-Studio-2013/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://my.phirobot.com/blog/2014-02-opencv_configuration_in_vs.html" target="_blank" rel="external">http://my.phirobot.com/blog/2014-02-opencv_configuration_in_vs.html</a><br><a href="https://github.com/jackklpan/visual_studio_config" target="_blank" rel="external">https://github.com/jackklpan/visual_studio_config</a></p>
 
           
         

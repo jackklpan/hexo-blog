@@ -247,7 +247,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2016/03/08/setup-hexo/">
+    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2016/07/28/mac-brew-pyenv-import-tkinter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jack Pan">
@@ -269,8 +269,8 @@
             
               
                 
-                <a class="post-title-link" href="/hexo-blog/2016/03/08/setup-hexo/" itemprop="url">
-                  建置Hexo
+                <a class="post-title-link" href="/hexo-blog/2016/07/28/mac-brew-pyenv-import-tkinter/" itemprop="url">
+                  mac brew pyenv import tkinter
                 </a>
               
             
@@ -286,8 +286,8 @@
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2016-03-08T08:00:00+08:00">
-                2016-03-08
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2016-07-28T22:46:00+08:00">
+                2016-07-28
               </time>
             
 
@@ -305,8 +305,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/hexo-blog/2016/03/08/setup-hexo/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/08/setup-hexo/" itemprop="commentCount"></span>
+                <a href="/hexo-blog/2016/07/28/mac-brew-pyenv-import-tkinter/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/28/mac-brew-pyenv-import-tkinter/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -333,14 +333,150 @@
 
       
         
-          <h2 id="初始設定"><a href="#初始設定" class="headerlink" title="初始設定"></a>初始設定</h2><p>Hexo的<a href="https://hexo.io/zh-tw/">官方網站</a>，根據官方網站可以有基本的設定，但官方的介面不太好看，所以接下來要使用別人寫好的Theme。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/hexo-blog/2016/03/08/setup-hexo/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>I use the homebrew and the pyenv to install python.</p>
+<p>When I want to import tkinter, there is a error message:<br>&nbsp; &nbsp; import _tkinter # If this fails your Python may not be configured for Tk<br>ImportError: No module named ‘_tkinter’</p>
+<p>Solve:</p>
+<p><pre class="prettyprint"><br>pyenv uninstall 3.5.1<br>brew tap Homebrew/dupes<br>brew install tcl-tk<br>pyenv install 3.5.1<br></pre><br>If there is a “zipimport” error when installing the python, solve by “xcode-select –install”.</p>
+<p>Reference:<br><a href="http://qiita.com/hokkun-k/items/223b1125b814621a0c0e" target="_blank" rel="external">http://qiita.com/hokkun-k/items/223b1125b814621a0c0e</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2016/03/19/Install-python-3-in-AWS-linux-by-pyenv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Pan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/hexo-blog/2016/03/19/Install-python-3-in-AWS-linux-by-pyenv/" itemprop="url">
+                  Install python 3 in AWS linux by pyenv
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2016-03-19T22:51:00+08:00">
+                2016-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/hexo-blog/2016/03/19/Install-python-3-in-AWS-linux-by-pyenv/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/19/Install-python-3-in-AWS-linux-by-pyenv/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>curl -L <a href="https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer" target="_blank" rel="external">https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer</a> | bash</p>
+<p>vim .bash_profile</p>
+<p>add following lines to .bash_profile:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export PATH=&quot;/home/ec2-user/.pyenv/bin:$PATH&quot;</div><div class="line">eval &quot;$(pyenv init -)&quot;</div><div class="line">eval &quot;$(pyenv virtualenv-init -)&quot;</div></pre></td></tr></table></figure></p>
+<p>sudo yum install gcc</p>
+<p>sudo yum install openssl-devel</p>
+<p>sudo yum install bzip2-devel</p>
+<p>sudo yum install sqlite-devel</p>
+<p>sudo yum install readline-devel</p>
+<p>pyenv install 3.4.3</p>
+
+          
         
       
     </div>
@@ -1395,139 +1531,6 @@ Remover all stopped containers:
         
           
             <p><a href="http://www.cyberciti.biz/tips/nohup-execute-commands-after-you-exit-from-a-shell-prompt.html" target="_blank" rel="external">http://www.cyberciti.biz/tips/nohup-execute-commands-after-you-exit-from-a-shell-prompt.html</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2015/12/15/ruby-csv-excel-gibberish/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Pan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Notes">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/hexo-blog/2015/12/15/ruby-csv-excel-gibberish/" itemprop="url">
-                  ruby csv excel gibberish
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2015-12-15T09:05:00+08:00">
-                2015-12-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/hexo-blog/2015/12/15/ruby-csv-excel-gibberish/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/12/15/ruby-csv-excel-gibberish/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>From:<br><a href="http://blog.poyi.tw/blog/2014/05/06/ruby-csv-file/" target="_blank" rel="external">http://blog.poyi.tw/blog/2014/05/06/ruby-csv-file/</a></p>
-<p>export_to_csv_string 匯出csv的string格式再利用send_data下載<br>&nbsp; head = ‘EF BB BF’.split(‘ ‘).map{|a|a.hex.chr}.join() # 加入BOM，解決excel中文亂碼</p>
-<p>&nbsp; csv_string = CSV.generate(csv = head) do |csv|<br>&nbsp; &nbsp; csv &lt;&lt; header<br>&nbsp; &nbsp; csv &lt;&lt; body<br>&nbsp; end</p>
-<p>&nbsp; # &gt; csv_string.encoding 執行這句會發現預設編碼為ACSII<br>&nbsp; csv_string.force_encoding(‘big5’)<br>&nbsp; # BOM也可以這樣加 csv_string = “\xEF\xBB\xBF#{csv_string}”<br>&nbsp; # 若不需要調整格式就直接下載<br>&nbsp; send_data csv_string</p>
-<p>convert_to_wide_word 大小寫英文數字轉全形字元<br>def self.convert_to_wide_word(text)<br>&nbsp; text.gsub(/[a-v]/){|a|(a.ord + 41608).chr(‘big5’).encode(‘utf-8’)}<br>&nbsp; &nbsp; .gsub(/[w-z]/){|a|(a.ord + 41673).chr(‘big5’).encode(‘utf-8’)}<br>&nbsp; &nbsp; .gsub(/[A-Z]/){|a|(a.ord + 41614).chr(‘big5’).encode(‘utf-8’)}<br>&nbsp; &nbsp; .gsub(/[0-9]/){|a|(a.ord + 41599).chr(‘big5’).encode(‘utf-8’)}<br>end</p>
-<p>convert_to_wide_word(“0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ”)<br>&nbsp;=&gt; “０１２３４５６７８９ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬ<br>&nbsp;ＭＮＯＰＱＲＳＴＵＶＷＸＹＺ”</p>
 
           
         
