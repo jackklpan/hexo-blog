@@ -247,6 +247,142 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2017/03/19/Install-python-3-in-AWS-linux-by-pyenv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jack Pan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/hexo-blog/2017/03/19/Install-python-3-in-AWS-linux-by-pyenv/" itemprop="url">
+                  Install python 3 in AWS linux by pyenv
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-03-19T22:51:00+08:00">
+                2017-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/hexo-blog/2017/03/19/Install-python-3-in-AWS-linux-by-pyenv/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/03/19/Install-python-3-in-AWS-linux-by-pyenv/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>curl -L <a href="https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer" target="_blank" rel="external">https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer</a> | bash</p>
+<p>vim .bash_profile</p>
+<p>add following lines to .bash_profile:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export PATH=&quot;/home/ec2-user/.pyenv/bin:$PATH&quot;</div><div class="line">eval &quot;$(pyenv init -)&quot;</div><div class="line">eval &quot;$(pyenv virtualenv-init -)&quot;</div></pre></td></tr></table></figure></p>
+<p>sudo yum install gcc</p>
+<p>sudo yum install openssl-devel</p>
+<p>sudo yum install bzip2-devel</p>
+<p>sudo yum install sqlite-devel</p>
+<p>sudo yum install readline-devel</p>
+<p>pyenv install 3.4.3</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2017/03/08/setup-hexo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1413,140 +1549,6 @@ urlpatterns += i18n_patterns(
         
           
             <p><a href="https://scotch.io/bar-talk/different-tricks-on-how-to-make-bootstrap-columns-all-the-same-height" target="_blank" rel="external">https://scotch.io/bar-talk/different-tricks-on-how-to-make-bootstrap-columns-all-the-same-height</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://jackklpan.github.io/hexo-blog/hexo-blog/2016/08/08/ie-window-open-variable-undefined/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jack Pan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/hexo-blog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Notes">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/hexo-blog/2016/08/08/ie-window-open-variable-undefined/" itemprop="url">
-                  ie window open variable undefined
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2016-08-08T16:02:00+08:00">
-                2016-08-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/hexo-blog/2016/08/08/ie-window-open-variable-undefined/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/08/ie-window-open-variable-undefined/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Just like this problem<br><a href="https://social.technet.microsoft.com/Forums/ie/en-US/466acbd2-9304-4714-9250-7669913d9a53/unable-to-pass-arguments-to-another-window-when-windowopen?forum=ieitprocurrentver" target="_blank" rel="external">https://social.technet.microsoft.com/Forums/ie/en-US/466acbd2-9304-4714-9250-7669913d9a53/unable-to-pass-arguments-to-another-window-when-windowopen?forum=ieitprocurrentver</a></p>
-<p>popupwindow = window.open();<br>popupwindow.a = “xxx”;</p>
-<p>However, in popupwindow, when use:<br>window.a shows “undefined”</p>
-<p>This happened in IE, but work as expected in Chrome. (window.a shows “xxx” )</p>
-<p>My workaround is:</p>
-<p>window.a = “xxx”;<br>popupwindow = window.open();</p>
-<p>In popupwindow:<br>window.opener.a shows “xxx”</p>
 
           
         
