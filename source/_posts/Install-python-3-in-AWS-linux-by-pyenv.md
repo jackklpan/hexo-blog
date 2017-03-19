@@ -4,6 +4,8 @@ tags: [python, aws]
 date: 2017-03-19 22:51:00
 ---
 
+## Install Pyenv and Python 3
+
 curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
 
 vim .bash_profile
@@ -26,3 +28,8 @@ sudo yum install sqlite-devel
 sudo yum install readline-devel
 
 pyenv install 3.4.3
+
+
+## Install lxml lib
+
+sudo yum install libxml2-dev libxslt-dev python34-dev
