@@ -1,0 +1,1155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[Install python 3 in AWS linux by pyenv]]></title>
+      <url>/hexo-blog/2017/03/19/Install-python-3-in-AWS-linux-by-pyenv/</url>
+      <content type="html"><![CDATA[<h2 id="Install-Pyenv-and-Python-3"><a href="#Install-Pyenv-and-Python-3" class="headerlink" title="Install Pyenv and Python 3"></a>Install Pyenv and Python 3</h2><p>curl -L <a href="https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer" target="_blank" rel="external">https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer</a> | bash</p>
+<p>vim .bash_profile</p>
+<p>add following lines to .bash_profile:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export PATH=&quot;/home/ec2-user/.pyenv/bin:$PATH&quot;</div><div class="line">eval &quot;$(pyenv init -)&quot;</div><div class="line">eval &quot;$(pyenv virtualenv-init -)&quot;</div></pre></td></tr></table></figure></p>
+<p>sudo yum install gcc</p>
+<p>sudo yum install openssl-devel</p>
+<p>sudo yum install bzip2-devel</p>
+<p>sudo yum install sqlite-devel</p>
+<p>sudo yum install readline-devel</p>
+<p>pyenv install 3.4.3</p>
+<h2 id="Install-lxml-lib"><a href="#Install-lxml-lib" class="headerlink" title="Install lxml lib"></a>Install lxml lib</h2><p>sudo yum install libxml2-dev libxslt-dev python34-dev</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> aws </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[建置Hexo]]></title>
+      <url>/hexo-blog/2017/03/08/setup-hexo/</url>
+      <content type="html"><![CDATA[<h2 id="初始設定"><a href="#初始設定" class="headerlink" title="初始設定"></a>初始設定</h2><p>Hexo的<a href="https://hexo.io/zh-tw/" target="_blank" rel="external">官方網站</a>，根據官方網站可以有基本的設定，但官方的介面不太好看，所以接下來要使用別人寫好的Theme。<br><a id="more"></a></p>
+<p>使用的是<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">NexT</a>，該主題很貼心的提供了很多相關的設定說明，比如：<a href="http://theme-next.iissnan.com/theme-settings.html#tags-page" target="_blank" rel="external">增加Tag</a>、<a href="http://theme-next.iissnan.com/third-party-services.html#disqus" target="_blank" rel="external">增加DISQUS</a>、<a href="http://theme-next.iissnan.com/third-party-services.html#mathjax" target="_blank" rel="external">增加MathJax</a>。</p>
+<h3 id="NexT"><a href="#NexT" class="headerlink" title="NexT"></a>NexT</h3><p>這邊需要注意的是，因為之後要用到travis自動化deploy。NexT為獨立的git repo，若無特殊設定，並不會將其檔案下載下來，導致travis的自動化部署失敗（找不到theme檔案）。有兩種方法：</p>
+<p>1.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rm themes/next/.gitignore</div><div class="line">rm -r themes/next/.git</div></pre></td></tr></table></figure></p>
+<p>將NexT的git刪除，使其全部使用同一個git repo</p>
+<p>2.<br>先fork NexT，並在此repo客製化後，將此repo視為submodule（請使用https的連結，避免權限問題）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git submodule add https://your/custom/repo</div></pre></td></tr></table></figure></p>
+<p>之後於travis指令執行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git submodule init</div><div class="line">git submodule update</div></pre></td></tr></table></figure></p>
+<p>即可以載入主題檔案。</p>
+<h3 id="MathJax使用方法"><a href="#MathJax使用方法" class="headerlink" title="MathJax使用方法"></a>MathJax使用方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$$ Block $$</div><div class="line"></div><div class="line">\\(inline\\)</div></pre></td></tr></table></figure>
+<h3 id="DISQUS"><a href="#DISQUS" class="headerlink" title="DISQUS"></a>DISQUS</h3><p>增加DISQUS時若要在local預覽，到_config.yml將url更改成localhost:4000（<a href="http://www.codeblocq.com/2015/12/Add-Disqus-comments-in-Hexo/" target="_blank" rel="external">參考</a>）。</p>
+<h3 id="NexT文字大小"><a href="#NexT文字大小" class="headerlink" title="NexT文字大小"></a>NexT文字大小</h3><p>大致上設定完成之後，另外更改NexT的文字大小。在：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">themes/next/source/css/_variable/custom.styl</div></pre></td></tr></table></figure></p>
+<p>可以修改相關的設定：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">// 正文字體大小</div><div class="line">$font-size-base = 18px</div><div class="line"></div><div class="line">$font-size-headings-base = 28px</div><div class="line"></div><div class="line">$table-font-size = 18px</div><div class="line"></div><div class="line">// 代碼字體大小</div><div class="line">$code-font-size = 17px</div><div class="line"></div><div class="line">$btn-default-font-size = 18px</div><div class="line"></div><div class="line">$logo-font-size = 24px</div><div class="line"></div><div class="line">$subtitle-font-size = 17px</div><div class="line"></div><div class="line">$read-more-font-size = 18px</div><div class="line"></div><div class="line">$site-description-font-size = 18px</div></pre></td></tr></table></figure></p>
+<h2 id="匯入Blogger的文章"><a href="#匯入Blogger的文章" class="headerlink" title="匯入Blogger的文章"></a>匯入Blogger的文章</h2><p>只能用RSS<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-migrator-rss --save</div></pre></td></tr></table></figure></p>
+<p>匯入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo migrate rss <span class="string">"http://annotationandnote.blogspot.com/feeds/posts/default?alt=rss&amp;max-results=1000000"</span></div></pre></td></tr></table></figure></p>
+<p>遇到個問題<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unknown block tag: load</div></pre></td></tr></table></figure></p>
+<p>是文章中有個<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;% load %&#125;</div></pre></td></tr></table></figure></p>
+<p>這種東西，將其包在code block即可。</p>
+<h2 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h2><p>我使用的方式是用repo的gh-pages。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<p>_config.yml：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: git@github.com:xxx/xxx.git</div><div class="line">  branch: gh-pages</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">url: https://xxx.github.io/xxx/</div><div class="line">root: /xxx/</div></pre></td></tr></table></figure>
+<p>command：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo g</div><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
+<h2 id="使用Travis自動部署"><a href="#使用Travis自動部署" class="headerlink" title="使用Travis自動部署"></a>使用Travis自動部署</h2><p>參考Hexo作者的<a href="https://zespia.tw/blog/2015/01/21/continuous-deployment-to-github-with-travis/" target="_blank" rel="external">文章</a></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="attr">language:</span> <span class="string">node_js</span></div><div class="line"><span class="attr">node_js:</span></div><div class="line"><span class="bullet">  -</span> <span class="string">node</span></div><div class="line"><span class="attr">before_install:</span></div><div class="line">  <span class="comment"># Decrypt the private key</span></div><div class="line"><span class="bullet">  -</span> <span class="string">openssl</span> <span class="string">aes-256-cbc</span> <span class="bullet">-K</span> <span class="string">$xxx_key</span> <span class="bullet">-iv</span> <span class="string">$xxx_iv</span></div><div class="line"><span class="bullet">    -</span><span class="string">in</span> <span class="string">.travis/xxx.enc</span> <span class="bullet">-out</span> <span class="string">~/.ssh/id_rsa</span></div><div class="line"><span class="bullet">    -</span><span class="string">d</span></div><div class="line">  <span class="comment"># Set the permission of the key</span></div><div class="line"><span class="bullet">  -</span> <span class="string">chmod</span> <span class="number">600</span> <span class="string">~/.ssh/id_rsa</span></div><div class="line">  <span class="comment"># Start SSH agent</span></div><div class="line"><span class="bullet">  -</span> <span class="string">eval</span> <span class="string">$(ssh-agent)</span></div><div class="line">  <span class="comment"># Add the private key to the system</span></div><div class="line"><span class="bullet">  -</span> <span class="string">ssh-add</span> <span class="string">~/.ssh/id_rsa</span></div><div class="line">  <span class="comment"># Copy SSH config</span></div><div class="line"><span class="bullet">  -</span> <span class="string">cp</span> <span class="string">.travis/ssh_config</span> <span class="string">~/.ssh/config</span></div><div class="line">  <span class="comment"># Set Git config</span></div><div class="line"><span class="bullet">  -</span> <span class="string">git</span> <span class="string">config</span> <span class="bullet">--global</span> <span class="string">user.name</span> <span class="string">"jackklpan"</span></div><div class="line"><span class="bullet">  -</span> <span class="string">git</span> <span class="string">config</span> <span class="bullet">--global</span> <span class="string">user.email</span> <span class="string">jackklpan@gmail.com</span></div><div class="line">  <span class="comment"># Install Hexo</span></div><div class="line"><span class="bullet">  -</span> <span class="string">npm</span> <span class="string">install</span> <span class="string">hexo</span> <span class="bullet">-g</span></div><div class="line">  <span class="comment"># Clone the repository, 產生的檔案會放置於.deploy_git，將其clone下來使commit一致，避免git force update</span></div><div class="line"><span class="bullet">  -</span> <span class="string">git</span> <span class="string">clone</span> <span class="bullet">--branch</span> <span class="string">gh-pages</span> <span class="attr">https://github.com/jackklpan/hexo-blog.git</span> <span class="string">.deploy_git</span></div><div class="line"><span class="attr">script:</span></div><div class="line"><span class="bullet">  -</span> <span class="string">git</span> <span class="string">submodule</span> <span class="string">init</span> <span class="comment"># 用于更新主题，需要指定到自己的repo，否则会clone最新NexT主题，客製化的部分會消失</span></div><div class="line"><span class="bullet">  -</span> <span class="string">git</span> <span class="string">submodule</span> <span class="string">update</span></div><div class="line"><span class="bullet">  -</span> <span class="string">hexo</span> <span class="string">generate</span></div><div class="line"><span class="bullet">  -</span> <span class="string">hexo</span> <span class="string">deploy</span></div><div class="line"><span class="attr">branches:</span></div><div class="line"><span class="attr">  only:</span></div><div class="line"><span class="bullet">    -</span> <span class="string">master</span></div></pre></td></tr></table></figure>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[react native scrollview crash ios 8]]></title>
+      <url>/hexo-blog/2017/03/05/react-native-scrollview-crash-ios-8/</url>
+      <content type="html"><![CDATA[<p>when upgrade to xcode8, you may encounter some error in react native.</p>
+<p><a href="http://bbs.reactnative.cn/topic/2595/react-native-0-32%E4%BB%A5%E4%B8%8B%E7%89%88%E6%9C%ACxcode8%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/2" target="_blank" rel="external">This link</a>‘s method can fix in iOS 10. However, will be crach in iOS 8.4.</p>
+<p>Finally, I use the method in <a href="https://github.com/facebook/react-native/commit/7c8b91442b3547cf94c752f234210bef0848c00a" target="_blank" rel="external">this link</a>.</p>
+<p>(<a href="https://yanqiw.github.io/2016/10/05/react-native-adopt-to-xcode8.html" target="_blank" rel="external">https://yanqiw.github.io/2016/10/05/react-native-adopt-to-xcode8.html</a>)</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> ios </tag>
+            
+            <tag> react-native </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[iOS upload to iTunes but not show after process]]></title>
+      <url>/hexo-blog/2017/01/13/iOS-upload-to-iTunes-but-not-show-after-process/</url>
+      <content type="html"><![CDATA[<p><a href="http://stackoverflow.com/questions/39567555/new-build-disappears-after-uploading-it-to-itunes-connect" target="_blank" rel="external">http://stackoverflow.com/questions/39567555/new-build-disappears-after-uploading-it-to-itunes-connect</a></p>
+<p>It will also email to your iTunes account.</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> ios </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[django deploy]]></title>
+      <url>/hexo-blog/2017/01/10/django-deploy/</url>
+      <content type="html"><![CDATA[<p>fabric<br>ansible</p>
+<p>nginx<br>gunicorn<br>systemd</p>
+<p>celery<br>django-rq<br>rabbitmq/redis</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> django </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[django use utf8 + scikit-learn ( sklearn ) in the elastic beanstalk]]></title>
+      <url>/hexo-blog/2016/12/29/django-use-utf8-scikit-learn-sklearn-in-the-elastic-beanstalk/</url>
+      <content type="html"><![CDATA[<p>Use t2.small, otherwise the memory will not enough.</p>
+<p>commands:<br>&nbsp; 000_dd:<br>&nbsp; &nbsp; command: test -f /swapfile || dd if=/dev/zero of=/swapfile bs=1024 count=1500000<br>&nbsp; 001_mkswap:<br>&nbsp; &nbsp; command: test -f /swapfile || mkswap /swapfile<br>&nbsp; 002_chmod:<br>&nbsp; &nbsp; command: test -f /swapfile || chmod 0600 /swapfile<br>&nbsp; 003_swapon:<br>&nbsp; &nbsp; command: test -f /swapfile || swapon /swapfile</p>
+<p>packages:<br>&nbsp; yum:<br>&nbsp; &nbsp; git: []<br>&nbsp; &nbsp; postgresql93-devel: []<br>&nbsp; &nbsp; atlas-devel: []<br>&nbsp; &nbsp; atlas-sse3-devel: []<br>&nbsp; &nbsp; blas-devel: []<br>&nbsp; &nbsp; gcc: []<br>&nbsp; &nbsp; gcc-c++: []<br>&nbsp; &nbsp; lapack-devel: []<br>&nbsp; &nbsp; python34-devel: []<br>&nbsp; &nbsp; libpng-devel: []<br>&nbsp; &nbsp; freetype-devel: []</p>
+<div><br></div><div><br></div><div><br></div><div><div>container_commands:</div><div>&nbsp; 01_collectstatic:</div><div>&nbsp; &nbsp; command: “source /opt/python/run/venv/bin/activate &amp;&amp; python manage.py collectstatic –noinput”</div><div>&nbsp; 02_wsgi_scipy:</div><div>&nbsp; &nbsp; <span style="color: red;">command: ‘echo “WSGIApplicationGroup %{GLOBAL}” &gt;&gt; ../wsgi.conf’</span></div><div><br></div><div>option_settings:</div><div>&nbsp; “aws:elasticbeanstalk:application:environment”:</div><div>&nbsp; &nbsp; DJANGO_SETTINGS_MODULE: “your_app_setting”</div><div>&nbsp; &nbsp; “PYTHONPATH”: “/opt/python/current/app/your_app:$PYTHONPATH”</div><div>&nbsp; “aws:elasticbeanstalk:container:python”:</div><div>&nbsp; &nbsp; WSGIPath: “your_app/wsgi.py”</div><div>&nbsp; “aws:elasticbeanstalk:container:python:staticfiles”:</div><div>&nbsp; &nbsp; “/static/“: “www/static/“</div></div><div><br></div><div><br>Make sure place packages in the requirements.txt in the correct order (dependency).<br>Ex: place Scipy before scikit-learn.</div><div><br><br>And if encounter the utf-8 encoding problems in EB.</div><div>1. You can add <span style="color: red;">.encode(‘utf-8’) if there are non-ascii char in the string.</span></div><div>2. Change wsgi.conf which in the /etc/httpd/conf.d/wsgi.conf<br>WSGIDaemonProcess wsgi processes=1 threads=15 display-name=%{GROUP} \<br>&nbsp; python-path=/opt/python/current/app:/opt/python/run/venv/lib64/python3.4/site-packages:/opt/python/run/venv/lib/python3.4/site-packages user=wsgi group=wsgi \<br>&nbsp; home=/opt/python/current/app <span style="color: red;">lang=en_US.UTF-8 locale=en_US.UTF-8</span><br>WSGIProcessGroup wsgi<br>3.&nbsp;export LC_ALL=en_US.UTF-8 &amp;&amp; export LANG=en_US.UTF-8 &amp;&amp; command by using&nbsp;subprocess.call([“”], shell=True) if necessary.<br><br></div><div>Reference:</div><div><a href="http://stackoverflow.com/questions/25477268/script-timed-out-before-returning-headers-wsgi-py-on-elastic-beanstalk" target="_blank" rel="external">http://stackoverflow.com/questions/25477268/script-timed-out-before-returning-headers-wsgi-py-on-elastic-beanstalk</a></div><div><a href="https://code.google.com/archive/p/modwsgi/wikis/ApplicationIssues.wiki#Python_Simplified_GIL_State_API" target="_blank" rel="external">https://code.google.com/archive/p/modwsgi/wikis/ApplicationIssues.wiki#Python_Simplified_GIL_State_API</a></div><div><a href="http://stackoverflow.com/questions/30634777/unicodeencodeerror-when-running-in-mod-wsgi-even-after-setting-lang-and-lc-all" target="_blank" rel="external">http://stackoverflow.com/questions/30634777/unicodeencodeerror-when-running-in-mod-wsgi-even-after-setting-lang-and-lc-all</a></div><div><br></div>]]></content>
+      
+        
+        <tags>
+            
+            <tag> django </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[music rank player]]></title>
+      <url>/hexo-blog/2016/10/02/music-rank-player/</url>
+      <content type="html"><![CDATA[<p>製作<br><a href="https://jackklpan.github.io/music_rank_player/">https://jackklpan.github.io/music_rank_player/</a></p>
+<p>主要使用到以下東西<br>Lambda, Api Gateway, DynamoDB<br>vue.js<br>apex, (terraform)</p>
+<p>Lambda串接googleapis和DynamoDB，查找歌曲在Youtube上面的播放Id，並存在DynamoDB，節省之後Youtube data api的查詢使用量。</p>
+<p>Api Gateway串接Lambda，使前端可以用ajax query。</p>
+<h3 id="Apex的雷："><a href="#Apex的雷：" class="headerlink" title="Apex的雷："></a>Apex的雷：</h3><p>googleapis裡面有資料夾相對路徑的結構，因此不能和apex github範例上一樣，用webpack全部合併成一個檔案，相對路徑會錯誤。<br>我直接在functions裡面的資料夾（和index.js同一層的地方），npm install googleapis，同一層會連同一起zip上去。</p>
+<h3 id="Api-Gateway的雷："><a href="#Api-Gateway的雷：" class="headerlink" title="Api Gateway的雷："></a>Api Gateway的雷：</h3><p>用terraform我覺得不好設定，直接用aws上面的介面比較容易。</p>
+<p>在Method Request加上Query String</p>
+<p>Integration Request加上Mapping，如下面網址說明，<br>使用application/json其中的預設template<br><a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html" target="_blank" rel="external">http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html</a><br>但要修改escapeJavaScript，在兩個escapeJavaScript後面加上.replaceAll(“\‘“, “‘“)，如下面網址說明。否則當其中有 ‘ 符號的時候，會發生錯誤。<br><a href="https://forums.aws.amazon.com/thread.jspa?threadID=228917" target="_blank" rel="external">https://forums.aws.amazon.com/thread.jspa?threadID=228917</a></p>
+<p>要加上CORS，使其他地方的domain也可以取用，如以下網址說明<br><a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html" target="_blank" rel="external">http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html</a></p>
+<h3 id="Youtube-Api的雷："><a href="#Youtube-Api的雷：" class="headerlink" title="Youtube Api的雷："></a>Youtube Api的雷：</h3><div>會有不能被embedded的影片，</div><div>用googleapis youtube api的時候加上videoEmbeddable: true可以濾掉一些。</div><div>不過有些影片是在某些domain才可以embedded的就無法濾掉了，所以這些影片會無法播放。</div><div><br></div>
+
+<h3 id="其他的雷："><a href="#其他的雷：" class="headerlink" title="其他的雷："></a>其他的雷：</h3><p>在Edge瀏覽器，要把script寫在一起才會Work…</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> front-end </tag>
+            
+            <tag> side-project </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[django i18n in mac]]></title>
+      <url>/hexo-blog/2016/09/27/django-i18n-in-mac/</url>
+      <content type="html"><![CDATA[<p>First, install gettext</p>
+<pre class="prettyprint">brew install gettext
+brew link gettext --force
+</pre>
+Add "locale" folder in your project root or app root.
+
+In settings.py
+Add to MIDDLEWEAR_CLASSES, locale, it enables language selection based on request:
+'django.middleware.locale.LocaleMiddleware',
+Add LOCALE_PATHS, this is where your translation files will be stored:
+<pre class="prettyprint">LOCALE_PATHS = (
+    os.path.join(PROJECT_PATH, 'locale/'),
+)
+</pre>
+
+<p>In your template,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#123;% load i18n %&#125;</div><div class="line">&#123;% trans &quot;XXX&quot; %&#125;</div></pre></td></tr></table></figure></p>
+<p>In command line,<br>django-admin makemessages -l zh-hant<br>django-admin.py compilemessages -l zh-hant</p>
+<p>In urls.py</p>
+<pre class="prettyprint">from django.conf.urls import include, url
+from django.conf.urls.i18n import i18n_patterns
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', include(admin.site.urls)),
+]
+
+urlpatterns += i18n_patterns(
+    url(r'^$', 'home.views.index'),
+)
+</pre>
+
+<p>Reference:<br><a href="http://missions5.blogspot.tw/2015/03/django-1.html" target="_blank" rel="external">http://missions5.blogspot.tw/2015/03/django-1.html</a><br><a href="http://blog.blackwhite.tw/2013/04/django-i18n.html" target="_blank" rel="external">http://blog.blackwhite.tw/2013/04/django-i18n.html</a><br><a href="http://stackoverflow.com/questions/10280881/django-site-with-2-languages" target="_blank" rel="external">http://stackoverflow.com/questions/10280881/django-site-with-2-languages</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> django </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[cs231n note]]></title>
+      <url>/hexo-blog/2016/09/20/cs231n-note/</url>
+      <content type="html"><![CDATA[<p><div><br></div><div><a href="http://cs231n.github.io/optimization-2/" target="_blank" rel="external">http://cs231n.github.io/optimization-2/</a></div><div>Backpropagation</div>Notice that if one of the inputs to the multiply gate is very small and the other is very big, then the multiply gate will do something slightly unintuitive: it will assign a relatively huge gradient to the small input and a tiny gradient to the large input. Note that in linear classifiers where the weights are dot producted wTxiwTxi (multiplied) with the inputs, this implies that the scale of the data has an effect on the magnitude of the gradient for the weights. For example, if you multiplied all input data examples xixi by 1000 during preprocessing, then the gradient on the weights will be 1000 times larger, and you’d have to lower the learning rate by that factor to compensate. This is why preprocessing matters a lot, sometimes in subtle ways! And having intuitive understanding for how the gradients flow can help you debug some of these cases.</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> ml </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[bootstrap columns same height & make column full page]]></title>
+      <url>/hexo-blog/2016/08/29/bootstrap-columns-same-height-make-column-full-page/</url>
+      <content type="html"><![CDATA[<p><a href="https://scotch.io/bar-talk/different-tricks-on-how-to-make-bootstrap-columns-all-the-same-height" target="_blank" rel="external">https://scotch.io/bar-talk/different-tricks-on-how-to-make-bootstrap-columns-all-the-same-height</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> front-end </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ie window open variable undefined]]></title>
+      <url>/hexo-blog/2016/08/08/ie-window-open-variable-undefined/</url>
+      <content type="html"><![CDATA[<p>Just like this problem<br><a href="https://social.technet.microsoft.com/Forums/ie/en-US/466acbd2-9304-4714-9250-7669913d9a53/unable-to-pass-arguments-to-another-window-when-windowopen?forum=ieitprocurrentver" target="_blank" rel="external">https://social.technet.microsoft.com/Forums/ie/en-US/466acbd2-9304-4714-9250-7669913d9a53/unable-to-pass-arguments-to-another-window-when-windowopen?forum=ieitprocurrentver</a></p>
+<p>popupwindow = window.open();<br>popupwindow.a = “xxx”;</p>
+<p>However, in popupwindow, when use:<br>window.a shows “undefined”</p>
+<p>This happened in IE, but work as expected in Chrome. (window.a shows “xxx” )</p>
+<p>My workaround is:</p>
+<p>window.a = “xxx”;<br>popupwindow = window.open();</p>
+<p>In popupwindow:<br>window.opener.a shows “xxx”</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> ie </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[mac brew pyenv import tkinter]]></title>
+      <url>/hexo-blog/2016/07/28/mac-brew-pyenv-import-tkinter/</url>
+      <content type="html"><![CDATA[<p>I use the homebrew and the pyenv to install python.</p>
+<p>When I want to import tkinter, there is a error message:<br>&nbsp; &nbsp; import _tkinter # If this fails your Python may not be configured for Tk<br>ImportError: No module named ‘_tkinter’</p>
+<p>Solve:</p>
+<p><pre class="prettyprint"><br>pyenv uninstall 3.5.1<br>brew tap Homebrew/dupes<br>brew install tcl-tk<br>pyenv install 3.5.1<br></pre><br>If there is a “zipimport” error when installing the python, solve by “xcode-select –install”.</p>
+<p>Reference:<br><a href="http://qiita.com/hokkun-k/items/223b1125b814621a0c0e" target="_blank" rel="external">http://qiita.com/hokkun-k/items/223b1125b814621a0c0e</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> python </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[QGIS]]></title>
+      <url>/hexo-blog/2016/02/24/QGIS/</url>
+      <content type="html"><![CDATA[<p>向量 =&gt; 地理運算工具 =&gt; Buffer<br>向量 =&gt; 地理運算工具 =&gt; Intersect<br>向量 =&gt; 地理運算工具 =&gt; Dissolve</p>
+<p>屬性表格 =&gt; 開啟欄位計算</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> gis </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[learn machine learning]]></title>
+      <url>/hexo-blog/2016/02/23/learn-machine-learning/</url>
+      <content type="html"><![CDATA[<p><span class="inline_editor_value"><span class="rendered_qtext">From:&nbsp; <a href="https://www.quora.com/Machine-Learning/How-do-I-learn-machine-learning-1" target="_blank" rel="external">https://www.quora.com/Machine-Learning/How-do-I-learn-machine-learning-1</a></span></span></p>
+<p><span class="inline_editor_value"><span class="rendered_qtext">I didn’t  do a PhD on machine learning (was mostly focused on Signal Processing  and Software Engineering) so I get this question a lot. The typical  person that asks me this question is a software engineer with a computer  science background, so I will address it from that perspective. If you  are a Math major, for example, my answer might be less useful.</span></span></p>
+<p>The first thing I tell someone who wants to get into machine learning is to take Andrew Ng’s <span class="qlink_container"><a href="https://www.coursera.org/course/ml" target="_blank" rel="external">online course</a></span>.  I think Ng’s course is very much to-the-point and very well organized,  so it is a great introduction for someone wanting to get into ML. I am  surprised when people tell me the course is “too basic” or “too  superficial”. If they tell me that I ask them to explain the difference  between Logistic Regression and Linear Kernel SVMs, PCA vs. Matrix  Factorization, regularization, or gradient descent. I have interviewed  candidates who claimed years of ML experience that did not know the  answer to these questions. They are all clearly explained in Ng’s  course. There are other online courses you can take after this one such  as <span class="qlink_container"><a href="https://www.coursera.org/course/mmds" target="_blank" rel="external"></a></span></p>
+<p><div class="tooltip" style="display: block; left: -16px; top: -31px;"><div class="tooltip_contents nub_bottom"><a href="https://www.coursera.org/course/mmds" target="_blank" rel="external"><span>coursera.org</span></a></div></div><a href="https://www.coursera.org/course/mmds" target="_blank" rel="external">Mining Massive Datasets</a> or <span class="qlink_container"><a href="https://www.coursera.org/learn/recommender-systems" target="_blank" rel="external">Recommender Systems</a></span>, but at this point you are mostly ready to go to the next step.</p>
+<p><span class="inline_editor_value"><span class="rendered_qtext">My  recommended next step is the following. Get a good ML book (my list  below), read the first intro chapters, and then jump to whatever chapter  includes an algorithm you are interested. Once you have found that  algo, dive into it, understand all the details, and, especially,  implement it. In the previous online course you would already have  implemented some algorithms in Octave. But, here I am talking about  implementing an algorithm from scratch in a “real” programming language.  You can still start with an easy one such as L2-regularized Logistic  Regression, or k-means, but you should also push yourself to implement  more interesting ones such as LDA (Latent Dirichlet Allocation) or SVMs.  You can use a reference implementation in one of the many existing  libraries to make sure you are getting comparable results, but ideally  you don’t want to look at the code but actually force yourself to  implement it directly from the mathematical formulation in the book.</span></span></p>
+<p>So, what are some good books to do this? Many have been mentioned before. Some of my favorite:</p>
+<ul>
+<li>Hastie, Tibshirani, and Friedman’s <span class="qlink_container"><a href="http://statweb.stanford.edu/%7Etibs/ElemStatLearn/" target="_blank" rel="external">The Elements of Statistical Learning</a></span></li>
+<li>Bishop’s <span class="qlink_container"><a href="http://research.microsoft.com/en-us/um/people/cmbishop/prml/" target="_blank" rel="external">Pattern Recognition and Machine Learning</a></span>*   David Barber’s <span class="qlink_container"><a href="http://web4.cs.ucl.ac.uk/staff/D.Barber/pmwiki/pmwiki.php?n=Brml.HomePage" target="_blank" rel="external">Bayesian Reasoning and Machine Learning</a></span></li>
+<li>Kevin Murphy’s <span class="qlink_container"><a href="http://www.cs.ubc.ca/%7Emurphyk/MLbook/" target="_blank" rel="external">Machine learning: a Probabilistic Perspective</a></span>You can also go directly to a research paper that introduces an algorithm or approach you are interested on and dive into it.</li>
+</ul>
+<p>My  main point is that machine learning is both about breadth as depth. You  are expected to know the basics of the most important algorithms (see  my answer to <span class="qlink_container"><a href="https://www.quora.com/What-are-the-top-10-data-mining-or-machine-learning-algorithms/answer/Xavier-Amatriain" target="_blank" rel="external"> What are the top 10 data mining or machine learning algorithms?</a></span>).  On the other hand, you are also expected to understand low-level  complicated details of algorithms and their implementation details. I  think the approach I am describing addresses both these dimensions and I  have seen it work.</p>
+<p><strong>Edit 08/26/2015</strong></p>
+<p>In response to  some comments and questions, I feel that I should add another book  recommendation. If you feel like you lack some background in Statistics,  I would totally recommend:</p>
+<ul>
+<li>Larry Wasserman’s <span class="qlink_container"><a href="http://www.amazon.com/All-Statistics-Statistical-Inference-Springer/dp/0387402721" target="_blank" rel="external">All of Statistics: A Concise Course in Statistical Inference</a></span>This  books cover all the topics in statistics that you need for  understanding ML concepts. As a matter of fact, the book itself has a  pretty good introduction to many of the typical ML approaches such as  regression and classification.</li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> ml </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[iOS Missing IOS Distrubution signing identity]]></title>
+      <url>/hexo-blog/2016/02/21/iOS-Missing-IOS-Distrubution-signing-identity/</url>
+      <content type="html"><![CDATA[<p>From:<br><a href="https://dotblogs.com.tw/aken1215/2016/02/15/234033" target="_blank" rel="external">https://dotblogs.com.tw/aken1215/2016/02/15/234033</a></p>
+<div class="article__content">                    <div class="article__desc">                        憑證顯示”<span style="color: red;">無效的簽發者</span>“<br>                        </div>搞了三小時才找到問題，問題的病徵其實很詭異，就當今天一如往常的想要將開發好的 APP發佈新版本，一切都很順利，一直到要輸出成ipa檔的時候，系統提示”<span style="color: red;">Missing IOS Distrubution &nbsp;signing&nbsp;identity &nbsp;for…</span>“的錯誤．身為一個在IOS世界裡打滾一小陣子的開發人員，很直覺得就會猜<br><br>1.  該不會又是該死的certificate過期了吧？可是回想一下，年初才全部更新過呀，全部都沒過期<br>2.  該不會又是certificate的私鑰找不到？於是就打開Key Chan，看到憑證和私鑰都存在．<br>3.  不合邏輯啊！該不會是provision profile選錯certificate？於是又重新從apple developer網頁下載provision profile 安裝完還是不行<br>4.  還是不行OOXX，心想，檢查一下Xcode的Target=&gt;General=&gt;Bundle identifier吧，還是沒錯….<br>5.  快沒招了，最後檢查XCode的Target =&gt; BuildSetting =&gt;Code&nbsp;Signing ，還是沒錯….我暈….以上講了五個步驟，其實都跟本篇的解決方案無關，但這次真的是例外，上面五個步驟，在遇到類似這種錯誤訊息通常都是可以順利解決的．而這次，這些步 驟我至少重複玩了一小時，甚至還從頭到尾 建立CSR=&gt;申請certificate=&gt;建立provision  profile=&gt;下載安裝certificate=&gt;下載安裝provision profile  =&gt;設定xocde全部跑過一次，還是無法解決．直到點開Key Chan裡的憑證，看到左下角有一個紅色叉叉寫著”<span style="color: red;">無效的簽發者</span>“才大致找到問題源頭，不看還好，一看心臟快停止，全部至少10多張憑證在同一時間全部都顯示這個訊息．不得已只好膜拜google大神…<br>  <a href="https://developer.apple.com/support/certificates/expiration/" target="_blank" rel="external">https://developer.apple.com/support/certificates/expiration/</a>&nbsp;=&gt;  apple 的解釋，大致上是說有一個叫做”The Apple Worldwide Developer Relations  Certification Intermediate  Certificate”的簽發人憑證即將在2016/2/14到期(謎之聲：不知道是apple裡的那位工程師不爽看大家在情人節放閃，故意在情人節要 捅大家)，不過文章也有說，你不需要重新產生所有已存在的憑證，原本可以運作的APP也都會正常運作．大致重點就這樣．不過他是說你在運行的APP不會掛 掉，但可沒說你要是想發布新版本APP卻沒更新該憑證就會中招．<br>  那要怎麼做呢？<br><br>1.  <a href="https://developer.apple.com/certificationauthority/AppleWWDRCA.cer" target="_blank" rel="external">https://developer.apple.com/certificationauthority/AppleWWDRCA.cer</a>=&gt;下載新版憑證&nbsp;<br>2.  將下載的憑證連續點兩下即可安裝<br>3.  打開Key Chan=&gt;顯示方式=&gt;顯示已過期憑證 =&gt;在登入和系統的分類裡各有一張過期的憑證請把它刪除(謎之聲：沒刪除它不會套用你剛安裝的新憑證，這裏我又卡了半小時有吧，無言….）<br>4.  請檢查所有IOS憑證是否顯示綠色圈圈搭配”此憑證是有效的”訊息，如果有的話，恭喜，大功告成..&nbsp;</div>]]></content>
+      
+        
+        <tags>
+            
+            <tag> ios </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[DIY NAS]]></title>
+      <url>/hexo-blog/2016/02/14/DIY-NAS/</url>
+      <content type="html"><![CDATA[<p>NAS OS:<br>freenas =&gt; require 8G RAM<br>nas4free<br>openmediavault</p>
+<p>I choose the openmediavault.</p>
+<p>Notes:</p>
+<ul>
+<li>The drive that installed openmediavault cannot be the data drive.</li>
+<li>Install extra plugin from webUI ( <a href="http://omv-extras.org/simple/index.php?id=how-to-install-omv-extras-plugin" target="_blank" rel="external">http://omv-extras.org/simple/index.php?id=how-to-install-omv-extras-plugin</a> ).</li>
+<li>In general setting, set the Session timeout to 0 to prevent logout.</li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> nas </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[multiple ssh key]]></title>
+      <url>/hexo-blog/2016/01/07/multiple-ssh-key/</url>
+      <content type="html"><![CDATA[<p><a href="http://stackoverflow.com/questions/7927750/specify-an-ssh-key-for-git-push-for-a-given-domain" target="_blank" rel="external">http://stackoverflow.com/questions/7927750/specify-an-ssh-key-for-git-push-for-a-given-domain</a><br><a href="https://gist.github.com/jexchan/2351996" target="_blank" rel="external">https://gist.github.com/jexchan/2351996</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[docker notes on mac]]></title>
+      <url>/hexo-blog/2015/12/27/docker-notes-on-mac/</url>
+      <content type="html"><![CDATA[<p>List all containers:</p>
+<pre><code>docker ps -a`&lt;/pre&gt;
+Remover all stopped containers:
+&lt;pre style=&quot;background-color: #eeeeee; border: 0px; color: #222426; font-family: Consolas, Menlo, Monaco, &apos;Lucida Console&apos;, &apos;Liberation Mono&apos;, &apos;DejaVu Sans Mono&apos;, &apos;Bitstream Vera Sans Mono&apos;, &apos;Courier New&apos;, monospace, sans-serif; font-size: 13px; margin-bottom: 1em; max-height: 600px; overflow: auto; padding: 5px; width: auto; word-wrap: normal;&quot;&gt;`docker rm `docker ps -aq`
+</code></pre><p>docker-machine ls</p>
+<p>To Prevent the virtualbox machine use many memory</p>
+<div class="p1"><span class="s1">VBoxManage controlvm default poweroff</span></div><div class="p1"><span class="s1">after stop the docker</span></div>]]></content>
+      
+        
+        <tags>
+            
+            <tag> docker </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[docker run elasticsearch on mac]]></title>
+      <url>/hexo-blog/2015/12/27/docker-run-elasticsearch-on-mac/</url>
+      <content type="html"><![CDATA[<p>First remember set up the config correctly.<br>Or you don’t mount config folder in the first time and copy the config by command:</p>
+<pre><code>docker cp &amp;lt;containerId&amp;gt;:/file/path/within/container /host/path/target
+</code></pre><p>Run by this command:<br>docker run -d -p 9200:9200 -p 9300:9300 -v “$PWD/data”:/usr/share/elasticsearch/data -v “$PWD/config”:/usr/share/elasticsearch/config elasticsearch /bin/bash -c ‘usermod -u 1000 elasticsearch; gosu elasticsearch elasticsearch’</p>
+<p>From:<br><a href="https://hub.docker.com/_/elasticsearch/" target="_blank" rel="external">https://hub.docker.com/_/elasticsearch/</a></p>
+<div style="box-sizing: inherit; color: #555555; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; font-size: 16px; line-height: 1.6; margin-bottom: 1.25rem; padding: 0px; text-rendering: optimizelegibility;">Lots of people have complained about the AccessDenied issue. This usually occurs when using docker machine (or boot2docker) on a Mac. I previously got around this by running elasticsearch as root but you can’t do that on the 2.x release.</div><div style="box-sizing: inherit; color: #555555; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; font-size: 16px; line-height: 1.6; margin-bottom: 1.25rem; padding: 0px; text-rendering: optimizelegibility;">My solution to this is based on the mount of /Users from the Mac into the boot2docker vm /Users is owned by the docker user who has uid 1000. When you look at the mount of the folder from the vm into the container, you can see that the user is 1000 (no name since there is no user with uid of 1000 defined in the container).</div><div style="box-sizing: inherit; color: #555555; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; font-size: 16px; line-height: 1.6; margin-bottom: 1.25rem; padding: 0px; text-rendering: optimizelegibility;">The hack is to change the uid of the elasticsearch user to be 1000 and then he will have permission against any mounted volume from the Mac. Just use this is the command supplied to docker run</div><div style="box-sizing: inherit; color: #555555; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; font-size: 16px; line-height: 1.6; margin-bottom: 1.25rem; padding: 0px; text-rendering: optimizelegibility;"><code>/bin/bash -c &#39;usermod -u 1000 elasticsearch; gosu elasticsearch elasticsearch&#39;</code></div>]]></content>
+      
+        
+        <tags>
+            
+            <tag> docker </tag>
+            
+            <tag> elasticsearch </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[run command after logout]]></title>
+      <url>/hexo-blog/2015/12/23/run-command-after-logout/</url>
+      <content type="html"><![CDATA[<p><a href="http://www.cyberciti.biz/tips/nohup-execute-commands-after-you-exit-from-a-shell-prompt.html" target="_blank" rel="external">http://www.cyberciti.biz/tips/nohup-execute-commands-after-you-exit-from-a-shell-prompt.html</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ruby csv excel gibberish]]></title>
+      <url>/hexo-blog/2015/12/15/ruby-csv-excel-gibberish/</url>
+      <content type="html"><![CDATA[<p>From:<br><a href="http://blog.poyi.tw/blog/2014/05/06/ruby-csv-file/" target="_blank" rel="external">http://blog.poyi.tw/blog/2014/05/06/ruby-csv-file/</a></p>
+<p>export_to_csv_string 匯出csv的string格式再利用send_data下載<br>&nbsp; head = ‘EF BB BF’.split(‘ ‘).map{|a|a.hex.chr}.join() # 加入BOM，解決excel中文亂碼</p>
+<p>&nbsp; csv_string = CSV.generate(csv = head) do |csv|<br>&nbsp; &nbsp; csv &lt;&lt; header<br>&nbsp; &nbsp; csv &lt;&lt; body<br>&nbsp; end</p>
+<p>&nbsp; # &gt; csv_string.encoding 執行這句會發現預設編碼為ACSII<br>&nbsp; csv_string.force_encoding(‘big5’)<br>&nbsp; # BOM也可以這樣加 csv_string = “\xEF\xBB\xBF#{csv_string}”<br>&nbsp; # 若不需要調整格式就直接下載<br>&nbsp; send_data csv_string</p>
+<p>convert_to_wide_word 大小寫英文數字轉全形字元<br>def self.convert_to_wide_word(text)<br>&nbsp; text.gsub(/[a-v]/){|a|(a.ord + 41608).chr(‘big5’).encode(‘utf-8’)}<br>&nbsp; &nbsp; .gsub(/[w-z]/){|a|(a.ord + 41673).chr(‘big5’).encode(‘utf-8’)}<br>&nbsp; &nbsp; .gsub(/[A-Z]/){|a|(a.ord + 41614).chr(‘big5’).encode(‘utf-8’)}<br>&nbsp; &nbsp; .gsub(/[0-9]/){|a|(a.ord + 41599).chr(‘big5’).encode(‘utf-8’)}<br>end</p>
+<p>convert_to_wide_word(“0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ”)<br>&nbsp;=&gt; “０１２３４５６７８９ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬ<br>&nbsp;ＭＮＯＰＱＲＳＴＵＶＷＸＹＺ”</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> ruby </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[cocoapods undefined symbols and duplicate symbols]]></title>
+      <url>/hexo-blog/2015/12/06/cocoapods-undefined-symbols-and-duplicate-symbols/</url>
+      <content type="html"><![CDATA[<p>delete Pod directory, Podfile.lock, *.xcworkspace<br>Pod install</p>
+<p>Edit Scheme (which is on the right of stop button) -&gt; Build -&gt; Add Pods before our project if the Pods not shown</p>
+<p>Add origin project Search Path &amp; Other Linker Flags with $(inherited)</p>
+<p><span style="background-color: white; color: #222222; font-family: &quot;arial&quot; , &quot;helvetica neue&quot; , &quot;helvetica&quot; , sans-serif; font-size: 15px;">Change Build Active Architecture Only to No</span><br><a href="http://stackoverflow.com/questions/5303933/xcode4-linking-problem-file-was-built-for-archive-which-is-not-the-architecture" target="_blank" rel="external">http://stackoverflow.com/questions/5303933/xcode4-linking-problem-file-was-built-for-archive-which-is-not-the-architecture</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> cocoapods </tag>
+            
+            <tag> ios </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[django model speedup]]></title>
+      <url>/hexo-blog/2015/11/30/django-model-speedup/</url>
+      <content type="html"><![CDATA[<p><a href="http://blog.jobbole.com/74881/" target="_blank" rel="external">http://blog.jobbole.com/74881/</a></p>
+<p><a href="http://www.slideshare.net/Counsyl/efficient-djangoquery-setuse" target="_blank" rel="external">http://www.slideshare.net/Counsyl/efficient-djangoquery-setuse</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> django </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[django Elastic Beanstalk]]></title>
+      <url>/hexo-blog/2015/10/21/django-Elastic-Beanstalk/</url>
+      <content type="html"><![CDATA[<p>Opswork<br><a href="https://github.com/poise/poise-python" target="_blank" rel="external">https://github.com/poise/poise-python</a></p>
+<p>Elastic Beanstalk<br><a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-django.html" target="_blank" rel="external">http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-django.html</a><br><a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/installing-ebcli.html" target="_blank" rel="external">http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/installing-ebcli.html</a></p>
+<p><a href="http://blog.amowu.com/2015/04/devops-continuous-integration-delivery-docker-circleci-aws-beanstalk.html?m=1" target="_blank" rel="external">http://blog.amowu.com/2015/04/devops-continuous-integration-delivery-docker-circleci-aws-beanstalk.html?m=1</a></p>
+<p>Good tutorial:<br><a href="https://realpython.com/blog/python/deploying-a-django-app-to-aws-elastic-beanstalk/" target="_blank" rel="external">https://realpython.com/blog/python/deploying-a-django-app-to-aws-elastic-beanstalk/</a><br>Below are simple notes.</p>
+<h3 id="eb-init"><a href="#eb-init" class="headerlink" title="eb init"></a>eb init</h3><p>Default region</p>
+<p>Choosing the region closest to your end users will generally provide the best performance. Check out <a href="http://www.turnkeylinux.org/blog/aws-datacenters" target="_blank" rel="external">this map</a> if you’re unsure which to choose.</p>
+<p>Credentials</p>
+<p>Next, it’s going to ask for your AWS credentials.</p>
+<p>Here, you will most likely want to set up an IAM User. See this guide for how to set one up. If you do set up a new user you will need to ensure the user has the appropriate permissions. The simplest way to do this is to just add “Administrator Access” to the User. (This is probably not a great choice for security reasons, though.) For the specific policies/roles that a user needs in order to create/manage an Elastic Beanstalk application, see the link here.</p>
+<p>Application name</p>
+<p>This will default to the directory name. Just go with that.</p>
+<p>Python version</p>
+<p>Next, the CLI should automagically detect that you are using Python and just ask for confirmation. Say yes. Then you need to select a platform version. Select Python 2.7.</p>
+<p>SSH</p>
+<p>Say yes to setting up SSH for your instances.</p>
+<p>RSA Keypair</p>
+<p>Next, you need to generate an RSA keypair, which will be added to your ~/.ssh folder. This keypair will also be uploaded to the EC2 public key for the region you specified in step one. This will allow you to SSH into your EC2 instance later in this tutorial.</p>
+<h3 id="eb-create"><a href="#eb-create" class="headerlink" title="eb create"></a>eb create</h3><p>Environment Name</p>
+<p>You should use a similar naming convention to what Amazon suggest – e.g., application_name-env_name – especially when/if you start hosing multiple applications with AWS. I used – iod-test.</p>
+<p>DNS CNAME prefix</p>
+<p>When you deploy an app to Elastic Beanstalk you will automatically get a domain name like xxx.elasticbeanstalk.com. DNS CNAME prefix is what you want to be used in place of xxx. Just go with the default.</p>
+<h3 id="Installing-packages"><a href="#Installing-packages" class="headerlink" title="Installing packages"></a>Installing packages</h3><p>The first thing we need to do is install some packages so that our pip install command will complete successfully. To do this, let’s first create a file called .ebextensions/01_packages.config:</p>
+<p>packages:<br>&nbsp; yum:<br>&nbsp; &nbsp; git: []<br>&nbsp; &nbsp; postgresql93-devel: []<br>EC2 instances run Amazon Linux, which is a Redhat flavor, so we can use yum to install the packages that we need. For now, we are just going to install two packages – git and the Postgres client.</p>
+<p>To use the .config file option, let’s create a new file called /.ebextensions/02_python.config:</p>
+<p>option_settings:<br>&nbsp; “aws:elasticbeanstalk:application:environment”:<br>&nbsp; &nbsp; DJANGO_SETTINGS_MODULE: “iotd.settings”<br>&nbsp; &nbsp; “PYTHONPATH”: “/opt/python/current/app/iotd:$PYTHONPATH”<br>&nbsp; “aws:elasticbeanstalk:container:python”:<br>&nbsp; &nbsp; WSGIPath: iotd/iotd/wsgi.py<br>&nbsp; &nbsp; NumProcesses: 3<br>&nbsp; &nbsp; NumThreads: 20<br>&nbsp; “aws:elasticbeanstalk:container:python:staticfiles”:<br>&nbsp; &nbsp; “/static/“: “www/static/“<br>What’s happening?</p>
+<p>DJANGO_SETTINGS_MODULE: “iotd.settings” – adds the path to the settings module.<br>“PYTHONPATH”: “/opt/python/current/app/iotd:$PYTHONPATH” – updates our PYTHONPATH so Python can find the modules in our application. (Note that the use of the full path is necessary.)<br>WSGIPath: iotd/iotd/wsgi.py sets our WSGI Path.<br>NumProcesses: 3 and NumThreads: 20 – updates the number of processes and threads used to run our WSGI application.<br>“/static/“: “www/static/“ sets our static files path.</p>
+<p>container_commands:<br>&nbsp; 01_migrate:<br>&nbsp; &nbsp; command: “source /opt/python/run/venv/bin/activate &amp;&amp; python iotd/manage.py migrate –noinput”<br>&nbsp; &nbsp; leader_only: true<br>&nbsp; 02_createsu:<br>&nbsp; &nbsp; command: “source /opt/python/run/venv/bin/activate &amp;&amp; python iotd/manage.py createsu”<br>&nbsp; &nbsp; leader_only: true<br>&nbsp; 03_collectstatic:<br>&nbsp; &nbsp; command: “source /opt/python/run/venv/bin/activate &amp;&amp; python iotd/manage.py collectstatic –noinput”</p>
+<p>option_settings:<br>&nbsp; “aws:elasticbeanstalk:application:environment”:<br>&nbsp; &nbsp; DJANGO_SETTINGS_MODULE: “iotd.settings”<br>&nbsp; &nbsp; “PYTHONPATH”: “/opt/python/current/app/iotd:$PYTHONPATH”<br>&nbsp; &nbsp; “ALLOWED_HOSTS”: “.elasticbeanstalk.com”<br>&nbsp; “aws:elasticbeanstalk:container:python”:<br>&nbsp; &nbsp; WSGIPath: iotd/iotd/wsgi.py<br>&nbsp; &nbsp; NumProcesses: 3<br>&nbsp; &nbsp; NumThreads: 20<br>&nbsp; “aws:elasticbeanstalk:container:python:staticfiles”:<br>&nbsp; &nbsp; “/static/“: “www/static/“</p>
+<p>We now need to ensure that the STATIC_ROOT is set correctly in the settings.py file:</p>
+<p>STATIC_ROOT = os.path.join(BASE_DIR, “..”, “www”, “static”)<br>STATIC_URL = ‘/static/‘</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> django </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[django model null blank]]></title>
+      <url>/hexo-blog/2015/10/18/django-model-null-blank/</url>
+      <content type="html"><![CDATA[<p>django default is not null.<br>If we allow null value, add null=true option in model.<br>However, for&nbsp;CharField and TextField, we should not add it, because empty string (‘’) already represent null value.<br>In addition, set null=true means we also need to set blank=true.<br>Because in django, null controls the database setting; blank controls the form setting. So we need to set blank=true to allow the from field to be empty.</p>
+<p><a href="https://docs.djangoproject.com/en/1.8/ref/models/fields/#django.db.models.Field.null" target="_blank" rel="external">https://docs.djangoproject.com/en/1.8/ref/models/fields/#django.db.models.Field.null</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> django </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[angularjs post data to django server]]></title>
+      <url>/hexo-blog/2015/10/18/angularjs-post-data-to-django-server/</url>
+      <content type="html"><![CDATA[<p><strong>Angularjs:</strong><br>var my_app = angular.module(‘MyApp’).config(function($httpProvider) {<br>&nbsp; &nbsp; $httpProvider.defaults.headers.common[‘X-Requested-With’] = ‘XMLHttpRequest’;<br>&nbsp; &nbsp; $httpProvider.defaults.xsrfCookieName = ‘csrftoken’;<br>&nbsp; &nbsp; $httpProvider.defaults.xsrfHeaderName = ‘X-CSRFToken’;<br>});</p>
+<p>$http.post(‘url’, {<br>&nbsp; &nbsp; &nbsp; &nbsp; data: $scope.data<br>&nbsp; &nbsp; }).success(function(data) {<br>&nbsp; &nbsp; &nbsp; &nbsp; console.log(data);<br>&nbsp; &nbsp; }).error(function(e) {<br>&nbsp; &nbsp; &nbsp; &nbsp; console.log(e);<br>&nbsp; &nbsp; });</p>
+<p><strong>Django:</strong><br>from django.http import HttpResponseBadRequest<br>from django.http import JsonResponse<br>import json</p>
+<p>def post(request):<br>&nbsp; &nbsp; if not request.is_ajax():<br>&nbsp; &nbsp; &nbsp; &nbsp; return HttpResponseBadRequest(‘Expected an XMLHttpRequest’)<br>&nbsp; &nbsp; in_data = json.loads(request.body.decode(‘utf-8’))<br>&nbsp; &nbsp;&nbsp;return JsonResponse({‘status’:’success’})</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> angularjs </tag>
+            
+            <tag> django </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[install postgres postgis in mac]]></title>
+      <url>/hexo-blog/2015/10/17/install-postgres-postgis-in-mac/</url>
+      <content type="html"><![CDATA[<p><a href="http://morphocode.com/how-to-install-postgis-on-mac-os-x/" target="_blank" rel="external">http://morphocode.com/how-to-install-postgis-on-mac-os-x/</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> postgresql </tag>
+            
+            <tag> postgis </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[mac pyenv install fail due to lib]]></title>
+      <url>/hexo-blog/2015/10/17/mac-pyenv-install-fail-due-to-lib/</url>
+      <content type="html"><![CDATA[<p>zipimport.ZipImportError: can’t decompress data; zlib not available</p>
+<p><div><br></div><div><a href="https://github.com/yyuu/pyenv/issues/451" target="_blank" rel="external">https://github.com/yyuu/pyenv/issues/451</a></div><div><br></div><div>successful installed by</div><div></div></p>
+<pre><code>CFLAGS=&quot;-I$(brew --prefix openssl)/include -I$(xcrun --show-sdk-path)/usr/include&quot; \
+LDFLAGS=&quot;-L$(brew --prefix openssl)/lib&quot; \
+pyenv install -v 3.5.0`&lt;/pre&gt;
+And actually it can be fixed when installed
+&lt;pre style=&quot;background-color: #f7f7f7; border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; border-top-left-radius: 3px; border-top-right-radius: 3px; box-sizing: border-box; color: #333333; font-family: Consolas, &apos;Liberation Mono&apos;, Menlo, Courier, monospace; font-size: 12px; line-height: 1.45; overflow: auto; padding: 16px; word-wrap: normal;&quot;&gt;`xcode-select --install
+</code></pre><p><span style="font-family: Consolas, Liberation Mono, Menlo, Courier, monospace;">then directly&nbsp;pyenv install xxx</span></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> python </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Project Manager & Product Manager]]></title>
+      <url>/hexo-blog/2015/09/30/Project-Manager-Product-Manager/</url>
+      <content type="html"><![CDATA[<p>身為一個新創團隊的 Project Manager 腦袋裡裝的常是，這樣的 Project 以哪種工具，會是有比較好的產出。通常以下這些會是 Project Manager 出現的工具：<br>AWS / Linode / React.js / Angular.js / Twitter Bootstrap / Sendgrid / New Relic / Asana / Redmine / Trello</p>
+<p>而身為一個 Product Manager，最在乎的就是如何理解 user 的行為，而當你使用者不再是小貓兩三隻的時候，或許以下工具，會是你有用的助手<br>Google Analytics / Mailchimp / Uservoice / Google Web Master / Amplitude or Mixpanel / Custom.io / segment.io / facebook karma / Optimizely</p>
+<p><a href="http://www.inside.com.tw/2015/09/30/what-are-the-differencies-between-project-manager-and-product-manager" target="_blank" rel="external">http://www.inside.com.tw/2015/09/30/what-are-the-differencies-between-project-manager-and-product-manager</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[JNI]]></title>
+      <url>/hexo-blog/2015/08/23/JNI/</url>
+      <content type="html"><![CDATA[<p>Call C/C++ from Java and call Java from C/C++</p>
+<p><a href="http://87showmin.blogspot.tw/2009/06/java-java-native-interfacejni.html" target="_blank" rel="external">http://87showmin.blogspot.tw/2009/06/java-java-native-interfacejni.html</a><br><a href="http://www.codeproject.com/Articles/993067/Calling-Java-from-Cplusplus-with-JNI" target="_blank" rel="external">http://www.codeproject.com/Articles/993067/Calling-Java-from-Cplusplus-with-JNI</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Using OpenCV in Visual Studio 2013]]></title>
+      <url>/hexo-blog/2015/05/18/Using-OpenCV-in-Visual-Studio-2013/</url>
+      <content type="html"><![CDATA[<p><a href="http://my.phirobot.com/blog/2014-02-opencv_configuration_in_vs.html" target="_blank" rel="external">http://my.phirobot.com/blog/2014-02-opencv_configuration_in_vs.html</a><br><a href="https://github.com/jackklpan/visual_studio_config" target="_blank" rel="external">https://github.com/jackklpan/visual_studio_config</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> opencv </tag>
+            
+            <tag> visual studio </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[node.js note]]></title>
+      <url>/hexo-blog/2015/05/13/node-js-note/</url>
+      <content type="html"><![CDATA[<p>Production:<br>forever<br>pm2</p>
+<p>From Tonyq(<a href="https://www.facebook.com/tonylovejava/posts/10206912577918652?fref=nf" target="_blank" rel="external">https://www.facebook.com/tonylovejava/posts/10206912577918652?fref=nf</a>)</p>
+<ul>
+<li>package.json 是專案設定檔，可以用來設定 dependency (會用到哪些 npm ，分成專案用跟開發用兩種 dependency / dev-dependency）。</li>
+</ul>
+<p>有設定的話剛 clone 別人專案回來時，可以用 “npm install” 直接安裝專案相依性到 local 。好處是不用把 node_modules commit 進版本控制，降低大小跟環境依賴。</p>
+<ul>
+<li><p>npm init 是如果沒有 package.json 可以用這個快速產生一個。</p>
+</li>
+<li><p>npm install &lt;package&gt; //正常的安裝套件流程</p>
+</li>
+</ul>
+<p>如果沒有指定 package 的話，會自動安裝 package.json 裡面的相依性.</p>
+<p>但如果你是裝專案需要的 npm package 的話，可以加上 “–save” ，如 npm install &lt;package&gt; –save ，會順便更新 package.json 檔加入這個 dependency。</p>
+<p>如果你是給 gulp 或其他開發工具用的，可以用 –save-dev ，會寫入 dev-dependency 區。</p>
+<p>另外跟這個沒有直接關係，但值得知道的事情是 “-g” 屬性，有支援 npm install -g &lt;package&gt; 的 npm ，會把該 package 直接變成 global 的 command。像是 express /browserify 等等等。(windows 底下這個功能有點 buggy …)</p>
+<p>==<br>發現我漏講了 npm run<br>在 package.json 裡面有 scripts properties 。可以在裡面直接寫入你要執行的 “command line”(!!) 指令</p>
+<p>像是我手上這專案是這樣<br>“scripts”: {<br>“test”: “echo \”Error: no test specified\” &amp;&amp; exit 1”,<br>“dev”: “supervisor –extensions ‘node,js,jsx’ app.js”<br>},</p>
+<p>就可以透過 npm run dev 來執行「supervisor –extensions ‘node,js,jsx’ app.js」</p>
+<p>npm install &lt;package&gt; 如果不帶上 –save 或 –save-dev 的話，所安裝的 package 將不會自動記進 package.json。</p>
+<p>但是，這些模塊仍會安裝在你的 node_modules。這時候你可以透過 npm prune 命令，清除這些不在 package.json 裡的模塊。</p>
+<p>這有時候在調試時，這還滿好用的。</p>
+<p>PS: bower prune 也有同樣功能。</p>
+<hr>
+<p>From 陳樂子 in (<a href="https://www.facebook.com/groups/javascript.tw/permalink/628502737251068/" target="_blank" rel="external">https://www.facebook.com/groups/javascript.tw/permalink/628502737251068/</a>)<br>npm install &lt;package&gt; -g 即是 –global，會把你的模塊裝到全局裡去，只要是在這個 node 環境下，所有項目都會共用著這些模塊，例如 npm gulp bower mocha 通常都是這樣使用。</p>
+<p>你 npm install mocha -g，安裝完成後，你便可以直接在任何地方執行 mocha –check-leaks –reporter spec 之類的命令。</p>
+<p>若你不想每次都要污染全局，你依然可以僅安裝在本地項目目錄上，只是若你要調試的話，便變成在要給模塊指定一個路徑，例如 node_modules/mocha/bin/mocha –check-leaks –reporter spec。</p>
+<p>你也可以透過 package.json 的 scripts 預先來編好一些腳本，再透過 npm run &lt;command&gt; 來執行。透過 npm run 執行的腳本，所有安裝在本地的模塊，皆不再須要幫它編寫路徑。</p>
+<p>因此你可以直接這樣作</p>
+<p>$ npm install npm-dep-info</p>
+<p>// package.json<br>“scripts”: {<br>“info”: “npm-dep-info”<br>}</p>
+<p>$ npm run info</p>
+<hr>
+<p>附帶一提，我命令都是用縮寫比較快。</p>
+<p>例如</p>
+<ul>
+<li><p>npm i 取代 npm install</p>
+</li>
+<li><p>npm un 取代 npm uninstall</p>
+</li>
+<li><p>npm i -S 取代 npm install –save</p>
+</li>
+<li><p>npm i -D 取代 npm install –save-dev</p>
+</li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> node.js </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[use BFMatcher instead of FlannBasedMatcher when want result to be same (openCV)]]></title>
+      <url>/hexo-blog/2015/05/08/use-BFMatcher-instead-of-FlannBasedMatcher-when-want-result-to-be-same-openCV/</url>
+      <content type="html"><![CDATA[<p>FlannBasedMatcher is a <span style="color: red;">approximate </span>matcher, and in my opinion it is depend on some random number.<br>Therefore if the execution sequence is the same, the result will be same.<br>However, this will lead to the result that when the same thing do twice, the result will not be the same.</p>
+<p>So if we want to guarantee the result will be <span style="color: red;">same no matter do it at any time</span>, we should use <span style="color: red;">BFMatcher</span>.</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> opencv </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ST_GeomFromGeoJSON connection terminated & crash]]></title>
+      <url>/hexo-blog/2015/04/27/ST-GeomFromGeoJSON-connection-terminated-crash/</url>
+      <content type="html"><![CDATA[<p>The postgis function&nbsp;ST_GeomFromGeoJSON &nbsp;sometimes cause database crash.<br><a href="http://dba.stackexchange.com/questions/83264/st-geomfromgeojson-causes-postgres-to-crash" target="_blank" rel="external">http://dba.stackexchange.com/questions/83264/st-geomfromgeojson-causes-postgres-to-crash</a><br><a href="http://trac.osgeo.org/postgis/ticket/3002" target="_blank" rel="external">http://trac.osgeo.org/postgis/ticket/3002</a></p>
+<p>And I cannot find any solution for it.</p>
+<p>Therefore, I do it workaround.<br>I convert the geojson to kml and then use ST_GeomFromKML.<br><a href="https://github.com/mapbox/tokml" target="_blank" rel="external">https://github.com/mapbox/tokml</a></p>
+<p><pre class="brush: javascript">var kml = tokml(geojson.geometry);<br>//left only the geometry part<br>kml = kml.replace(‘&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;&lt;kml xmlns=”<a href="http://www.opengis.net/kml/2.2&quot;&gt;&lt;Document&gt;&lt;Placemark&gt;&lt;ExtendedData&gt;&lt;/ExtendedData&amp;gt" target="_blank" rel="external">http://www.opengis.net/kml/2.2&quot;&gt;&lt;Document&gt;&lt;Placemark&gt;&lt;ExtendedData&gt;&lt;/ExtendedData&amp;gt</a>;’, “”).replace(“&lt;/Placemark&gt;&lt;/Document&gt;&lt;/kml&gt;”, “”);<br></pre><div><br></div></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> postgresql </tag>
+            
+            <tag> sql </tag>
+            
+            <tag> postgis </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[sql + postgresql + postgis usage]]></title>
+      <url>/hexo-blog/2015/04/25/sql-postgresql-postgis-usage/</url>
+      <content type="html"><![CDATA[<p><a href="http://www.w3schools.com/sql/default.asp" target="_blank" rel="external">http://www.w3schools.com/sql/default.asp</a></p>
+<p>prevent sql injection:<br><a href="http://fecbob.pixnet.net/blog/post/39095519-%E9%A0%90%E9%98%B2sql%E6%B3%A8%E5%85%A5%E6%94%BB%E6%93%8A" target="_blank" rel="external">http://fecbob.pixnet.net/blog/post/39095519-%E9%A0%90%E9%98%B2sql%E6%B3%A8%E5%85%A5%E6%94%BB%E6%93%8A</a><br>In summary:<br>1. Use&nbsp;Parameterized Query<br>2. Data validation for integer and date…etc.<br>3. Replace the ‘ to ‘’ ( Replace(“‘“, “‘’”) ) for string type.<br>4. Use ‎appropriate user role to connect database.</p>
+<p>POSTGIS:<br><a href="http://revenant.ca/www/postgis/workshop/indexing.html" target="_blank" rel="external">http://revenant.ca/www/postgis/workshop/indexing.html</a><br><a href="http://workshops.boundlessgeo.com/postgis-intro/" target="_blank" rel="external">http://workshops.boundlessgeo.com/postgis-intro/</a></p>
+<p>ST_GeomFromGeoJSON =&gt; connection terminated, because this function cause database crash!<br><a href="http://dba.stackexchange.com/questions/83264/st-geomfromgeojson-causes-postgres-to-crash" target="_blank" rel="external">http://dba.stackexchange.com/questions/83264/st-geomfromgeojson-causes-postgres-to-crash</a><br>and I cannot find any solution to this.</p>
+<p>優化與維護:<br><a href="https://ruimemo.wordpress.com/2010/03/31/postgresql-performance-and-maintenance-%EF%BC%88postgres-%E4%BC%98%E5%8C%96%E4%B8%8E%E7%BB%B4%E6%8A%A4/" target="_blank" rel="external">https://ruimemo.wordpress.com/2010/03/31/postgresql-performance-and-maintenance-%EF%BC%88postgres-%E4%BC%98%E5%8C%96%E4%B8%8E%E7%BB%B4%E6%8A%A4/</a></p>
+<p>VACUUM ANALYZE&nbsp;CLUSTER</p>
+<p>DB size:<br>SELECT pg_size_pretty(pg_database_size(‘dbname’));</p>
+<p>Table size:<br>SELECT&nbsp;pg_size_pretty(pg_total_relation_size(‘cities_region’));</p>
+<p>Top 10 size:<br>SELECT relname AS “relation”, pg_size_pretty(pg_relation_size(C.oid)) AS “size”<br>&nbsp; FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace)<br>&nbsp; WHERE nspname NOT IN (‘pg_catalog’, ‘information_schema’)<br>&nbsp; ORDER BY pg_relation_size(C.oid) DESC<br>&nbsp; LIMIT 10;</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> postgresql </tag>
+            
+            <tag> sql </tag>
+            
+            <tag> postgis </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[angularjs]]></title>
+      <url>/hexo-blog/2015/04/19/angularjs/</url>
+      <content type="html"><![CDATA[<p><a href="https://umur.io/angularjs-directives-using-isolated-scope-with-attributes/" target="_blank" rel="external">https://umur.io/angularjs-directives-using-isolated-scope-with-attributes/</a><br>directives should use ‘-‘ to replace camel case variable in scope and directives name<br>for example:<br>scope: {<br>&nbsp; aExample: “=”<br>}<br>is<br>a-example when use</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> angularjs </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[web gis]]></title>
+      <url>/hexo-blog/2015/04/08/web-gis/</url>
+      <content type="html"><![CDATA[<p>TileMill<br>openlayer<br>geoserver mapserver<br>mapnik</p>
+<p><a href="http://cicero.azavea.com/docs/epsg_codes.html" target="_blank" rel="external">http://cicero.azavea.com/docs/epsg_codes.html</a><br><a href="http://www.wangwei.info/2014/09/osmgis-planet-data-import/" target="_blank" rel="external">http://www.wangwei.info/2014/09/osmgis-planet-data-import/</a><br><a href="https://developers.google.com/maps/documentation/javascript/examples/maptype-image" target="_blank" rel="external">https://developers.google.com/maps/documentation/javascript/examples/maptype-image</a></p>
+<p><a href="http://live.osgeo.org/zh/overview/overview.html" target="_blank" rel="external">http://live.osgeo.org/zh/overview/overview.html</a></p>
+<h3 id="Shapefile-to-Google-map-image-tiles"><a href="#Shapefile-to-Google-map-image-tiles" class="headerlink" title="Shapefile to Google map image tiles"></a>Shapefile to Google map image tiles</h3><p><a href="http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/" target="_blank" rel="external">http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/</a><br><a href="https://gist.github.com/tmcw/4954720" target="_blank" rel="external">https://gist.github.com/tmcw/4954720</a><br>TileMill<br><a href="https://github.com/mapbox/mbutil" target="_blank" rel="external">https://github.com/mapbox/mbutil</a><br><a href="https://developers.google.com/maps/documentation/javascript/examples/maptype-overlay" target="_blank" rel="external">https://developers.google.com/maps/documentation/javascript/examples/maptype-overlay</a></p>
+<p><a href="https://github.com/bmcbride/PHP-MBTiles-Server" target="_blank" rel="external">https://github.com/bmcbride/PHP-MBTiles-Server</a><br>create php apache server<br><a href="http://www.jaceju.net/blog/archives/703/" target="_blank" rel="external">http://www.jaceju.net/blog/archives/703/</a><br>and in windows<br>extension_dir = “D:/Program Files (x86)/php_5/ext” (<a href="http://stackoverflow.com/questions/7086859/pdo-drivers-no-value-in-windows" target="_blank" rel="external">http://stackoverflow.com/questions/7086859/pdo-drivers-no-value-in-windows</a>)</p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[C++ const]]></title>
+      <url>/hexo-blog/2015/03/21/C-const/</url>
+      <content type="html"><![CDATA[<p><a href="http://blog.csdn.net/wuliming_sc/article/details/3717017" target="_blank" rel="external">http://blog.csdn.net/wuliming_sc/article/details/3717017</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Pass JavaScript variables from a server to AngularJS]]></title>
+      <url>/hexo-blog/2015/02/28/Pass-JavaScript-variables-from-a-server-to-AngularJS/</url>
+      <content type="html"><![CDATA[<p><a href="http://www.linkplugapp.com/a/224929#http://www.garbl.es/angularjs/preload/2014/06/07/frictionless-data-preloading-in-angularjs/" target="_blank" rel="external">http://www.linkplugapp.com/a/224929#http://www.garbl.es/angularjs/preload/2014/06/07/frictionless-data-preloading-in-angularjs/</a><br><a href="http://codeutopia.net/blog/2013/05/27/3-ways-to-get-backend-data-to-angularjs/" target="_blank" rel="external">http://codeutopia.net/blog/2013/05/27/3-ways-to-get-backend-data-to-angularjs/</a><br><a href="http://www.mircozeiss.com/how-to-pass-javascript-variables-from-a-server-to-angular/" target="_blank" rel="external">http://www.mircozeiss.com/how-to-pass-javascript-variables-from-a-server-to-angular/</a>&nbsp;(3rd way is bad.)</p>
+<p><a href="https://docs.angularjs.org/guide/module" target="_blank" rel="external">https://docs.angularjs.org/guide/module</a><br><a href="http://lostechies.com/gabrielschenker/2014/01/14/angularjspart-9-values-and-constants/" target="_blank" rel="external">http://lostechies.com/gabrielschenker/2014/01/14/angularjspart-9-values-and-constants/</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Machine learning note]]></title>
+      <url>/hexo-blog/2015/02/23/Machine-learning-note/</url>
+      <content type="html"><![CDATA[<p><a href="https://class.coursera.org/ml-008/" target="_blank" rel="external">https://class.coursera.org/ml-008/</a></p>
+<p>Supervised Learning:</p>
+<p><div>Right answers are given.</div><div><br>Regression problem:<br>Predict continuous value output.</div></p>
+<p>Classification problem:<br>Discrete value output.</p>
+<p>Unsupervised Learning:<br>Correct answers are not given to computer. Find the structure in the data.</p>
+<p>Linear Regression with One Variable:<br>ax+b = y minimize the squared error with training data.</p>
+<p>Gradient Descent:<br>Using the different value initialization will lead to different optimal result.( \theta_j := \theta_j - \alpha \frac{\partial }{\partial \theta_j}J(\theta_0, \theta_1) )<br>(\alpha) is called learning rate. It controls how big a step we take downhill to gradient descent.<br>If the alpha is too small, gradient descent can be slow.<br>If the alpha is too large, it may fail to converge, or even diverge.<br>Simultaneous update ( \theta_0, \theta_1 ).<br>In linear regression, the cost function is a convex function (bowl-shape function). So the gradient descent can find the only global optimum.<br>If the cost function is not convex, then gradient descent may find any local optima.</p>
+<p><strong>Linear Regression with Multiple Variable:</strong><br>( h_{\theta}(x) = \theta_0+\theta_1 x_1+\theta_2 x_2+…+\theta_n x_n )<br>For convenience, ( x<em>0 = 1 )<br>( J(\theta) = \frac{1}{2m} \sum</em>{i=1}^m{(h_{\theta}(x^{(i)}) - y^{(i)})^2} )<br>Use gradient descent: ( \theta_j = \theta<em>j - \alpha \frac{1}{m} \sum</em>{i=1}^m{(h_{\theta}(x^{(i)}) - y^{(i)}) x_j^{(i)}} )<br><strong>Feature scaling</strong><br>For gradient descent, we need to do feature scaling to make features in the range -3&lt;value&lt;3. All features in the similar range can make gradient descent more quickly.<br>In general, feature scaling is: ( x = \frac{x-mean}{standard \, deviations} )<br>And in practice, in training stage, we should save every feature’s mean and standard deviation. Because in predict stage, we still need to do the feature scaling first.<br><strong>Learning rate</strong><br>The learning rate ( \alpha ):<br>If ( \alpha ) is too small: slow convergence.<br>If ( \alpha ) is too large: ( J(\theta) ) may not decrease on every iteration and may not converge.<br>In practice, we can try learning rate in log scale which is about 3 times the previous value (ie., 0.3, 0.1, 0.03, 0.01 and so on).<br><strong>Feature selecting and polynomial regression</strong><br>Besides, we can do some features selecting and polynomial regression in linear regression.<br>For example, we can multiply two features to create new feature or omit some features.<br>Polynomial regression example: ( \theta_0 + \theta_1 x + \theta_2 x^2 + \theta_3 x^3 )<br>If the x is the feature: “size”. ( x_1 = (size) \quad x_2 = (size)^2 \quad x_3 = (size)^3 )<br><strong>Normal equation</strong><br>In addition to gradient descent, we can use normal equation to solve linear regression ( \theta ) analytically.<br>So in general, We do differentiation in cost function ( J(\theta) ) for every ( \theta ) and set it to zero. In order to find the minimum value of the cost function.<br>And actually we can directly do it in matrix in linear regression. We want ( X \theta = y ), therefore ( \theta = (X^\top X)^{-1} X^\top y ).<br>In summary, normal equation’s advantages are:<br>1. No need to choose ( \alpha )<br>2. Don’t need to iterate<br>The disadvantages are:<br>1. Need to compute ( (X^\top X)^{-1} )<br>2. Slow if the number of feature(n) is very large(&gt;10000).</p>
+<p><strong>Logistic Regression</strong><br>In classification problem, the linear regression is not a good method to solve it. We can use the logistic regression to solve classification problem. (Define a new Hypothesis and cost function.)<br>The hypothesis in linear regression is: ( h_{\theta}(x) = \theta_0+\theta_1 x_1+\theta_2 x_2+…+\theta_n x<em>n = \theta^\top x )<br>The new hypothesis in logistic regression is: ( h</em>\theta(x) = g(\theta^\top x) = \frac{1}{1+e^{-\theta^\top x}} ) which g is a sigmoid function.<br>And it actually represent the <strong>possibility</strong> that y=1 on input x.<br><a href="http://3.bp.blogspot.com/-4Br754yMeTg/VOtP0nC8RgI/AAAAAAAAAMc/JhP-bqGfLZc/s1600/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" target="_blank" rel="external"><img src="https://3.bp.blogspot.com/-4Br754yMeTg/VOtP0nC8RgI/AAAAAAAAAMc/JhP-bqGfLZc/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" alt=""></a><br>So based on the hypothesis, we will predict y=1 if ( J(\theta) ) &gt;= 0.5. In other word, when ( \theta^\top x ) &gt;= 0.<br>And that is called decision boundary.<br><a href="http://2.bp.blogspot.com/-5X-Fp0Bq6Ok/VOtRZXqoUrI/AAAAAAAAAMo/1kjpXOWDgpI/s1600/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" target="_blank" rel="external"><img src="https://2.bp.blogspot.com/-5X-Fp0Bq6Ok/VOtRZXqoUrI/AAAAAAAAAMo/1kjpXOWDgpI/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" alt=""></a><br>The decision boundary can be non-linear when we use other function in ( \theta^\top x ) just like in linear regression.<br><a href="http://4.bp.blogspot.com/-Y2_7r7yTg-w/VOtTUWAu0kI/AAAAAAAAAM0/iBXxITeGd-o/s1600/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" target="_blank" rel="external"><img src="https://4.bp.blogspot.com/-Y2_7r7yTg-w/VOtTUWAu0kI/AAAAAAAAAM0/iBXxITeGd-o/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" alt=""></a><br>Then in cost function.<br>The cost function in linear regression is: ( J(\theta) = \frac{1}{2m} \sum<em>{i=1}^m{(h</em>{\theta}(x^{(i)}) - y^{(i)})^2} )<br>We cannot use it in logistic regression because the (h_\theta(x)) is change. And it contain a sigmoid function that it produces a non-convex function when we use this cost function.<br>Therefore, we change the function inside the summation to:<br><a href="http://2.bp.blogspot.com/-yJK-7Q9ocg4/VOtU-y-Aq3I/AAAAAAAAANA/oGz9vZIa7ZE/s1600/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" target="_blank" rel="external"><img src="https://2.bp.blogspot.com/-yJK-7Q9ocg4/VOtU-y-Aq3I/AAAAAAAAANA/oGz9vZIa7ZE/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" alt=""></a><br>Because we use it in binary classification, and y=0 or 1, so can simplified it to: ( -ylog(h<em>\theta(x))-(1-y)log(1-h</em>\theta(x)) )<br>Finally the cost function is: ( J(\theta) = -\frac{1}{m}[\sum<em>{i=1}^m{ y^{(i)} log(h</em>\theta(x^{(i)})) + (1-y^{(i)}) log(1-h_\theta(x^{(i)})) }] )<br>And it is derived from statistics using the principle of maximum likelihood estimation. It also has a nice property that it is convex.<br>Now we have cost function, we can use it to do gradient descent to find the minimum cost. Same as in linear regression, the gradient descent is:<br>( \theta_j = \theta_j - \alpha \frac{\partial}{\partial\theta_j} J(\theta) )<br>After differential the cost function, we can get:<br>( \theta_j = \theta<em>j - \alpha \frac{1}{m} \sum</em>{i=1}^m{(h_{\theta}(x^{(i)}) - y^{(i)}) x<em>j^{(i)}} )<br>In surprise, it’s totally same as the gradient descent in linear regression.<br>The way to differential the cost function is show in below by picture.<br><a href="http://math.stackexchange.com/questions/477207/derivative-of-cost-function-for-logistic-regression" target="_blank" rel="external">http://math.stackexchange.com/questions/477207/derivative-of-cost-function-for-logistic-regression</a><br>[![](<a href="https://3.bp.blogspot.com/-kXLqV5SwoL4/VOtaMF-UGdI/AAAAAAAAANc/M8SEcFVYgo4/s400/FireShot%2BCapture%2B-%2Bstatistics%2B-%2Bderivative%2Bof%2Bcost%2Bfunctio" target="_blank" rel="external">https://3.bp.blogspot.com/-kXLqV5SwoL4/VOtaMF-UGdI/AAAAAAAAANc/M8SEcFVYgo4/s400/FireShot%2BCapture%2B-%2Bstatistics%2B-%2Bderivative%2Bof%2Bcost%2Bfunctio</a></em>%2B-%2Bhttp<strong>_math.stackexchange.com<em>questi.png)](<a href="http://3.bp.blogspot.com/-kXLqV5SwoL4/VOtaMF-UGdI/AAAAAAAAANc/M8SEcFVYgo4/s1600/FireShot%2BCapture%2B-%2Bstatistics%2B-%2Bderivative%2Bof%2Bcost%2Bfunctio" target="_blank" rel="external">http://3.bp.blogspot.com/-kXLqV5SwoL4/VOtaMF-UGdI/AAAAAAAAANc/M8SEcFVYgo4/s1600/FireShot%2BCapture%2B-%2Bstatistics%2B-%2Bderivative%2Bof%2Bcost%2Bfunctio</a></em>%2B-%2Bhttp_</strong>math.stackexchange.com_questi.png)<br>We can do gradient descent by vectorization in matlab:<br><a href="http://1.bp.blogspot.com/-TouprIuusyo/VPCNkY_q98I/AAAAAAAAANw/isLW7Be-2u0/s1600/FireShot%2BCapture%2B-%2BStanford%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0---%E7%AC%AC%E4%B8%89%E8%AE%B2.%2B%E9%80%BB_%2B-%2Bhttp___blog.csdn.net_abcjennifer_article_details_7716281.png" target="_blank" rel="external"><img src="https://1.bp.blogspot.com/-TouprIuusyo/VPCNkY_q98I/AAAAAAAAANw/isLW7Be-2u0/s320/FireShot%2BCapture%2B-%2BStanford%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0---%E7%AC%AC%E4%B8%89%E8%AE%B2.%2B%E9%80%BB_%2B-%2Bhttp___blog.csdn.net_abcjennifer_article_details_7716281.png" alt=""></a><br>In addition to gradient descent, there are other way to optimize the cost function. Like Conjugate gradient, BFGS, L-BFGS. The advantages are no need to select ( \alpha ) rate and more fast. But disadvantage is more complex.<br>However, we can use them easily by matlab without knowing any about their actually algorithm.<br>What we need to do in matlab is writing the function return cost and the partial derivatives value when given theta. And matlab will chose the appropriate method for us.<br>For example, the function we should write in the format like:  </p>
+<p><pre class="brush: text">function [jVal, gradient] = costFunction(theta)<br>  jVal = (theta(1)-5)^2 + (theta(2)-5)^2;<br>  gradient = zeros(2,1);<br>  gradient(1) = 2<em>(theta(1)-5);<br>  gradient(2) = 2</em>(theta(2)-5);<br></pre>And use it by:</p>
+<p><pre class="brush: text">options = optimset(‘GradObj’, ‘on’, ‘MaxIter’, ‘100’);<br>initialTheta = zeros(2,1);<br>[optTheta, functionVal, exitFlag] = fminunc(@costFunction, initialTheta, options);<br></pre>The optTheta will be the optimization theta.<br>Besides, we can also use logistic regression in multi-calss classification.<br>The way is just train a logistic regression classifier for each class. And pick the class that probability is maximum as the result.<br><a href="http://3.bp.blogspot.com/--RFTczq9WsY/VPCWRX48b7I/AAAAAAAAAOA/W1hDtkoJQN4/s1600/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" target="_blank" rel="external"><img src="https://3.bp.blogspot.com/--RFTczq9WsY/VPCWRX48b7I/AAAAAAAAAOA/W1hDtkoJQN4/s320/FireShot%2BCapture%2B-%2B%2B-%2Bhttps___d396qusza40orc.cloudfront.net_ml_docs_slides_Lecture6.pdf.png" alt=""></a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> ml </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Alternative to TestFlight?]]></title>
+      <url>/hexo-blog/2015/02/23/Alternative-to-TestFlight/</url>
+      <content type="html"><![CDATA[<p><a href="https://www.linkedin.com/groups/Alternative-TestFlight-712237.S.5968340843382194176?view=&amp;item=5968340843382194176&amp;type=member&amp;gid=712237&amp;trk=eml-b2_anet_digest-group_discussions-10-grouppost-disc-3&amp;midToken=AQF2z_g07q8BBw&amp;fromEmail=fromEmail&amp;ut=0RIXkGlrlEkmE1" target="_blank" rel="external">https://www.linkedin.com/groups/Alternative-TestFlight-712237.S.5968340843382194176?view=&amp;item=5968340843382194176&amp;type=member&amp;gid=712237&amp;trk=eml-b2_anet_digest-group_discussions-10-grouppost-disc-3&amp;midToken=AQF2z_g07q8BBw&amp;fromEmail=fromEmail&amp;ut=0RIXkGlrlEkmE1</a>  Try Crashlytics!</p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Python pyenv and virtualenv usage note]]></title>
+      <url>/hexo-blog/2015/02/09/Python-pyenv-and-virtualenv-usage-note/</url>
+      <content type="html"><![CDATA[<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation:"></a>Installation:</h2><div><br></div>
+
+<h3 id="pyenv"><a href="#pyenv" class="headerlink" title="pyenv"></a>pyenv</h3><div><br></div>
+
+<h4 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h4><div><br></div>brew update<br>brew install pyenv<br><br>To upgrade pyenv in the future, just use upgrade instead of install.<br><br>After installation, you’ll still need to add eval “$(pyenv init -)” to your profile (add it to ~/.bash_profile). You’ll only ever have to do this once.<br><br>#### Others<br><div><br></div># Get Code<br>git clone <a href="https://github.com/yyuu/pyenv.git" target="_blank" rel="external">https://github.com/yyuu/pyenv.git</a> ~/.pyenv<br><br># Set the Paths<br>echo ‘export PYENV_ROOT=”$HOME/.pyenv”‘ &gt;&gt; ~/.bash_profile<br>echo ‘export PATH=”$PYENV_ROOT/bin:$PATH”‘ &gt;&gt; ~/.bash_profile<br><strong>Zsh note: Modify your ~/.zshenv file instead of ~/.bash_profile.</strong><br><strong>Ubuntu note: Modify your ~/.bashrc file instead of ~/.bash_profile.</strong><br><br># Initialize pyenv on load of terminal<br>echo ‘eval “$(pyenv init -)”‘ &gt;&gt; ~/.bash_profile<br>exec $SHELL<br><br>### pyenv-virtualenv<br><div><br></div>
+
+<h4 id="Mac-1"><a href="#Mac-1" class="headerlink" title="Mac"></a>Mac</h4><div><br></div><div>brew install pyenv-virtualenv</div><div><br></div><div>Add</div><div>eval “$(pyenv virtualenv-init -)”</div><div>to your profile (add it to ~/.bash_profile)<br><br></div>
+
+<h4 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h4><div><br></div><div><div># Install pyenv virtualenv</div><div>git clone <a href="https://github.com/yyuu/pyenv-virtualenv.git" target="_blank" rel="external">https://github.com/yyuu/pyenv-virtualenv.git</a> ~/.pyenv/plugins/pyenv-virtualenv</div><div><br></div><div># auto ativate virtualenv for pyenv</div><div>echo ‘eval “$(pyenv virtualenv-init -)”‘ &gt;&gt; ~/.bash_profile</div><div><strong>Zsh note: Modify your ~/.zshenv file instead of ~/.bash_profile.</strong><br><strong>Ubuntu note: Modify your ~/.bashrc file instead of ~/.bash_profile.</strong><br><strong>
+</strong></div><div># restart shell</div></div><div>exec $SHELL<br><br></div>
+
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><div><br></div>
+
+<h3 id="pyenv-1"><a href="#pyenv-1" class="headerlink" title="pyenv"></a>pyenv</h3><p><div><br></div># install python<br>pyenv install 2.7.9<br>pyenv install 3.4.3</p>
+<h1 id="if-there-are-problems-when-install-the-python-you-can-refer-to"><a href="#if-there-are-problems-when-install-the-python-you-can-refer-to" class="headerlink" title="if there are problems when install the python, you can refer to"></a>if there are problems when install the python, you can refer to</h1><p>#&nbsp;<a href="https://github.com/yyuu/pyenv/wiki/Common-build-problems" target="_blank" rel="external">https://github.com/yyuu/pyenv/wiki/Common-build-problems</a></p>
+<h1 id="rehash-when-install-the-new-versions-every-time"><a href="#rehash-when-install-the-new-versions-every-time" class="headerlink" title="rehash when install the new versions every time"></a>rehash when install the new versions every time</h1><p>pyenv rehash</p>
+<h1 id="set-version-of-python-to-use-for-this-session"><a href="#set-version-of-python-to-use-for-this-session" class="headerlink" title="set version of python to use for this session"></a>set version of python to use for this session</h1><p>pyenv shell 3.4.3</p>
+<h1 id="set-global-python-for-everytime-we-start-pyenv"><a href="#set-global-python-for-everytime-we-start-pyenv" class="headerlink" title="set global python for everytime we start pyenv"></a>set global python for everytime we start pyenv</h1><p>pyenv global 3.4.3</p>
+<h1 id="set-python-version-for-current-and-all-sub-directories"><a href="#set-python-version-for-current-and-all-sub-directories" class="headerlink" title="set python version for current and all sub directories"></a>set python version for current and all sub directories</h1><p>pyenv local 3.4.3</p>
+<h3 id="pyenv-virtualenv"><a href="#pyenv-virtualenv" class="headerlink" title="pyenv-virtualenv"></a>pyenv-virtualenv</h3><p><div><br></div>Restart the shell and let’s create an virtualenv with Python 2.7.8.<br>pyenv virtualenv 2.7.8 project-a-2.7.8</p>
+<p>Activate the newly created virtualenv.<br>pyenv activate project-a-2.7.8</p>
+<p>You can deactivate the current virtualenv.<br>pyenv deactivate</p>
+<p>And list the available virtualenvs.<br>pyenv virtualenvs</p>
+<p>Those virtualenvs are located in ~/.pyenv/versions just like those installed Pythons. If you want to remove a virtualenv, simply delete that corresponding folder.<br>Or<br>pyenv uninstall my-virtual-env</p>
+<p>Reference:<br><a href="http://eureka.ykyuen.info/2014/07/11/pyenv-python-version-manager/" target="_blank" rel="external">http://eureka.ykyuen.info/2014/07/11/pyenv-python-version-manager/</a><br><a href="http://eureka.ykyuen.info/2014/07/14/manage-your-python-projects-with-virtualenv/" target="_blank" rel="external">http://eureka.ykyuen.info/2014/07/14/manage-your-python-projects-with-virtualenv/</a><br><a href="http://blog.froehlichundfrei.de/2014/11/30/my-transition-to-python3-and-pyenv-goodby-virtualenvwrapper.html" target="_blank" rel="external">http://blog.froehlichundfrei.de/2014/11/30/my-transition-to-python3-and-pyenv-goodby-virtualenvwrapper.html</a><br><a href="https://godjango.com/96-django-and-python-3-how-to-setup-pyenv-for-multiple-pythons/" target="_blank" rel="external">https://godjango.com/96-django-and-python-3-how-to-setup-pyenv-for-multiple-pythons/</a><br><a href="https://github.com/yyuu/pyenv" target="_blank" rel="external">https://github.com/yyuu/pyenv</a><br><a href="https://github.com/yyuu/pyenv-virtualenv" target="_blank" rel="external">https://github.com/yyuu/pyenv-virtualenv</a><br><a href="http://www.openfoundry.org/tw/tech-column/8516-pythons-virtual-environment-and-multi-version-programming-tools-virtualenv-and-pythonbrew" target="_blank" rel="external">http://www.openfoundry.org/tw/tech-column/8516-pythons-virtual-environment-and-multi-version-programming-tools-virtualenv-and-pythonbrew</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> python </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Imgae alignment]]></title>
+      <url>/hexo-blog/2015/02/07/Imgae-alignment/</url>
+      <content type="html"><![CDATA[<h1 id="Newton’s-method"><a href="#Newton’s-method" class="headerlink" title="Newton’s method:"></a>Newton’s method:</h1><p>Find the f(x) = 0.<br>For an initialized point, calculate the tangent line. And set the point that is intersection of x-axis and tangent line as next x.<br>As the animated picture from wiki:<br><img src="http://upload.wikimedia.org/wikipedia/commons/e/e0/NewtonIteration_Ani.gif" alt=""><br>So write in math:<br>( x_{n+1} = x_n - \frac{f(x_n)}{f^\prime(x_n)} ) </p>
+<h1 id="Lucas-Kanade"><a href="#Lucas-Kanade" class="headerlink" title="Lucas-Kanade:"></a>Lucas-Kanade:</h1><p>When in image alignment that <strong>only translation</strong>:<br>( E(u, v) = \sum<em>{x,y}{(I(x+u, y+v) - T(x, y))}^2 )<br>Do Taylor’s expand in I(x+y, y+v):<br>( E(u, v) = \sum</em>{x,y}{(I(x, y) - T(x, y) + uI_x + + vI<em>y)}^2 )<br>And differentiate to find the extremal point:<br>( 0 = \frac{\partial E}{\partial u} = \sum</em>{x,y}{2I_x(I(x,y)-T(x,y)+uI_x+vI<em>y)} )<br>( 0 = \frac{\partial E}{\partial v} = \sum</em>{x,y}{2I_y(I(x,y)-T(x,y)+uI_x+vI<em>y)} )<br>Reformat as matrix:<br>( \begin{bmatrix} \sum</em>{x,y}{I<em>x^2} &amp; \sum</em>{x,y}{I_xI<em>y} \ \sum</em>{x,y}{I_xI<em>y} &amp; \sum</em>{x,y}{I<em>y^2} \end{bmatrix}  \begin{bmatrix} u \ v \end{bmatrix} = \begin{bmatrix} \sum</em>{x,y}{I<em>x(T(x,y)-I(x,y))} \ \sum</em>{x,y}{I_y(T(x,y)-I(x,y))} \end{bmatrix}  )<br>One thing to note:<br>Although in the math is plus u and v.<br>But if we write in transformation matrix, it is minus u and v.<br><strong>Because I(x+u, y+v) means original x, y becomes the x-y, y-v in a transformed image. </strong> </p>
+<p>circular convolution<br> 1. why don’t just use translation matrix to fit<br>2. d/dx d/dy use which kernel is better </p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Postgres backup by pg_dump and psql restore]]></title>
+      <url>/hexo-blog/2015/02/05/Postgres-backup-by-pg-dump-and-psql-restore/</url>
+      <content type="html"><![CDATA[<p>pg_dump –data-only -t “\”MixedCaseName\”” &gt; xxx.txt<br>(add -o if you want to retain id)</p>
+<p>Use psql to delete all data from the table.</p>
+<p>sudo sudo -u username psql -U username -d dbname -f filename(xxx.txt)</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> postgresql </tag>
+            
+            <tag> sql </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Running a Reverse Proxy in Apache]]></title>
+      <url>/hexo-blog/2015/01/22/Running-a-Reverse-Proxy-in-Apache/</url>
+      <content type="html"><![CDATA[<p>ps -ef | grep apache<br>/usr/sbin/apache2 -V | grep SERVER_CONFIG_FILE </p>
+<p> sudo a2enmod mod_proxy<br>sudo a2enmod proxy_http </p>
+<p> In apache config file:<br>ProxyPass       /app1/  <a href="http://internal1.example.com/" target="_blank" rel="external">http://internal1.example.com/</a><br>ProxyPassReverse /app1/ <a href="http://internal1.example.com/" target="_blank" rel="external">http://internal1.example.com/</a> </p>
+<p>service apache2 restart</p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Using openCV SIFT in C++]]></title>
+      <url>/hexo-blog/2015/01/19/Using-openCV-SIFT-in-C/</url>
+      <content type="html"><![CDATA[<p>1. </p>
+<pre class="brush: cpp">
+#include &ltopencv2\nonfree\features2d.hpp&gt
+#include &ltopencv2\nonfree\nonfree.hpp&gt
+</pre>
+2\. link opencv_nonfree247.lib (247 is your opencv version) 
+3\.  <pre class="brush: cpp">
+initModule_nonfree();
+
+Ptr&ltcv::FeatureDetector&gt detector = FeatureDetector::create("SIFT"); 
+Ptr&ltcv::DescriptorExtractor&gt descriptor = DescriptorExtractor::create("SIFT"); 
+
+// detect keypoints
+std::vector&ltKeyPoint&gt keypoints1;
+detector->detect(img1, keypoints1);
+
+// extract features
+Mat desc1, desc2;
+descriptor->compute(img1, keypoints1, desc1);
+</pre>]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Linear Algebra]]></title>
+      <url>/hexo-blog/2014/12/17/Linear-Algebra/</url>
+      <content type="html"><![CDATA[<p>( 2x-y = 0 )<br>( -x+2y = 3 )<br>Row picture: intersection of planes<br>( \begin{bmatrix}  2 &amp; -1 \ -1 &amp; 2 \end{bmatrix} \begin{bmatrix} x \ y \end{bmatrix} =  \begin{bmatrix} 0 \ 3 \end{bmatrix} )<br>Column picture: combine vectors to produce right hand. Or called it as a linear combination of columns.<br>(  x \begin{bmatrix} 2 \ -1      \end{bmatrix} +  y \begin{bmatrix} -1 \ 2 \end{bmatrix}  = \begin{bmatrix} 0 \ 3 \end{bmatrix} )<br>Ax = b have solution when A is invertible(non-singular case).<br>And we can say Ax is a combination of columns of A. </p>
+<h1 id="Elimination"><a href="#Elimination" class="headerlink" title="Elimination"></a>Elimination</h1><p>Select the first row first column as pivot, and elimination all row below it, to make these row’s first columns become zero.<br>Then select the second row second column as pivot. elimination all row below it to make these row’s second columns become zero.<br>Do it recursive until reach the last row. </p>
+<p><strong>One thing to note is “pivots cannot be zero”</strong> </p>
+<p>So the elimination fail when A matrix is singular matrix.<br>We can exchange the row’s positions to make pivots not zero when A matrix is not singular matrix.<br>( \begin{bmatrix} 0 &amp; 1 \ 1 &amp; 0 \end{bmatrix} \begin{bmatrix} 0 &amp; 2 \ 3 &amp; 1 \end{bmatrix} = \begin{bmatrix} 3 &amp; 1 \ 0 &amp; 2 \end{bmatrix} )<br>And we can express these operations in matrix form.<br>(When we put a matrix in the left of A, it is a combination of <strong>rows</strong> of A. Just like the above example to exchange row 1 and row 2.<br> When we put a matrix in the right of A, it is a combination of <strong>columns</strong> of A. Like the below example to exchange col 1 and col 2.)<br>( \begin{bmatrix} 0 &amp; 2 &amp; 1\ 3 &amp; 1 &amp; 2\ 1 &amp; 2 &amp; 3 \end{bmatrix} \begin{bmatrix} 0 &amp; 1 &amp; 0 \ 1 &amp; 0 &amp; 0 \ 0 &amp; 0 &amp; 1 \end{bmatrix}  = \begin{bmatrix} 2 &amp; 0 &amp; 1 \ 1 &amp; 3 &amp; 2 \ 2 &amp; 1 &amp; 3 \end{bmatrix} ) </p>
+<p>Example for elimination:<br>( x+2y+z = 2 )<br>( 3x+8y+z = 12 )<br>(  4y+z = 2 )<br>( \begin{bmatrix} 1 &amp; 0 &amp; 0 \ 0 &amp; 1 &amp; 0 \ 0 &amp; -2 &amp; 1 \end{bmatrix} \begin{bmatrix} 1 &amp; 0 &amp; 0 \ -3 &amp; 1 &amp; 0 \ 0 &amp; 0 &amp; 1 \end{bmatrix} \begin{bmatrix} 1 &amp; 2 &amp; 1 \ 3 &amp; 8 &amp; 1 \ 0 &amp; 4 &amp; 1 \end{bmatrix} =  \begin{bmatrix} 1 &amp; 2 &amp; 1 \ 0 &amp; 2 &amp; -2 \ 0 &amp; 0 &amp; 5 \end{bmatrix} )<br>It can be expressed as:<br>( E<em>{32} E</em>{21} A = U ) or just ( E A = U )<br>So do the same multiplication on b, we can get z value first. And back-substitution to get x and y. </p>
+<h1 id="Multiplication"><a href="#Multiplication" class="headerlink" title="Multiplication"></a>Multiplication</h1><p>Not commutative, but associative.<br>( AB = C )<br>( A=m<em>n \qquad B=n</em>p \qquad C=m*p ) </p>
+<ol>
+<li>Row times column( C<em>{34} = (row\,3\,of\,A) \cdot (column\,4\,of\,B) = a</em>{31}b<em>{14} + a</em>{32}b<em>{24} + … = \sum\limits</em>{k=1}^n a<em>{3k}b</em>{k4} )2.  Column wayColumns of C are combinations of columns of A( \begin{bmatrix} \; &amp; \; \end{bmatrix} \begin{bmatrix} | &amp; | \end{bmatrix} = \begin{bmatrix} | &amp; | \end{bmatrix} )3.  Row wayRows of C are combinations of rows of B( \begin{bmatrix} - \end{bmatrix} \begin{bmatrix} \; \end{bmatrix} = \begin{bmatrix} - \end{bmatrix} )4.  Column times rowSum of (cols of A) * (rows of B)( \begin{bmatrix} 2 &amp; 7 \ 3 &amp; 8 \ 4 &amp; 9 \end{bmatrix} \begin{bmatrix} 1 &amp; 6 \ 0 &amp; 0 \end{bmatrix} = \begin{bmatrix} 2 \ 3 \ 4 \end{bmatrix} \begin{bmatrix} 1 &amp; 6 \end{bmatrix} + \begin{bmatrix} 7 \ 8 \ 9 \end{bmatrix} \begin{bmatrix} 0 &amp; 0 \end{bmatrix} )5.  Block way( \begin{bmatrix} A_1 &amp; A_2 \ A_3 &amp; A_4 \end{bmatrix} \begin{bmatrix} B_1 &amp; B_2 \ B_3 &amp; B_4 \end{bmatrix} = \begin{bmatrix} A_1B_1+A_2B<em>3 &amp; \</em> \ _ &amp; _ \end{bmatrix} )</li>
+</ol>
+<h1 id="Inverses-of-square-matrices"><a href="#Inverses-of-square-matrices" class="headerlink" title="Inverses of square matrices"></a>Inverses of square matrices</h1><p>( A^{-1}A = I = AA^{-1} )<br>Only when matrix is square, we can put inverse of A after A to get I. (A must to be square to be invertible?)<br>But <strong>not all matrices have inverses. An inverse is <span style="color:red">impossible</span> when Ax is zero and x is non zero.</strong><br>Because ( A^{-1}Ax = A^{-1}0 ) means ( Ix = A^{-1}0 ) means ( x = 0 ). So it is impossible to find inverse of A when x is nonzero and there exist Ax is zero.<br><strong>The inverse exists if and only if elimination produces n pivots</strong> </p>
+<p><strong>Gauss-Jordan method to compute inverse of A</strong><br>Put the matrix in the form ( \begin{bmatrix} A &amp; I \end{bmatrix} ) and start the elimination to make A become triangular U. And then do it backward to make U become I.<br>The matrix become ( \begin{bmatrix} I &amp; ? \end{bmatrix} ).<br>Actually ? is ( A^{-1} ).<br>If we let E matrix is the steps we do in A to let A become I, we know that ( E \begin{bmatrix} A &amp; I \end{bmatrix} =  \begin{bmatrix} I &amp; ? \end{bmatrix} ).<br>So ( EA = I ) =&gt; ( E = A^{-1} ), means ( EI = A^{-1} ). Therefore the ? in the right is what we want ( A^{-1} ).</p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[iOS Prefix.pch]]></title>
+      <url>/hexo-blog/2014/11/20/iOS-Prefix-pch/</url>
+      <content type="html"><![CDATA[<p>I meet a problem that Xcode success to build the project and run correctly.<br>But it show many syntax errors in the editor because of undefined type name.<br>That type is inside the class file that I include in the prefix.pch.</p>
+<p><a href="http://stackoverflow.com/questions/24158648/why-isnt-projectname-prefix-pch-created-automatically-in-xcode-6" target="_blank" rel="external">http://stackoverflow.com/questions/24158648/why-isnt-projectname-prefix-pch-created-automatically-in-xcode-6</a></p>
+<p>This is something I find with prefix.pch in Xcode 6.<br>I set the “Increase Sharing of Precompiled Headers” to “YES”, then every thing get fine.<br>That’s weird.</p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Maps with Leaflet, TopoJSON]]></title>
+      <url>/hexo-blog/2014/11/18/Maps-with-Leaflet-TopoJSON/</url>
+      <content type="html"><![CDATA[<p>A really good article that teach to use leaflet to show map.<br><a href="http://blog.webkid.io/maps-with-leaflet-and-topojson/" target="_blank" rel="external">http://blog.webkid.io/maps-with-leaflet-and-topojson/</a><br>Below is my note of this article </p>
+<pre class="brush: html">
+&lt;!DOCTYPE html&gt;  
+&lt;html&gt;  
+&lt;head&gt;  
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;maps with leaflet &amp; topojson&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css&quot; /&gt;
+  &lt;style&gt;
+    html,body,#worldmap{
+      height:100%;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;  
+&lt;body&gt;  
+  &lt;div id=&quot;worldmap&quot;&gt;&lt;/div&gt;  
+
+  &lt;script src=&quot;http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js&quot;&gt;&lt;/script&gt;
+  &lt;script&gt;
+  // create a map object and set the view to the coordinates 24.875224031804528,121.53076171875 with a zoom of 9
+  var map = L.map('worldmap').setView([24.875224031804528,121.53076171875], 9);
+  &lt;/script&gt;
+&lt;/body&gt;  
+&lt;/html&gt;  
+</pre>You will get a blank full screen leaflet map. (nothing show in the map) 
+In leaflet [tutorial](http://leafletjs.com/examples/quick-start.html), their is a map with streets show up in background. 
+<pre class="brush: javascript">
+L.tileLayer('http://{s}.tiles.mapbox.com/v3/MapID/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; [OpenStreetMap](http://openstreetmap.org) contributors, [CC-BY-SA](http://creativecommons.org/licenses/by-sa/2.0/), Imagery © [Mapbox](http://mapbox.com)',
+    maxZoom: 18
+}).addTo(map);
+</pre>This code in tutorial is the reason for it. It add a overlayer(openstreetmap) to map through a service called mapbox. 
+But, in our case, we don't need this overlayer, just keep it blank first. And load a topoJson in next step.
+<pre class="brush: html">
+&lt;script src=&quot;http://d3js.org/topojson.v1.min.js&quot;&gt;&lt;/script&gt;  
+&lt;script src=&quot;//code.jquery.com/jquery-1.11.0.min.js&quot;&gt;&lt;/script&gt;
+</pre>Leaflet do not know about topoJson, so we need to convert it to geoJson in the browser. 
+Use the code below to extend leaflet class. <pre class="brush: javascript">
+L.TopoJSON = L.GeoJSON.extend({  
+  addData: function(jsonData) {    
+    if (jsonData.type === "Topology") {
+      for (key in jsonData.objects) {
+        geojson = topojson.feature(jsonData, jsonData.objects[key]);
+        L.GeoJSON.prototype.addData.call(this, geojson);
+      }
+    }    
+    else {
+      L.GeoJSON.prototype.addData.call(this, jsonData);
+    }
+  }  
+});
+// Copyright (c) 2013 Ryan Clark
+</pre>Then we can Load the data and set up some interactive function for each layer in topoJson. <pre class="brush: javascript">
+var topoLayer = new L.TopoJSON();
+
+$.getJSON('data/countries.topo.json')
+  .done(addTopoData);
+
+function addTopoData(topoData){  
+  topoLayer.addData(topoData);
+  topoLayer.addTo(map);
+  topoLayer.eachLayer(handleLayer);
+}
+
+function handleLayer(layer){  
+  layer.setStyle({
+    fillColor : '#D5E3FF',
+    fillOpacity: 1,
+    color:'#555',
+    weight:1,
+    opacity:0.5
+  });
+
+  layer.on({
+    mouseover: enterLayer,
+    mouseout: leaveLayer
+  });
+}
+
+function enterLayer(){  
+  var countryName = this.feature.properties.name;
+  //get the properties in topoJson
+  console.log(countryName);
+
+  this.bringToFront();
+  this.setStyle({
+    weight:2,
+    opacity: 1
+  });
+}
+
+function leaveLayer(){  
+  this.bringToBack();
+  this.setStyle({
+    weight:1,
+    opacity:.5
+  });
+}
+</pre>]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Sublime Text Notes]]></title>
+      <url>/hexo-blog/2014/11/05/Sublime-Text-Notes/</url>
+      <content type="html"><![CDATA[<p>Guide:<br><a href="http://zh.lucida.me/blog/sublime-text-complete-guide/" target="_blank" rel="external">http://zh.lucida.me/blog/sublime-text-complete-guide/</a><br><a href="http://code.kpman.cc/2014/10/14/sublime-text-3-mac-指南/" target="_blank" rel="external">http://code.kpman.cc/2014/10/14/sublime-text-3-mac-指南/</a></p>
+<p>Add to mac terminal </p>
+<p><pre class="brush: bash">sudo ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/bin/subl<br></pre><br>Install Package Controller<br><a href="https://sublime.wbond.net/installation" target="_blank" rel="external">https://sublime.wbond.net/installation</a> </p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Math symbol]]></title>
+      <url>/hexo-blog/2014/11/01/Math-symbol/</url>
+      <content type="html"><![CDATA[<h1 id="Norm"><a href="#Norm" class="headerlink" title="Norm"></a>Norm</h1><p>(   |x| = \sqrt{x_1^2+…+x_n^2} )  in n-dimensional Euclidean space<br>(   |x|<em>1 = \sum\limits</em>{i=1}^n |x_i| )<br>(   |x|<em>p = (\sum\limits</em>{i=1}^n |x_i|^p)^{1/p} ) </p>
+<h1 id="Vector-dot-product"><a href="#Vector-dot-product" class="headerlink" title="Vector dot product"></a>Vector dot product</h1><p>(   \vec{a} \cdot \vec{b} = \sum\limits_{i=1}^n a_i b_i = |\vec{a}| |\vec{b}| cos(\theta) )<br>(   cos(\theta) = \frac{\vec{a} \cdot \vec{b}} {|\vec{a}| |\vec{b}|} )<br>And dot product also means projection =&gt;<br>(   |\vec{a}| cos(\theta) )  is the component of vector a in direction b. (project a to b)<br>  (   |\vec{b}| )  is the length of vector b. However, if b is normal vector, then  (   |\vec{b}| )  is one.</p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Using MathJax in Blogger]]></title>
+      <url>/hexo-blog/2014/10/25/Using-MathJax-in-Blogger/</url>
+      <content type="html"><![CDATA[<p>It’s really easy. Just add the following code above &lt;head&gt; in blogger’s template: </p>
+<pre class="brush: html">&lt;script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;
+&lt;/script&gt;
+</pre>
+And you can test it now! 
+\(          J_\alpha(x) = \sum\limits_{m=0}^\infty \frac{(-1)^m}{m! \, \Gamma(m + \alpha + 1)}{\bigl({\frac{x}{2}}\bigr)}^{2 m + \alpha} \) 
+<pre>\(
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;J_\alpha(x) = \sum\limits_{m=0}^\infty \frac{(-1)^m}{m! \, \Gamma(m + \alpha + 1)}{\bigl({\frac{x}{2}}\bigr)}^{2 m + \alpha}
+
+\)
+</pre>]]></content>
+      
+        
+        <tags>
+            
+            <tag> blogger </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Using SyntaxHighlighter in Blogger]]></title>
+      <url>/hexo-blog/2014/10/25/Using-SyntaxHighlighter-in-Blogger/</url>
+      <content type="html"><![CDATA[<p>I use the Google Code Prettify Now.<br><a href="https://amobiz.github.io/2013/05/28/blogger-google-code-prettify-github-gist/" target="_blank" rel="external">https://amobiz.github.io/2013/05/28/blogger-google-code-prettify-github-gist/</a><br><a href="https://github.com/google/code-prettify/" target="_blank" rel="external">https://github.com/google/code-prettify/</a><br>Use method:<br>&lt;pre class=”prettyprint”&gt;&lt;/pre&gt;</p>
+<p>Add the following code above the &lt;head&gt; in your blogger’s template: </p>
+<p><pre class="brush: html">&lt;link href=”<a href="http://alexgorbatchev.com/pub/sh/current/styles/shCore.css" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/styles/shCore.css</a>“ rel=”stylesheet” type=”text/css”&gt;&lt;/link&gt;<br>&lt;!– the theme can change –&gt;<br>&lt;link href=”<a href="http://alexgorbatchev.com/pub/sh/current/styles/shThemeDefault.css" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/styles/shThemeDefault.css</a>“ rel=”stylesheet” type=”text/css”&gt;&lt;/link&gt;<br>&lt;script src=”<a href="http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js</a>“ type=”text/javascript”&gt;&lt;/script&gt;<br>&lt;script src=”<a href="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCpp.js" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCpp.js</a>“ type=”text/javascript”&gt;&lt;/script&gt;<br>&lt;script src=”<a href="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCSharp.js" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCSharp.js</a>“ type=”text/javascript”&gt;&lt;/script&gt;<br>&lt;script src=”<a href="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCss.js" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCss.js</a>“ type=”text/javascript”&gt;&lt;/script&gt;<br>&lt;script src=”<a href="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJava.js" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJava.js</a>“ type=”text/javascript”&gt;&lt;/script&gt;<br>&lt;script src=”<a href="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js</a>“ type=”text/javascript”&gt;&lt;/script&gt;<br>&lt;script src=”<a href="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushPhp.js" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/scripts/shBrushPhp.js</a>“ type=”text/javascript”&gt;&lt;/script&gt;<br>&lt;script src=”<a href="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushPython.js" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/scripts/shBrushPython.js</a>“ type=”text/javascript”&gt;&lt;/script&gt;<br>&lt;script src=”<a href="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushRuby.js" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/scripts/shBrushRuby.js</a>“ type=”text/javascript”&gt;&lt;/script&gt;<br>&lt;script src=”<a href="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushSql.js" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/scripts/shBrushSql.js</a>“ type=”text/javascript”&gt;&lt;/script&gt;<br>&lt;script src=”<a href="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushVb.js" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/scripts/shBrushVb.js</a>“ type=”text/javascript”&gt;&lt;/script&gt;<br>&lt;script src=”<a href="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushXml.js" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/scripts/shBrushXml.js</a>“ type=”text/javascript”&gt;&lt;/script&gt;<br>&lt;script src=”<a href="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushPerl.js" target="_blank" rel="external">http://alexgorbatchev.com/pub/sh/current/scripts/shBrushPerl.js</a>“ type=”text/javascript”&gt;&lt;/script&gt;<br>&lt;script language=”javascript”&gt;<br>SyntaxHighlighter.config.bloggerMode = true;  //need to add this if we use blogger<br>SyntaxHighlighter.all();<br>&lt;/script&gt;<br></pre>And one thing need to note is that if you want to add some code with &lt; or &gt;, you need to encode the code first. For example, you can use: <a href="http://www.opinionatedgeek.com/dotnet/tools/htmlencode/encode.aspx" target="_blank" rel="external">http://www.opinionatedgeek.com/dotnet/tools/htmlencode/encode.aspx</a></p>
+<p>Reference:<br><a href="http://alexgorbatchev.com/SyntaxHighlighter/" target="_blank" rel="external">http://alexgorbatchev.com/SyntaxHighlighter/</a><br><a href="http://www.craftyfella.com/2010/01/syntax-highlighting-with-blogger-engine.html" target="_blank" rel="external">http://www.craftyfella.com/2010/01/syntax-highlighting-with-blogger-engine.html</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> blogger </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>
