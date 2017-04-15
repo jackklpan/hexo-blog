@@ -41,6 +41,10 @@ $$ Block $$
 ### DISQUS
 增加DISQUS時若要在local預覽，到_config.yml將url更改成localhost:4000（[參考](http://www.codeblocq.com/2015/12/Add-Disqus-comments-in-Hexo/)）。
 
+### Search
+可以看這個[網址](http://theme-next.iissnan.com/third-party-services.html#local-search)，
+且可以直接使用[hexo-generator-search](https://github.com/PaicHyperionDev/hexo-generator-search)
+
 ### NexT文字大小
 大致上設定完成之後，另外更改NexT的文字大小。在：
 ```
