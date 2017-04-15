@@ -569,9 +569,9 @@ Remover all stopped containers:
         
         <tags>
             
-            <tag> postgresql </tag>
-            
             <tag> postgis </tag>
+            
+            <tag> postgresql </tag>
             
         </tags>
         
@@ -724,11 +724,11 @@ And actually it can be fixed when installed
         
         <tags>
             
+            <tag> postgis </tag>
+            
             <tag> postgresql </tag>
             
             <tag> sql </tag>
-            
-            <tag> postgis </tag>
             
         </tags>
         
@@ -751,11 +751,11 @@ And actually it can be fixed when installed
         
         <tags>
             
+            <tag> postgis </tag>
+            
             <tag> postgresql </tag>
             
             <tag> sql </tag>
-            
-            <tag> postgis </tag>
             
         </tags>
         
