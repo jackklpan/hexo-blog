@@ -6,21 +6,27 @@
       <title><![CDATA[Hands on Machine Learning with Scikit-Learn & TensorFlow Notes]]></title>
       <url>/hexo-blog/2017/04/15/Hands-on-Machine-Learning-with-Scikit-Learn-&amp;-TensorFlow-Notes/</url>
       <content type="html"><![CDATA[<p>這邊紀錄閱讀 Hands on Machine Learning with Scikit-Learn &amp; TensorFlow 的筆記。</p>
-<h2 id="Ch-1-The-Machine-Learning-Landscape"><a href="#Ch-1-The-Machine-Learning-Landscape" class="headerlink" title="Ch 1: The Machine Learning Landscape"></a>Ch 1: The Machine Learning Landscape</h2><p>機器學習是一種讓電腦從資料中學習的方法。</p>
+<h1 id="Ch-1-The-Machine-Learning-Landscape"><a href="#Ch-1-The-Machine-Learning-Landscape" class="headerlink" title="Ch 1: The Machine Learning Landscape"></a>Ch 1: The Machine Learning Landscape</h1><p>機器學習是一種讓電腦從資料中學習的方法。</p>
 <p>問題過於複雜（long lists of rules）且需要不斷找到新的pattern，或者是難以直接用傳統程式語言描述並解出的問題，就適合使用機器學習從資料中找出解法。<br>且透過機器學習的方法，人類也可以去檢視學習出來的模型，來得到該問題的相關知識。</p>
 <p>根據機器學習的種類，可以分成：</p>
 <ol>
 <li>Supervised / Unsupervised Learning ： 資料是否有標記解答</li>
 <li>Batch and Online Learning ： Online為每筆資料進來，就會調整模型</li>
-<li>Instance-Based Versus Model-Based Learning<br>這三大類可以互相交互組合。</li>
+<li>Instance-Based Versus Model-Based Learning</li>
 </ol>
+<p>這三大類可以交互組合。</p>
 <a id="more"></a>
-<h2 id="Ch-2-End-to-End-Machine-Learning-Project"><a href="#Ch-2-End-to-End-Machine-Learning-Project" class="headerlink" title="Ch 2: End-to-End Machine Learning Project"></a>Ch 2: End-to-End Machine Learning Project</h2><p>這一張使用dataset走過一次機器學習的流程，使用scikit-learn。<br>首先要先定義好問題，定義好量測效果的指標，這裡使用RMSE。</p>
-<h3 id="常用的觀察資料方法"><a href="#常用的觀察資料方法" class="headerlink" title="常用的觀察資料方法"></a>常用的觀察資料方法</h3><p>category feature可以用value_counts()查看<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">housing[<span class="string">"ocean_proximity"</span>]. value_counts()</div></pre></td></tr></table></figure></p>
+<h1 id="Ch-2-End-to-End-Machine-Learning-Project"><a href="#Ch-2-End-to-End-Machine-Learning-Project" class="headerlink" title="Ch 2: End-to-End Machine Learning Project"></a>Ch 2: End-to-End Machine Learning Project</h1><p>這一張使用dataset走過一次機器學習的流程，使用scikit-learn。<br>首先要先定義好問題，定義好量測效果的指標，這裡使用RMSE。</p>
+<h2 id="常用的觀察資料方法"><a href="#常用的觀察資料方法" class="headerlink" title="常用的觀察資料方法"></a>常用的觀察資料方法</h2><p>category feature可以用value_counts()查看<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">housing[<span class="string">"ocean_proximity"</span>]. value_counts()</div></pre></td></tr></table></figure></p>
 <p>將資料中所有numerical屬性畫出histogram<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">housing.hist( bins = <span class="number">50</span>, figsize =( <span class="number">20</span>,<span class="number">15</span>))</div></pre></td></tr></table></figure></p>
 <p>會觀察到很多屬性會是tail-heavy，這種分布對於某些機器學習方法不甚理想，因此最好能將其轉換成bell-shaped distributions。</p>
-<h3 id="建置test-set"><a href="#建置test-set" class="headerlink" title="建置test set"></a>建置test set</h3><p>一般人建置test set可能就是隨機抽樣，會有兩個問題。</p>
-<p>第一個</p>
+<h2 id="建置test-set"><a href="#建置test-set" class="headerlink" title="建置test set"></a>建置test set</h2><p>一般人建置test set可能就是隨機抽樣，會有兩個問題。</p>
+<h3 id="第一個"><a href="#第一個" class="headerlink" title="第一個"></a>第一個</h3><p>當下次有新資料進來時，這次抽到的test set，有些可能上次是被分到train set。最理想是能維持一致性，上次是test set，這一次也仍在test set。</p>
+<p>書中提出的方法為，為每一筆資料編號一個獨特的ID，並每次切分train/test set時，使用同樣的順序或邏輯。比如若將每個屬性相加hash過後的值當作ID，那麼可以將hash後個位數值大於等於8者當作test set，如此因每次hash後值會一樣，每次都會分到相同的set。</p>
+<p>比較一般的做法，仍是使用隨機抽樣的方法，只是要保證每次資料的順序一致，且鎖定random seed，此種做法可以使用scikit-learn的<code>train_test_split</code>函數。</p>
+<h3 id="第二個"><a href="#第二個" class="headerlink" title="第二個"></a>第二個</h3><p>假若資料的分佈實際上有某中趨勢，但是我們仍使用隨機抽樣的方式，此時test set會與實際資料產生抽樣上的誤差。比如資料男女的分配比率為60比40，使用隨機抽樣的男女分配比例，會很難接近這樣的比例，有較大誤差。需使用<code>stratified sampling</code>。</p>
+<p>而在書中實際運用的例子為，median income的屬性對於房價的預估很重要，希望這個屬性盡量趨近正確的分佈。但因此屬性為連續的數值，所以須先將其切分bin轉成category來使用。在切bin時要注意，每個bin都要有足夠的sample數量，如此才可做stratified sampling。</p>
+<p>可以使用scikit-learn的<code>StratifiedShuffleSplit</code>或者<code>train_test_split</code>也有一個<code>stratify</code>參數可以設定。</p>
 ]]></content>
       
         
