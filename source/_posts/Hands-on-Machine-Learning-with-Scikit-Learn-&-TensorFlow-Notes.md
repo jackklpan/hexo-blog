@@ -57,3 +57,50 @@ housing.hist( bins = 50, figsize =( 20,15))
 而在書中實際運用的例子為，median income的屬性對於房價的預估很重要，希望這個屬性盡量趨近正確的分佈。但因此屬性為連續的數值，所以須先將其切分bin轉成category來使用。在切bin時要注意，每個bin都要有足夠的sample數量，如此才可做stratified sampling。
 
 可以使用scikit-learn的```StratifiedShuffleSplit```或者```train_test_split```也有一個```stratify```參數可以設定。
+
+## 觀察資料
+不觀察test set，且若training set資料量過大，可以另外sample出小一點的set來觀察。
+
+畫scatter plot
+```python
+housing.plot( kind =" scatter", x =" longitude", y =" latitude", alpha = 0.4, s = housing[" population"]/ 100, label =" population", c =" median_house_value", cmap = plt.get_cmap(" jet"), colorbar = True, )
+```
+
+計算standard correlation coefficient (also called Pearson’s r)
+```python
+corr_matrix = housing.corr()
+corr_matrix[" median_house_value"]. sort_values( ascending = False)
+```
+0代表無關聯，1或-1代表有極度關聯。但是此僅能表示線性關聯。
+
+使用pandas的scatter_matrix，繪製所有**數值**屬性倆倆的scatter chart。挑出需要看關係的屬性即可，否則會太多圖。
+```python
+from pandas.tools.plotting import scatter_matrix 
+attributes = [" median_house_value", "median_income", "total_rooms", "housing_median_age"] 
+scatter_matrix( housing[ attributes], figsize =( 12, 8))
+```
+除了觀察資料外，還有一個重點是做feature engineering，將不同的屬性用不一樣的方式結合成新的屬性，很有可能原先的屬性沒有效果，結合後變得很有效果。
+
+## 準備資料
+
+### Missing Values
+大多數的方法無法處理missing values，有三種方式處理
+1. 將有missing value的row拿掉
+2. 將有missing value的屬性拿掉
+3. 用某種方法填充missing value（比如中位數）
+
+若使用第三種方法，如計算中位數記得僅使用training set data。然後再將其值填充到training/test set。
+
+```Imputer```為scikit-learn提供處理missing values的class，它只能處理數值屬性，因此使用它處理時，記得把非數值屬性先drop掉。
+```python
+from sklearn.preprocessing import Imputer 
+imputer = Imputer( strategy =" median")
+housing_num = housing.drop(" ocean_proximity", axis = 1) #丟掉非數值屬性
+imputer.fit( housing_num)
+imputer.statistics_ #查看計算出的結果
+X = imputer.transform( housing_num)
+housing_tr = pd.DataFrame( X, columns = housing_num.columns) #可以這樣轉回pandas
+```
+
+### Non-numerical Attributes
+多數方法喜歡數值型態的屬性
