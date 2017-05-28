@@ -43,10 +43,10 @@
 <p><strong>Imputer</strong>為scikit-learn提供處理missing values的class，它只能處理數值屬性，因此使用它處理時，記得把非數值屬性先drop掉。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> Imputer </div><div class="line">imputer = Imputer( strategy =<span class="string">" median"</span>)</div><div class="line">housing_num = housing.drop(<span class="string">" ocean_proximity"</span>, axis = <span class="number">1</span>) <span class="comment">#丟掉非數值屬性</span></div><div class="line">imputer.fit( housing_num)</div><div class="line">imputer.statistics_ <span class="comment">#查看計算出的結果</span></div><div class="line">X = imputer.transform( housing_num)</div><div class="line">housing_tr = pd.DataFrame( X, columns = housing_num.columns) <span class="comment">#可以這樣轉回pandas</span></div></pre></td></tr></table></figure></p>
 <h3 id="Non-numerical-Attributes"><a href="#Non-numerical-Attributes" class="headerlink" title="Non-numerical Attributes"></a>Non-numerical Attributes</h3><p>多數方法喜歡數值型態的屬性</p>
 <h1 id="Ch-6-Decision-Trees"><a href="#Ch-6-Decision-Trees" class="headerlink" title="Ch 6: Decision Trees"></a>Ch 6: Decision Trees</h1><p>Decision使用Gini來衡量乾淨程度（最後所有的sample都能分到正確的class）</p>
-<p>$$<br>G<em>{i} = 1 - \sum</em>{k=1}^{n}p_{i,k}^{2}<br>$$</p>
+<p>[<br>G<em>{i} = 1 - \sum</em>{k=1}^{n}p_{i,k}^{2}<br>]</p>
 <p>p代表在該節點中該類別所佔之比例。</p>
 <p><img src="http://i.imgur.com/C8AGVQX.png" alt=""></p>
-<p>如圖中的綠色，其Gini為$$1-(0/54)^2-(49/54)^2-(5/54)^2=0.168$$。</p>
+<p>如圖中的綠色，其Gini為(1-(0/54)^2-(49/54)^2-(5/54)^2=0.168)。</p>
 ]]></content>
       
         
