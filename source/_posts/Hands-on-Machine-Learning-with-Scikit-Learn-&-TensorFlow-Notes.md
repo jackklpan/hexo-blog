@@ -109,6 +109,13 @@ housing_tr = pd.DataFrame( X, columns = housing_num.columns) #可以這樣轉回
 # Ch 6: Decision Trees
 
 Decision使用Gini來衡量乾淨程度（最後所有的sample都能分到正確的class）
-{% math %}
+
+$$
 G_{i} = 1 - \sum_{k=1}^{n}p_{i,k}^{2}
-{% endmath %}
+$$
+
+p代表在該節點中該類別所佔之比例。
+
+![](http://i.imgur.com/C8AGVQX.png)
+
+如圖中的綠色，其Gini為$$1-(0/54)^2-(49/54)^2-(5/54)^2=0.168$$。
