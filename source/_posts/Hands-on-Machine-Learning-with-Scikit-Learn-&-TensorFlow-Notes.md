@@ -49,14 +49,14 @@ housing.hist( bins = 50, figsize =( 20,15))
 
 書中提出的方法為，為每一筆資料編號一個獨特的ID，並每次切分train/test set時，使用同樣的順序或邏輯。比如若將每個屬性相加hash過後的值當作ID，那麼可以將hash後個位數值大於等於8者當作test set，如此因每次hash後值會一樣，每次都會分到相同的set。
 
-比較一般的做法，仍是使用隨機抽樣的方法，只是要保證每次資料的順序一致，且鎖定random seed，此種做法可以使用scikit-learn的```train_test_split```函數。
+比較一般的做法，仍是使用隨機抽樣的方法，只是要保證每次資料的順序一致，且鎖定random seed，此種做法可以使用scikit-learn的**train_test_split**函數。
 
 ### 第二個
-假若資料的分佈實際上有某中趨勢，但是我們仍使用隨機抽樣的方式，此時test set會與實際資料產生抽樣上的誤差。比如資料男女的分配比率為60比40，使用隨機抽樣的男女分配比例，會很難接近這樣的比例，有較大誤差。需使用```stratified sampling```。
+假若資料的分佈實際上有某中趨勢，但是我們仍使用隨機抽樣的方式，此時test set會與實際資料產生抽樣上的誤差。比如資料男女的分配比率為60比40，使用隨機抽樣的男女分配比例，會很難接近這樣的比例，有較大誤差。需使用**stratified sampling**。
 
 而在書中實際運用的例子為，median income的屬性對於房價的預估很重要，希望這個屬性盡量趨近正確的分佈。但因此屬性為連續的數值，所以須先將其切分bin轉成category來使用。在切bin時要注意，每個bin都要有足夠的sample數量，如此才可做stratified sampling。
 
-可以使用scikit-learn的```StratifiedShuffleSplit```或者```train_test_split```也有一個```stratify```參數可以設定。
+可以使用scikit-learn的**StratifiedShuffleSplit**或者**train_test_split**也有一個**stratify**參數可以設定。
 
 ## 觀察資料
 不觀察test set，且若training set資料量過大，可以另外sample出小一點的set來觀察。
@@ -91,7 +91,7 @@ scatter_matrix( housing[ attributes], figsize =( 12, 8))
 
 若使用第三種方法，如計算中位數記得僅使用training set data。然後再將其值填充到training/test set。
 
-```Imputer```為scikit-learn提供處理missing values的class，它只能處理數值屬性，因此使用它處理時，記得把非數值屬性先drop掉。
+**Imputer**為scikit-learn提供處理missing values的class，它只能處理數值屬性，因此使用它處理時，記得把非數值屬性先drop掉。
 ```python
 from sklearn.preprocessing import Imputer 
 imputer = Imputer( strategy =" median")
@@ -104,3 +104,11 @@ housing_tr = pd.DataFrame( X, columns = housing_num.columns) #可以這樣轉回
 
 ### Non-numerical Attributes
 多數方法喜歡數值型態的屬性
+
+
+# Ch 6: Decision Trees
+
+Decision使用Gini來衡量乾淨程度（最後所有的sample都能分到正確的class）
+{% math %}
+G_{i} = 1 - \sum_{k=1}^{n}p_{i,k}^{2}
+{% endmath %}
