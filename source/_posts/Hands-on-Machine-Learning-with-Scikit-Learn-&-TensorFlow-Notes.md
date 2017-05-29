@@ -108,9 +108,30 @@ housing_tr = pd.DataFrame( X, columns = housing_num.columns) #可以這樣轉回
 
 # Ch 6: Decision Trees
 
-Decision使用Gini來衡量乾淨程度（最後所有的sample都能分到正確的class）
+Decision使用Gini來衡量乾淨程度
 $$G\_{i} = 1 - \sum\_{k=1}^{n}p\_{i,k}^{2}$$
 p代表在該節點中該類別所佔之比例。
 
 ![](http://i.imgur.com/C8AGVQX.png)
 如圖中的綠色，其Gini為\\(1-(0/54)^2-(49/54)^2-(5/54)^2=0.168\\)。
+
+在sklearn中只有binary tree的形式，但在其他lib可不限於binary tree（節點可以有超過兩個子節點）。
+
+## CART Training Algorithm
+此方法為每次都找一個feature與threshold來當作切樹的條件。選擇feature和threshold的方式為，選擇能使其子節點根據sample數量加權平均後最乾淨的（EX: Gini）
+$$Cost = \frac{m\_{left}}{m}G\_{left}+\frac{m\_{right}}{m}G\_right$$
+G是Gini，m是sample數量。
+
+重複直到無法再減少Gini，或其他條件達到（EX: max_depth）。此為一greedy algorithm，故無法保證為全局最佳解。
+
+## 時間複雜度
+假設decision tree為binary tree且接近balanced。則預測的時間複雜度為O(\\(\log\_{2}(m)\\))，m為sample數量。訓練的時間複雜度為O(n\*m\\(\log\_{2}(m)\\))，n為feature數量，因為最多可以切log(m)次，而每次需要從n個feature，m個sample故m種threshold，挑出最好的pair，因此為n\*m。訓練的時間複雜度相對而言較高。
+
+## Entropy
+除了使用Gini外，也可以使用Entropy當作判斷乾淨的方式，基本上兩者出來的結果會一樣，但Gini的計算較快，Entropy則可能產生較平衡的樹，通常使用Gini即可。
+$$Entropy = -\sum\_{k=1}^{n}p\_{i,k}\log(p\_{i,k})$$
+\\(p\_{i,k}\\)不能為零。
+同樣圖中的綠色，其Entropy為\\(-\frac{49}{54}\log(\frac{49}{54}) - -\frac{5}{54}\log(\frac{5}{54}) = 0.31\\)
+
+## Regularization
+Decision Tree若不給
