@@ -108,7 +108,7 @@ housing_tr = pd.DataFrame( X, columns = housing_num.columns) #可以這樣轉回
 
 # Ch 6: Decision Trees
 
-Decision使用Gini來衡量乾淨程度
+使用Gini來衡量節點乾淨程度，並評估如何切分節點
 $$G\_{i} = 1 - \sum\_{k=1}^{n}p\_{i,k}^{2}$$
 p代表在該節點中該類別所佔之比例。
 
@@ -119,7 +119,7 @@ p代表在該節點中該類別所佔之比例。
 
 ## CART Training Algorithm
 此方法為每次都找一個feature與threshold來當作切樹的條件。選擇feature和threshold的方式為，選擇能使其子節點根據sample數量加權平均後最乾淨的（EX: Gini）
-$$Cost = \frac{m\_{left}}{m}G\_{left}+\frac{m\_{right}}{m}G\_right$$
+$$Cost = \frac{m\_{left}}{m}G\_{left}+\frac{m\_{right}}{m}G\_{right}$$
 G是Gini，m是sample數量。
 
 重複直到無法再減少Gini，或其他條件達到（EX: max_depth）。此為一greedy algorithm，故無法保證為全局最佳解。
@@ -134,4 +134,20 @@ $$Entropy = -\sum\_{k=1}^{n}p\_{i,k}\log(p\_{i,k})$$
 同樣圖中的綠色，其Entropy為\\(-\frac{49}{54}\log(\frac{49}{54}) - -\frac{5}{54}\log(\frac{5}{54}) = 0.31\\)
 
 ## Regularization
-Decision Tree若不給
+Decision Tree若不給Regularization會overfitting，故通常會設定最大深度，最小可切分的樣本數量等等。
+
+另一種方法則是先不給Regularization全部長完後，再用pruning去刪掉不要的節點。
+
+## Regression
+![](http://i.imgur.com/vQf4Zts.png)
+基本上皆一樣，只是預測變成數值，且cost的算法變成算MSE，如下圖。
+![](http://i.imgur.com/C9yOU1Y.png)
+一樣需要做Regularization，否則會如下圖左overfitting。
+![](http://i.imgur.com/oszEgHA.png)
+
+## Instability
+Decision Tree的限制與問題，第一個在於它切分的方式皆為直角（與某一axis垂直），故若相同的的dataset轉個角度，即造成其無法產生正確generalize的模型，如下圖。
+![](http://i.imgur.com/27hN0cV.png)
+其中一個解決方法為使用PCA先使dataset轉到好的角度。
+
+第二個為很容易因為training data的些微不同而生成與之前差異度極大的模型。透過Random Forests平均的方式可以減少此不穩定性。
